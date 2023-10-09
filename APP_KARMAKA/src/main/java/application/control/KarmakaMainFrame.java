@@ -1,11 +1,11 @@
-package control;
+package application.control;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import view.KarmakaMainFrameController;
+import application.view.KarmakaMainFrameController;
 
 public class KarmakaMainFrame extends Application {
     private KarmakaMainFrameController kmfc;

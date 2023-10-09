@@ -1,6 +1,6 @@
-package view;
+package application.view;
 
-import control.KarmakaMainFrame;
+import application.control.KarmakaMainFrame;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 
