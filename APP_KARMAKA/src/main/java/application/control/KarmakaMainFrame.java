@@ -7,7 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import application.view.KarmakaMainFrameController;
 
-public class KarmakaMainFrame extends Application {
+public class KarmakaMainFrame extends Application implements Renderable {
     private KarmakaMainFrameController kmfc;
 
     private Stage primaryStage;
@@ -33,12 +33,17 @@ public class KarmakaMainFrame extends Application {
             primaryStage.setScene(scene);
             primaryStage.setTitle("KARMAKA");
             this.primaryStage.setResizable(false);
-
             this.kmfc = loader.getController();
             this.kmfc.initContext(primaryStage, this);
             this.kmfc.displayDialog();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void displayGameStart() {
+       KarmakaMainFrame.runApp();
     }
 }

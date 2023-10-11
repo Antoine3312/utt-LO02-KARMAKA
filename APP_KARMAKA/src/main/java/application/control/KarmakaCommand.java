@@ -1,7 +1,13 @@
 package application.control;
 
-public class KarmakaCommand {
-    public static void runApp() {
-        System.out.println("Started app in command line");
+import application.view.KarmakaCommandController;
+
+public class KarmakaCommand implements Renderable{
+
+    private final KarmakaCommandController kcc = new KarmakaCommandController();
+
+    @Override
+    public void displayGameStart() {
+        this.kcc.displayGameStart();
     }
 }
