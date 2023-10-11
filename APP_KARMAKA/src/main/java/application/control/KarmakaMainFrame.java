@@ -23,7 +23,7 @@ public class KarmakaMainFrame extends Application {
         try {
 
             FXMLLoader loader = new FXMLLoader(
-                    KarmakaMainFrameController.class.getResource("/view/KarmakaMainFramePane.fxml"));
+                    KarmakaMainFrameController.class.getResource("/application/view/KarmakaMainFramePane.fxml"));
 
             BorderPane root = loader.load();
 
