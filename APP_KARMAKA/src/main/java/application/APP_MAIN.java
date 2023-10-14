@@ -4,7 +4,7 @@ import application.control.DeroulementJeu;
 import application.control.KarmakaCommand;
 import model.joueur.Joueur;
 import model.joueur.Ordinateur;
-import model.joueur.StrategyDebutant;
+import model.joueur.Debutant;
 
 public class APP_MAIN {
     public static void main(String[] args) {
@@ -12,6 +12,6 @@ public class APP_MAIN {
 //        DeroulementJeu game = new DeroulementJeu(new KarmakaMainFrame()); // GRAPHIC PROMPT MODE
         game.beginGame();
         Joueur j1 = new Joueur();
-        Joueur j2 = new Ordinateur(new StrategyDebutant());
+        Joueur j2 = new Ordinateur(new Debutant());
     }
 }
