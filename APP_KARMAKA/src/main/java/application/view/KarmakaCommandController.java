@@ -8,4 +8,8 @@ public class KarmakaCommandController {
         System.out.println("========================= KARMAKA 2023 =========================");
         System.out.println("Bienvenu sur le jeu de société Karmaka !");
     }
+
+    public void beginDisplayOfTheGame() {
+        System.out.println("Début d'une partie ...");
+    }
 }
