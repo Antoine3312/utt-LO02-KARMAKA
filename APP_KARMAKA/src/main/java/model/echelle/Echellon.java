@@ -1,7 +1,5 @@
 package model.echelle;
 
-import model.joueur.Playable;
-
 import java.util.List;
 
 public class Echellon {

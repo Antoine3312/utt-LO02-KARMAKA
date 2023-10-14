@@ -1,6 +1,6 @@
 package model.joueur;
 
-public class Ordinateur implements Playable{
+public class Ordinateur extends Joueur{
     private StyleJeuStrategy strategy;
 
     public Ordinateur(StyleJeuStrategy strategy) {
