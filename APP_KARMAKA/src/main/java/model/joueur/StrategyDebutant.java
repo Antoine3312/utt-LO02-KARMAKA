@@ -1,6 +1,6 @@
 package model.joueur;
 
-public class StrategyDebutant extends ActionJouer implements StyleJeuStrategy {
+public class StrategyDebutant implements StyleJeuStrategy {
 
     @Override
     public void jouerTour() {
