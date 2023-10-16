@@ -11,9 +11,7 @@ public class Joueur {
     private PileCartes pile;
     private PileCartes vieFutur;
     private List<Carte> main;
-
-    protected void piocher(){
-        System.out.println("Je pioche ...");
+    public boolean isBot(){
+        return false;
     }
-
 }

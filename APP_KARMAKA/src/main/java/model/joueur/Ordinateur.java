@@ -10,4 +10,8 @@ public class Ordinateur extends Joueur{
     public void executeTour(){
         this.strategy.jouerTour();
     }
+
+    public boolean isBot(){
+        return true;
+    }
 }

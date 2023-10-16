@@ -1,9 +1,11 @@
 package model.echelle;
 
+import model.joueur.Joueur;
+
 import java.util.List;
 
 public class Echellon {
-    private List<Playable> joueurs;
+    private List<Joueur> joueurs;
     private int ptsNecessairePourMonter;
     private NomPalier nom;
 
