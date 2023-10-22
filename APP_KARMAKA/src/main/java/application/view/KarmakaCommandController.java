@@ -9,6 +9,7 @@ import model.joueur.StyleJeuStrategy;
 import java.util.*;
 
 public class KarmakaCommandController {
+    private static final int DELAYDETWEENCHARPROMPTinms = 20;
 
     public void displayGameStart() {
         System.out.println("========================= KARMAKA 2023 =========================");
@@ -19,24 +20,35 @@ public class KarmakaCommandController {
         this.print("Début d'une partie ..." );
     }
 
-    private void print(String _s){
-        for(char c: _s.toCharArray()){
-            System.out.print(c);
-            wait(20);
-        }
-        System.out.println();
-    }
-
-    private void wait(int ms) {
-        try{
-            Thread.sleep(ms);
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
-    }
-
     public int numberOfBot() {
         return this.askMultipleChoiceQuestion("Combien voulez-vous de BOT ?", List.of("1 ordinateur","2 ordinateurs"));
+    }
+
+    public String getPlayerName(int numJoueur) {
+        return this.askQuestion(String.format("Quel est le nom du joueur %s",numJoueur), Optional.of(1), Optional.of(2));
+    }
+
+    public void loadSave() {
+        System.out.println("Chargement d'une sauvegarde ...");
+    }
+
+    public StyleJeuStrategy getBotDifficulty(String botName) {
+        int userInput = this.askMultipleChoiceQuestion(String.format("Choisir le niveau de %s :", botName), List.of("Débutant", "Intermédiaire","Expert"));
+        StyleJeuStrategy botDifficulty = null;
+        switch (userInput){
+            case 1:
+                botDifficulty = new Debutant();
+                break;
+            case 2:
+                botDifficulty = new Intermediaire();
+                break;
+            case 3:
+                botDifficulty = new Expert();
+                break;
+            default:
+                break;
+        }
+        return botDifficulty;
     }
 
     private int askMultipleChoiceQuestion(String question, List<String> choices){
@@ -81,30 +93,19 @@ public class KarmakaCommandController {
         return userInput;
     }
 
-    public String getPlayerName(int numJoueur) {
-        return this.askQuestion(String.format("Quel est le nom du joueur %s",numJoueur), Optional.of(1), Optional.of(2));
-    }
-
-    public void loadSave() {
-        System.out.println("Chargement d'une sauvegarde ...");
-    }
-
-    public StyleJeuStrategy getBotDifficulty(String botName) {
-        int userInput = this.askMultipleChoiceQuestion(String.format("Choisir le niveau de %s :", botName), List.of("Débutant", "Intermédiaire","Expert"));
-        StyleJeuStrategy botDifficulty = null;
-        switch (userInput){
-            case 1:
-                botDifficulty = new Debutant();
-                break;
-            case 2:
-                botDifficulty = new Intermediaire();
-                break;
-            case 3:
-                botDifficulty = new Expert();
-                break;
-            default:
-                break;
+    private void print(String _s){
+        for(char c: _s.toCharArray()){
+            System.out.print(c);
+            wait(DELAYDETWEENCHARPROMPTinms);
         }
-        return botDifficulty;
+        System.out.println();
+    }
+
+    private void wait(int ms) {
+        try{
+            Thread.sleep(ms);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
     }
 }
