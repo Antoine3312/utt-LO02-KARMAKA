@@ -41,7 +41,7 @@ public class KarmakaCommand
     }
 
     @Override
-    public StyleJeuStrategy getBotDifficulty() {
-        return this.kcc.getBotDifficulty();
+    public StyleJeuStrategy getBotDifficulty(String botName) {
+        return this.kcc.getBotDifficulty(botName);
     }
 }

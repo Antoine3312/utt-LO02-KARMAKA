@@ -17,5 +17,5 @@ public interface Renderable {
 
     void loadSave();
 
-    StyleJeuStrategy getBotDifficulty();
+    StyleJeuStrategy getBotDifficulty(String botName);
 }

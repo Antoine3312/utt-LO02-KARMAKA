@@ -77,8 +77,8 @@ public class KarmakaCommandController {
         System.out.println("Chargement d'une sauvegarde ...");
     }
 
-    public StyleJeuStrategy getBotDifficulty() {
-        int userInput = this.askMultipleChoiceQuestion("Choisir le niveau du bot :", List.of("Débutant", "Intermédiaire","Expert"));
+    public StyleJeuStrategy getBotDifficulty(String botName) {
+        int userInput = this.askMultipleChoiceQuestion(String.format("Choisir le niveau de %s :", botName), List.of("Débutant", "Intermédiaire","Expert"));
         StyleJeuStrategy botDifficulty = null;
         switch (userInput){
             case 1:

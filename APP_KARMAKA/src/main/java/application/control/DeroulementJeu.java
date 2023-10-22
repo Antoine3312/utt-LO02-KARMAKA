@@ -41,13 +41,13 @@ public class DeroulementJeu {
             case 1:
                 playerName = this.renderer.getPlayerName(1);
                 j1 = new Joueur(playerName);
-                niveauBot = this.renderer.getBotDifficulty();
+                niveauBot = this.renderer.getBotDifficulty("Bot");
                 j2 = new Ordinateur("Bot", niveauBot);
                 break;
             case 2:
-                niveauBot = this.renderer.getBotDifficulty();
+                niveauBot = this.renderer.getBotDifficulty("Bot1");
                 j1 = new Ordinateur("Bot1", niveauBot);
-                niveauBot = this.renderer.getBotDifficulty();
+                niveauBot = this.renderer.getBotDifficulty("Bot2");
                 j2 = new Ordinateur("Bot2", niveauBot);
                 break;
             default:
