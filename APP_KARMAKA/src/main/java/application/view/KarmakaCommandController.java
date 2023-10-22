@@ -47,25 +47,23 @@ public class KarmakaCommandController {
             numOfChoice ++;
         }
         Scanner in = new Scanner(System.in);
-
-        int userInput = -1;
+        int userInput = 0;
         boolean inputIsValid = false;
         // Vérifie que la saisie est bien un entier
-        do {
+        while(!inputIsValid){
             try {
                 this.print("Choisissez une proposition : ");
                 userInput = in.nextInt();
+                // Vérifie que la saisie est bien comprise entre 1 et le nombre de choix du menu
+                while(userInput<1 || userInput>numOfChoice){
+                    this.print(String.format("Votre choix doit être compris entre 1 et %s, Veuillez saisir à nouveaux :", numOfChoice));
+                    userInput = in.nextInt();
+                }
                 inputIsValid = true;
             } catch (java.util.InputMismatchException e) {
                 this.print("Saisie invalide. Veuillez entrer un entier valide.");
                 in.nextLine();
             }
-        } while (!inputIsValid);
-
-        // Vérifie que la saisie est bien comprise entre dans les propositions fournies
-        while(userInput<1 || userInput>numOfChoice){
-            this.print(String.format("Votre choix doit être compris entre 1 et %s, Veuillez saisir à nouveaux :", numOfChoice));
-            userInput = in.nextInt();
         }
         return userInput;
     }
