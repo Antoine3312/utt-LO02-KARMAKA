@@ -11,7 +11,8 @@ public class APP_MAIN {
         DeroulementJeu game = new DeroulementJeu(new KarmakaCommand()); // COMMAND PROMPT MODE
 //        DeroulementJeu game = new DeroulementJeu(new KarmakaMainFrame()); // GRAPHIC PROMPT MODE
         game.beginGame();
-        Joueur j1 = new Joueur();
-        Joueur j2 = new Ordinateur(new Debutant());
+//        Joueur j1 = new Joueur();
+//        Joueur j2 = new Ordinateur(new Debutant());
+
     }
 }

@@ -11,7 +11,7 @@ public class DeroulementPartie {
         this.renderer = renderer;
     }
 
-    public void beginDisplayOfTheGame(){
-        this.renderer.beginDisplayOfTheGame();
+    public void beginDisplayOfTheGame(EtatPartie partie){
+        this.renderer.beginDisplayOfTheGame(partie);
     }
 }

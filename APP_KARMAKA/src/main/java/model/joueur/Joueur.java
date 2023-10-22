@@ -11,7 +11,13 @@ public class Joueur {
     private PileCartes pile;
     private PileCartes vieFutur;
     private List<Carte> main;
+
+    public Joueur(String nom) {
+        this.nom = nom;
+    }
+
     public boolean isBot(){
         return false;
     }
+
 }

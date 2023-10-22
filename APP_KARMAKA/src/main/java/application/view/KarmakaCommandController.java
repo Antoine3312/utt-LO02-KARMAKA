@@ -1,6 +1,12 @@
 package application.view;
 
-import application.control.Renderable;
+import model.EtatPartie;
+import model.joueur.Debutant;
+import model.joueur.Expert;
+import model.joueur.Intermediaire;
+import model.joueur.StyleJeuStrategy;
+
+import java.util.*;
 
 public class KarmakaCommandController {
 
@@ -9,8 +15,8 @@ public class KarmakaCommandController {
         this.print("Bienvenu sur le jeu de société Karmaka !");
     }
 
-    public void beginDisplayOfTheGame() {
-        this.print("Début d'une partie ...");
+    public void beginDisplayOfTheGame(EtatPartie partie) {
+        this.print("Début d'une partie ..." );
     }
 
     private void print(String _s){
@@ -27,5 +33,66 @@ public class KarmakaCommandController {
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    public int numberOfBot() {
+        return this.askMultipleChoiceQuestion("Combien voulez-vous de BOT ?", List.of("1 ordinateur","2 ordinateurs"));
+    }
+
+    private int askMultipleChoiceQuestion(String question, List<String> choices){
+        this.print(question);
+        int numOfChoice = 0;
+        for(String choice: choices){
+            this.print((numOfChoice+1)+". "+choice);
+            numOfChoice ++;
+        }
+        Scanner in = new Scanner(System.in);
+        this.print("Choisisser une proposition :");
+        int userInput = in.nextInt();
+        while(userInput<1 || userInput>numOfChoice){
+            this.print(String.format("Votre choix doit être compris entre 1 et %s, Veuillez saisir à nouveaux :", numOfChoice));
+            userInput = in.nextInt();
+        }
+        return userInput;
+    }
+
+    private String askQuestion(String question, Optional<Integer> maxLength, Optional<Integer> minLength){
+        Scanner in = new Scanner(System.in);
+        this.print(question);
+        String userInput = in.next();
+        if (maxLength.isPresent() && minLength.isPresent()){
+            while (userInput.length()> maxLength.get() && userInput.length()<minLength.get()){
+                this.print(String.format("Votre réponse doit contenir entre %s et %s caractères. Veuillez saisir à nouveaux", minLength.get(), maxLength.get()));
+                userInput = in.next();
+            }
+        }
+        return userInput;
+    }
+
+    public String getPlayerName(int numJoueur) {
+        return this.askQuestion(String.format("Quel est le nom du joueur %s",numJoueur), Optional.of(1), Optional.of(2));
+    }
+
+    public void loadSave() {
+        System.out.println("Chargement d'une sauvegarde ...");
+    }
+
+    public StyleJeuStrategy getBotDifficulty() {
+        int userInput = this.askMultipleChoiceQuestion("Choisir le niveau du bot :", List.of("Débutant", "Intermédiaire","Expert"));
+        StyleJeuStrategy botDifficulty = null;
+        switch (userInput){
+            case 1:
+                botDifficulty = new Debutant();
+                break;
+            case 2:
+                botDifficulty = new Intermediaire();
+                break;
+            case 3:
+                botDifficulty = new Expert();
+                break;
+            default:
+                break;
+        }
+        return botDifficulty;
     }
 }
