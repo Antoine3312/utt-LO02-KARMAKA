@@ -1,7 +1,10 @@
 package application.control;
 
 import model.EtatPartie;
+import model.joueur.Joueur;
 import model.joueur.StyleJeuStrategy;
+
+import java.util.List;
 
 public interface Renderable {
 
@@ -18,4 +21,6 @@ public interface Renderable {
     void loadSave();
 
     StyleJeuStrategy getBotDifficulty(String botName);
+
+    void showPlayer(List<Joueur> joueurs);
 }

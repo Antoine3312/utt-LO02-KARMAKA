@@ -2,7 +2,10 @@ package application.control;
 
 import application.view.KarmakaCommandController;
 import model.EtatPartie;
+import model.joueur.Joueur;
 import model.joueur.StyleJeuStrategy;
+
+import java.util.List;
 
 public class KarmakaCommand
         implements Renderable
@@ -43,5 +46,10 @@ public class KarmakaCommand
     @Override
     public StyleJeuStrategy getBotDifficulty(String botName) {
         return this.kcc.getBotDifficulty(botName);
+    }
+
+    @Override
+    public void showPlayer(List<Joueur> joueurs) {
+        this.kcc.showPlayer(joueurs);
     }
 }

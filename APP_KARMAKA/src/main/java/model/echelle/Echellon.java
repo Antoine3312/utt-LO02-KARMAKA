@@ -13,4 +13,8 @@ public class Echellon {
         this.ptsNecessairePourMonter = ptsNecessairePourMonter;
         this.nom = nom;
     }
+
+    public void addPlayers(List<Joueur> joueurs){
+        this.joueurs.addAll(joueurs);
+    }
 }

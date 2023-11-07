@@ -15,4 +15,9 @@ public class Ordinateur extends Joueur{
     public boolean isBot(){
         return true;
     }
+
+    @Override
+    public String toString() {
+        return super.nom+" "+this.strategy.getClass().getName().split("\\.")[2];
+    }
 }

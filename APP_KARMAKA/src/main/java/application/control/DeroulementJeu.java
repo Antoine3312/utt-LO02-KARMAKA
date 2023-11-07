@@ -1,8 +1,13 @@
 package application.control;
 
+import model.EtatPartie;
+import model.echelle.EchelleKarmique;
 import model.joueur.Joueur;
 import model.joueur.Ordinateur;
 import model.joueur.StyleJeuStrategy;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class DeroulementJeu {
     private Renderable renderer;
@@ -18,16 +23,18 @@ public class DeroulementJeu {
         boolean newGame = this.renderer.playNewOrLoadSave();
         if(newGame){
             int nbBot = this.renderer.numberOfBot();
-            Joueur[] joueurs = createPlayer(nbBot);
+            List<Joueur> joueurs = createPlayer(nbBot);
+            this.renderer.showPlayer(joueurs);
+
+            this.dp.startNewGame(joueurs);
         } else {
             loadSave();
         }
-
-
-//        this.renderer.beginDisplayOfTheGame();
     }
 
-    private Joueur[] createPlayer(int nbBot) {
+
+
+    private List<Joueur> createPlayer(int nbBot) {
         Joueur j1 = null;
         Joueur j2 = null;
         StyleJeuStrategy niveauBot;
@@ -53,7 +60,7 @@ public class DeroulementJeu {
             default:
                 break;
         }
-        return new Joueur[]{j1, j2};
+        return Arrays.asList(j1, j2);
     }
 
     private void loadSave() {

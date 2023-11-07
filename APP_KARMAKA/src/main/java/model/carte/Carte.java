@@ -1,7 +1,16 @@
 package model.carte;
 
-public class Carte {
-    private String nom;
-    private int point;
-    private NomCouleur couleur;
+public abstract class Carte {
+    protected String nom;
+    protected int point;
+    protected NomCouleur couleur;
+
+    public void jouerPoint(){
+        System.out.println("Joueur point");
+    }
+    public void jouerFutur(){
+        System.out.println("Joueur futur");
+    }
+
+    public abstract void jouerPouvoir();
 }

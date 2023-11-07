@@ -1,19 +1,16 @@
 package application.view;
 
 import model.EtatPartie;
-import model.joueur.Debutant;
-import model.joueur.Expert;
-import model.joueur.Intermediaire;
-import model.joueur.StyleJeuStrategy;
+import model.joueur.*;
 
 import java.util.*;
 
 public class KarmakaCommandController {
-    private static final int DELAYDETWEENCHARPROMPTinms = 20;
+    private static final int DELAYDETWEENCHARPROMPTinms = 30;
 
     public void displayGameStart() {
         System.out.println("========================= KARMAKA 2023 =========================");
-        this.print("Bienvenu sur le jeu de société Karmaka !");
+        this.print("Bienvenue sur le jeu de société Karmaka !");
     }
 
     public void beginDisplayOfTheGame(EtatPartie partie) {
@@ -107,5 +104,11 @@ public class KarmakaCommandController {
         } catch(InterruptedException ex) {
             Thread.currentThread().interrupt();
         }
+    }
+
+    public void showPlayer(List<Joueur> joueurs) {
+        System.out.println("Voici les deux joueurs de la partie :");
+        System.out.println(String.format("Joueur 1 : %s", joueurs.get(0)));
+        System.out.println(String.format("Joueur 2 : %s", joueurs.get(1)));
     }
 }

@@ -12,7 +12,20 @@ public class EtatPartie {
     private PileCartes fosse;
     private int numTour;
 
-    public EtatPartie(EchelleKarmique echelle, Joueur joueur1, Joueur joueur2, PileCartes source, PileCartes fosse, int numTour) {
+    private EtatPartie instance;
+
+    private EtatPartie(){
+
+    }
+
+    public EtatPartie getInstance(){
+        if(instance == null){
+            return new EtatPartie();
+        }
+        return instance;
+    }
+
+    public void init(EchelleKarmique echelle, Joueur joueur1, Joueur joueur2, PileCartes source, PileCartes fosse, int numTour){
         this.echelle = echelle;
         this.joueur1 = joueur1;
         this.joueur2 = joueur2;

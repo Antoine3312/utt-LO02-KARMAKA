@@ -6,7 +6,7 @@ import model.carte.PileCartes;
 import java.util.List;
 
 public class Joueur {
-    private String nom;
+    protected String nom;
     private PileCartes oeuvre;
     private PileCartes pile;
     private PileCartes vieFutur;
@@ -20,4 +20,9 @@ public class Joueur {
         return false;
     }
 
+
+    @Override
+    public String toString() {
+        return this.nom;
+    }
 }
