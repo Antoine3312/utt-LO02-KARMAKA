@@ -24,6 +24,7 @@ public class DeroulementPartie {
         this.partie = this.partie.getInstance();
         this.initGame(joueurs);
         this.initHands(joueurs);
+        this.initPie(joueurs);
     }
 
     private void initGame(List<Joueur> joueurs) {
@@ -37,9 +38,11 @@ public class DeroulementPartie {
     }
 
     private void initHands(List<Joueur> joueurs) {
-
     }
-    
+
+    private void initPie(List<Joueur> joueurs) {
+    }
+
     private List<Carte> loadSource(){
         return Arrays.asList(new Carte1(), new Carte2());
     }
