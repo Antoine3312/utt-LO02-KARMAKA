@@ -19,4 +19,16 @@ public class Echellon {
     public void addPlayers(List<Joueur> joueurs){
         this.joueurs.addAll(joueurs);
     }
+
+    public List<Joueur> getJoueurs() {
+        return joueurs;
+    }
+
+    public int getPtsNecessairePourMonter() {
+        return ptsNecessairePourMonter;
+    }
+
+    public NomPalier getNom() {
+        return nom;
+    }
 }
