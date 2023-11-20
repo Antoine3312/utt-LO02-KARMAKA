@@ -25,7 +25,7 @@ public class DeroulementJeu {
             int nbBot = this.renderer.numberOfBot();
             List<Joueur> joueurs = createPlayer(nbBot);
             this.renderer.showPlayer(joueurs);
-
+            System.out.println(joueurs);
             this.dp.startNewGame(joueurs);
         } else {
             loadSave();

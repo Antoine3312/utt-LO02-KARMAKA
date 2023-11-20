@@ -5,20 +5,22 @@ import java.util.List;
 import java.util.Stack;
 
 public class PileCartes {
-    private Stack<Carte> pile;
+    private Stack<Carte> cartes;
 
     public PileCartes() {
-        this.pile = new Stack<>();
+        this.cartes = new Stack<>();
     }
 
     public PileCartes(Stack<Carte> listCartes) {
-        this.pile = listCartes;
+        this.cartes = listCartes;
     }
 
     public void addCartes(List<Carte> cartes){
-        cartes.stream().forEach(carte -> {
-            this.pile.push(carte);
-        });
-        Collections.shuffle(this.pile);
+        cartes.forEach(this.cartes::push);
+        Collections.shuffle(this.cartes);
+    }
+
+    public Stack<Carte> getCartes() {
+        return cartes;
     }
 }

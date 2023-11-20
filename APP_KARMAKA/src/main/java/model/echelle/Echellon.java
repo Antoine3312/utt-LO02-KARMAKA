@@ -2,6 +2,7 @@ package model.echelle;
 
 import model.joueur.Joueur;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Echellon {
@@ -12,6 +13,7 @@ public class Echellon {
     public Echellon(int ptsNecessairePourMonter, NomPalier nom) {
         this.ptsNecessairePourMonter = ptsNecessairePourMonter;
         this.nom = nom;
+        this.joueurs = new ArrayList<>();
     }
 
     public void addPlayers(List<Joueur> joueurs){

@@ -21,10 +21,10 @@ public class DeroulementPartie {
     }
 
     public void startNewGame(List<Joueur> joueurs) {
-        this.partie = this.partie.getInstance();
+        this.partie = EtatPartie.getInstance();
         this.initGame(joueurs);
-        this.initHands(joueurs);
-        this.initPie(joueurs);
+        this.initHands();
+        this.initPile();
     }
 
     private void initGame(List<Joueur> joueurs) {
@@ -35,12 +35,38 @@ public class DeroulementPartie {
         PileCartes fosse = new PileCartes();
         int numTour = 0;
         this.partie.init(echelle,joueurs.get(0),joueurs.get(1),source,fosse,numTour);
+
+        this.jouerPartie(); 
     }
 
-    private void initHands(List<Joueur> joueurs) {
+    private void jouerPartie(){
+        while (this.partie.getJoueur1().hasWon() || this.partie.getJoueur2().hasWon()){
+            this.jouerTour(this.partie.getJoueur1());
+            this.jouerTour(this.partie.getJoueur2());
+        }
     }
 
-    private void initPie(List<Joueur> joueurs) {
+    private void jouerTour(Joueur joueur1) {
+
+
+    }
+
+    private void initHands() {
+        List<Joueur> joueurs = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());
+        for (Joueur j : joueurs){
+            for (int i = 0; i<4; i++){
+                j.getMain().add(this.partie.getSource().getCartes().pop());
+            }
+        }
+    }
+
+    private void initPile() {
+        List<Joueur> joueurs = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());
+        for (Joueur j : joueurs){
+            for (int i = 0; i<2; i++){
+                j.getPile().getCartes().push(this.partie.getSource().getCartes().pop());
+            }
+        }
     }
 
     private List<Carte> loadSource(){

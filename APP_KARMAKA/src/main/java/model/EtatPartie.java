@@ -12,13 +12,11 @@ public class EtatPartie {
     private PileCartes fosse;
     private int numTour;
 
-    private EtatPartie instance;
+    private static EtatPartie instance;
 
-    private EtatPartie(){
+    private EtatPartie(){}
 
-    }
-
-    public EtatPartie getInstance(){
+    public static EtatPartie getInstance(){
         if(instance == null){
             return new EtatPartie();
         }
@@ -32,5 +30,29 @@ public class EtatPartie {
         this.source = source;
         this.fosse = fosse;
         this.numTour = numTour;
+    }
+
+    public Joueur getJoueur1() {
+        return joueur1;
+    }
+
+    public Joueur getJoueur2() {
+        return joueur2;
+    }
+
+    public EchelleKarmique getEchelle() {
+        return echelle;
+    }
+
+    public PileCartes getSource() {
+        return source;
+    }
+
+    public PileCartes getFosse() {
+        return fosse;
+    }
+
+    public int getNumTour() {
+        return numTour;
     }
 }
