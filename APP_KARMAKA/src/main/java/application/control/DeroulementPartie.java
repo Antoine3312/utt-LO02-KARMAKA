@@ -42,9 +42,9 @@ public class DeroulementPartie {
         int numTour = 0;
         this.partie.init(echelle,joueurs.get(0),joueurs.get(1),source,fosse,numTour);
 
-        this.jouerPartie();
+//        this.jouerPartie();
     }
-
+/*
     private void jouerPartie(){
         while (this.partie.getJoueur1().hasWon() || this.partie.getJoueur2().hasWon()){
             this.jouerTour(this.partie.getJoueur1());
@@ -79,7 +79,7 @@ public class DeroulementPartie {
 
     private void jouer(Joueur joueur) {
         if(!joueur.getPile().getCartes().isEmpty()){
-            joueur.getMain().add(this.partie.getSource().getCartes().pop())
+            joueur.getMain().add(this.partie.getSource().getCartes().pop());
         }
         Carte carte = this.renderer.afficherEtChoisirCarte();
         int utilisation = this.renderer.choisirUtilisation(carte);
@@ -88,7 +88,7 @@ public class DeroulementPartie {
             case DeroulementPartie.UTILISATIONFUTUR -> carte.jouerFutur();
             case DeroulementPartie.UTILISATIONPOINT -> carte.jouerPoint();
         }
-    }
+    }*/
 
     private void initHands() {
         List<Joueur> joueurs = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());

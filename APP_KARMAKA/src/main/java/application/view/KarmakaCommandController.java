@@ -6,8 +6,8 @@ import model.joueur.*;
 import java.util.*;
 
 public class KarmakaCommandController {
-//    private static final int DELAYDETWEENCHARPROMPTinms = 30;
-    private static final int DELAYDETWEENCHARPROMPTinms = 0;
+    private static final int DELAYDETWEENCHARPROMPTinms = 30;
+//    private static final int DELAYDETWEENCHARPROMPTinms = 0;
 
     public void displayGameStart() {
         System.out.println("========================= KARMAKA 2023 =========================");
