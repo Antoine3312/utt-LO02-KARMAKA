@@ -2,6 +2,8 @@ package model.echelle;
 
 import model.joueur.Joueur;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
 
 public class EchelleKarmique {
@@ -24,5 +26,15 @@ public class EchelleKarmique {
 
     public Echellon getSinge() {
         return singe;
+    }
+
+    public Echellon getEchellonOf(Joueur joueur) {
+        List<Echellon> echellons = Arrays.asList(this.serpent, this.bousier, this.singe, this.loup);
+        for(Echellon echellon : echellons){
+            if(echellon.getJoueurs().contains(joueur)){
+                return echellon;
+            }
+        }
+        return null;
     }
 }
