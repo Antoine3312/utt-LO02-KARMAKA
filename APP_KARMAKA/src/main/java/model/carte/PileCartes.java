@@ -1,8 +1,6 @@
 package model.carte;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 public class PileCartes {
     private Stack<Carte> cartes;
@@ -22,5 +20,17 @@ public class PileCartes {
 
     public Stack<Carte> getCartes() {
         return cartes;
+    }
+
+    public void viderCartes() {
+        this.cartes = new Stack<>();
+    }
+
+    public Set<String> getCouleursInStack() {
+        Set<String> res = new HashSet<>();
+        for(Carte carte : this.cartes){
+            res.add(String.valueOf(carte.getCouleur()));
+        }
+        return res;
     }
 }

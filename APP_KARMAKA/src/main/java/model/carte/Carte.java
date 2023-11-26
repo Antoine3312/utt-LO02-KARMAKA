@@ -13,4 +13,21 @@ public abstract class Carte {
     }
 
     public abstract void jouerPouvoir();
+
+    public String getNom() {
+        return nom;
+    }
+
+    public int getPoint() {
+        return point;
+    }
+
+    public NomCouleur getCouleur() {
+        return couleur;
+    }
+
+    @Override
+    public String toString() {
+        return "("+point+")"+"  "+nom+"  ["+couleur+"]";
+    }
 }

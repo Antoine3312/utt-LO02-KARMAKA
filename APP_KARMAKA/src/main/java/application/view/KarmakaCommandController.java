@@ -1,6 +1,9 @@
 package application.view;
 
 import model.EtatPartie;
+import model.carte.Carte;
+import model.carte.NomCouleur;
+import model.carte.PileCartes;
 import model.joueur.*;
 
 import java.util.*;
@@ -11,11 +14,11 @@ public class KarmakaCommandController {
 
     public void displayGameStart() {
         System.out.println("========================= KARMAKA 2023 =========================");
-        this.print("Bienvenue sur le jeu de société Karmaka !");
+        this.display("Bienvenue sur le jeu de société Karmaka !");
     }
 
     public void beginDisplayOfTheGame(EtatPartie partie) {
-        this.print("Début d'une partie ..." );
+        this.display("Début d'une partie ..." );
     }
 
     public int numberOfBot() {
@@ -25,6 +28,22 @@ public class KarmakaCommandController {
     public String getPlayerName(int numJoueur) {
         return this.askQuestion(String.format("Quel est le nom du joueur %s",numJoueur), Optional.of(1), Optional.of(2));
     }
+
+    public NomCouleur choisirCouleur(PileCartes cartes) {
+        this.afficherCartes(cartes.getCartes());
+        List<String> couleursDesCartes = new ArrayList<>(cartes.getCouleursInStack());
+
+        int choixUtilisateur = this.askMultipleChoiceQuestion("Choisissez la couleur que vous estimez la plus rentable. ", couleursDesCartes);
+
+        NomCouleur res = null;
+        for(int i = 0; i<couleursDesCartes.size();i++){
+            if (i+1 == choixUtilisateur){
+                res = NomCouleur.valueOf(couleursDesCartes.get(i));
+            }
+        }
+        return res;
+    }
+
 
     public void loadSave() {
         System.out.println("Chargement d'une sauvegarde ...");
@@ -50,10 +69,10 @@ public class KarmakaCommandController {
     }
 
     private int askMultipleChoiceQuestion(String question, List<String> choices){
-        this.print(question);
+        this.display(question);
         int numOfChoice = 0;
         for(String choice: choices){
-            this.print((numOfChoice+1)+". "+choice);
+            this.display((numOfChoice+1)+". "+choice);
             numOfChoice ++;
         }
         Scanner in = new Scanner(System.in);
@@ -62,16 +81,16 @@ public class KarmakaCommandController {
         // Vérifie que la saisie est bien un entier
         while(!inputIsValid){
             try {
-                this.print("Choisissez une proposition : ");
+                this.display("Choisissez une proposition : ");
                 userInput = in.nextInt();
                 // Vérifie que la saisie est bien comprise entre 1 et le nombre de choix du menu
                 while(userInput<1 || userInput>numOfChoice){
-                    this.print(String.format("Votre choix doit être compris entre 1 et %s, Veuillez saisir à nouveaux :", numOfChoice));
+                    this.display(String.format("Votre choix doit être compris entre 1 et %s, Veuillez saisir à nouveaux :", numOfChoice));
                     userInput = in.nextInt();
                 }
                 inputIsValid = true;
             } catch (java.util.InputMismatchException e) {
-                this.print("Saisie invalide. Veuillez entrer un entier valide.");
+                this.display("Saisie invalide. Veuillez entrer un entier valide.");
                 in.nextLine();
             }
         }
@@ -80,23 +99,66 @@ public class KarmakaCommandController {
 
     private String askQuestion(String question, Optional<Integer> maxLength, Optional<Integer> minLength){
         Scanner in = new Scanner(System.in);
-        this.print(question);
+        this.display(question);
         String userInput = in.next();
         if (maxLength.isPresent() && minLength.isPresent()){
             while (userInput.length()> maxLength.get() && userInput.length()<minLength.get()){
-                this.print(String.format("Votre réponse doit contenir entre %s et %s caractères. Veuillez saisir à nouveaux", minLength.get(), maxLength.get()));
+                this.display(String.format("Votre réponse doit contenir entre %s et %s caractères. Veuillez saisir à nouveaux", minLength.get(), maxLength.get()));
                 userInput = in.next();
             }
         }
         return userInput;
     }
 
-    private void print(String _s){
-        for(char c: _s.toCharArray()){
+    private void afficherCartes(List<Carte> cartes){
+        for(Carte c : cartes){
+            this.displayInColor(c.toString(), c.getCouleur());
+        }
+    }
+
+    private void display(String _s){
+        printRowToScreen(_s);
+        System.out.println();
+    }
+
+    public void displayInColor(String _s, NomCouleur couleur){
+        switch (couleur){
+            case BLEU -> System.out.print(ColoredText.BLEU.getValue());
+            case ROUGE -> System.out.print(ColoredText.ROUGE.getValue());
+            case VERTE -> System.out.print(ColoredText.VERT.getValue());
+            default -> {}
+        }
+        if(couleur.equals(NomCouleur.MOSAIQUE)){
+            this.diplayMosaique(_s);
+        } else {
+            printRowToScreen(_s);
+        }
+        System.out.println(ColoredText.RESET.getValue());
+    }
+
+    private void diplayMosaique(String ligne) {
+        int i = 1;
+        for(char c: ligne.toCharArray()){
+            if(i%3 == 0){
+                System.out.print(ColoredText.VERT.getValue());
+                i = 1;
+            } else if (i%2 == 0) {
+                System.out.print(ColoredText.BLEU.getValue());
+                i = 3;
+            } else {
+                System.out.print(ColoredText.ROUGE.getValue());
+                i = 2;
+            }
             System.out.print(c);
             wait(DELAYDETWEENCHARPROMPTinms);
         }
-        System.out.println();
+    }
+
+    private void printRowToScreen(String ligne) {
+        for(char c: ligne.toCharArray()){
+            System.out.print(c);
+            wait(DELAYDETWEENCHARPROMPTinms);
+        }
     }
 
     private void wait(int ms) {

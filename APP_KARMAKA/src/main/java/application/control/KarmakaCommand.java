@@ -2,10 +2,14 @@ package application.control;
 
 import application.view.KarmakaCommandController;
 import model.EtatPartie;
+import model.carte.Carte;
+import model.carte.NomCouleur;
+import model.carte.PileCartes;
 import model.joueur.Joueur;
 import model.joueur.StyleJeuStrategy;
 
 import java.util.List;
+import java.util.Stack;
 
 public class KarmakaCommand
         implements Renderable
@@ -51,5 +55,10 @@ public class KarmakaCommand
     @Override
     public void showPlayer(List<Joueur> joueurs) {
         this.kcc.showPlayer(joueurs);
+    }
+
+    @Override
+    public NomCouleur choisirCouleur(PileCartes cartes) {
+        return this.kcc.choisirCouleur(cartes);
     }
 }

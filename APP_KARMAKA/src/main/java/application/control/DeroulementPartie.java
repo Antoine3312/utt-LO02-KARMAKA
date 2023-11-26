@@ -1,15 +1,14 @@
 package application.control;
 
 import model.EtatPartie;
-import model.carte.Carte;
-import model.carte.Carte1;
-import model.carte.Carte2;
-import model.carte.PileCartes;
+import model.carte.*;
 import model.echelle.EchelleKarmique;
 import model.echelle.Echellon;
+import model.echelle.NomPalier;
 import model.joueur.Joueur;
 import model.joueur.Ordinateur;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,15 +41,17 @@ public class DeroulementPartie {
         int numTour = 0;
         this.partie.init(echelle,joueurs.get(0),joueurs.get(1),source,fosse,numTour);
 
-//        this.jouerPartie();
+        this.jouerPartie();
     }
-/*
     private void jouerPartie(){
         while (this.partie.getJoueur1().hasWon() || this.partie.getJoueur2().hasWon()){
-            this.jouerTour(this.partie.getJoueur1());
-            this.jouerTour(this.partie.getJoueur2());
+//            this.jouerTour(this.partie.getJoueur1());
+            if(this.partie.getJoueur1().hasWon()){
+                break;
+            }
+//            this.jouerTour(this.partie.getJoueur2());
         }
-        this.finDePartie();
+//        this.finDePartie();
     }
 
     private void jouerTour(Joueur joueur) {
@@ -67,14 +68,41 @@ public class DeroulementPartie {
     }
 
     private void reincarner(Joueur joueur) {
-        int score = joueur.reincarner();
+        NomCouleur couleurLaPlusRentable = this.renderer.choisirCouleur(joueur.getOeuvre());
+        int score = this.effectuerReincarnationDe(joueur, couleurLaPlusRentable);
         Echellon echellon = this.partie.getEchelle().getEchellonOf(joueur);
         if( this.renderer.utiliserJetonKarmique() ){
             score += this.renderer.combienDeJeton();
         }
         if(score >= echellon.getPtsNecessairePourMonter()){
-            this.partie.getEchelle().monterCategorie(joueur);
+            if(this.partie.getEchelle().monterCategorie(joueur).equals(NomPalier.SINGE)){
+                joueur.setHasWon(true);
+            };
         }
+    }
+
+    private int effectuerReincarnationDe(Joueur joueur, NomCouleur couleur) {
+        // Calcul du score de la couleur la plus rentable
+        int score = 0;
+        for(Carte c : joueur.getOeuvre().getCartes()){
+            if(c.getCouleur().equals(couleur)){
+                score += c.getPoint();
+            }
+        }
+        // Défosser toutes les oeuvres
+        partie.getFosse().addCartes(joueur.getOeuvre().getCartes());
+
+        // Composition de la nouvelle main
+        joueur.setMain( new ArrayList<Carte>(joueur.getVieFutur().getCartes()));
+        joueur.getVieFutur().viderCartes();
+
+        // Composition de la nouvelle
+        int carteAPiocher = 6 - joueur.getMain().size();
+        for(int i = 0; i < carteAPiocher; i++){
+            joueur.getPile().getCartes().push(partie.getSource().getCartes().peek());
+        }
+
+        return score;
     }
 
     private void jouer(Joueur joueur) {
@@ -88,7 +116,9 @@ public class DeroulementPartie {
             case DeroulementPartie.UTILISATIONFUTUR -> carte.jouerFutur();
             case DeroulementPartie.UTILISATIONPOINT -> carte.jouerPoint();
         }
-    }*/
+    }
+
+
 
     private void initHands() {
         List<Joueur> joueurs = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());

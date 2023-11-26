@@ -2,7 +2,6 @@ package model.echelle;
 
 import model.joueur.Joueur;
 
-import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,5 +35,31 @@ public class EchelleKarmique {
             }
         }
         return null;
+    }
+
+    public NomPalier monterCategorie(Joueur joueur) {
+        NomPalier current = null;
+        switch (this.getEchellonOf(joueur).getNom()){
+            case BOUSIER :
+                this.bousier.getJoueurs().remove(joueur);
+                this.serpent.getJoueurs().add(joueur);
+                current = NomPalier.BOUSIER;
+                break;
+            case SERPENT:
+                this.serpent.getJoueurs().remove(joueur);
+                this.loup.getJoueurs().add(joueur);
+                current = NomPalier.SERPENT;
+                break;
+            case LOUP:
+                this.loup.getJoueurs().remove(joueur);
+                this.singe.getJoueurs().add(joueur);
+                current = NomPalier.LOUP;
+                break;
+            case SINGE:
+                this.singe.getJoueurs().remove(joueur);
+                current = NomPalier.SINGE;
+                break;
+        }
+        return current;
     }
 }

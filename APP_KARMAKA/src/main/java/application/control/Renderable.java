@@ -1,6 +1,8 @@
 package application.control;
 
 import model.EtatPartie;
+import model.carte.NomCouleur;
+import model.carte.PileCartes;
 import model.joueur.Joueur;
 import model.joueur.StyleJeuStrategy;
 
@@ -23,4 +25,6 @@ public interface Renderable {
     StyleJeuStrategy getBotDifficulty(String botName);
 
     void showPlayer(List<Joueur> joueurs);
+
+    NomCouleur choisirCouleur(PileCartes cartes);
 }
