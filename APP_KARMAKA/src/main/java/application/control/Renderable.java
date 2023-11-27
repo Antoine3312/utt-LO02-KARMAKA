@@ -27,4 +27,8 @@ public interface Renderable {
     void showPlayer(List<Joueur> joueurs);
 
     NomCouleur choisirCouleur(PileCartes cartes);
+
+    boolean utiliserJetonKarmique(Joueur joueur);
+
+    int combienDeJeton(Joueur joueur);
 }

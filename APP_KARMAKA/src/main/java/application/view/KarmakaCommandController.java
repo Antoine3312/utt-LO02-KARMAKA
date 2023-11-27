@@ -174,4 +174,18 @@ public class KarmakaCommandController {
         System.out.println(String.format("Joueur 1 : %s", joueurs.get(0)));
         System.out.println(String.format("Joueur 2 : %s", joueurs.get(1)));
     }
+
+    public boolean utiliserJetonKarmique(Joueur joueur) {
+        int input = this.askMultipleChoiceQuestion(String.format("Voulez vous utiliser vos jetons karmique ? (Vous en avez %s )", joueur.getNbAnneauxKarmique()), Arrays.asList("Oui", "Non"));
+        boolean choice = false;
+        switch (input){
+            case 1 -> choice=true;
+            case 2 -> choice=false;
+        }
+        return choice;
+    }
+
+    public int combienDeJeton(Joueur joueur) {
+        return null;
+    }
 }

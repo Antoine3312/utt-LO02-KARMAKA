@@ -61,4 +61,14 @@ public class KarmakaCommand
     public NomCouleur choisirCouleur(PileCartes cartes) {
         return this.kcc.choisirCouleur(cartes);
     }
+
+    @Override
+    public boolean utiliserJetonKarmique(Joueur joueur) {
+        return this.kcc.utiliserJetonKarmique(joueur);
+    }
+
+    @Override
+    public int combienDeJeton(Joueur joueur) {
+        return this.kcc.combienDeJeton(joueur);
+    }
 }

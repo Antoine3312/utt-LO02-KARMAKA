@@ -71,8 +71,8 @@ public class DeroulementPartie {
         NomCouleur couleurLaPlusRentable = this.renderer.choisirCouleur(joueur.getOeuvre());
         int score = this.effectuerReincarnationDe(joueur, couleurLaPlusRentable);
         Echellon echellon = this.partie.getEchelle().getEchellonOf(joueur);
-        if( this.renderer.utiliserJetonKarmique() ){
-            score += this.renderer.combienDeJeton();
+        if( this.renderer.utiliserJetonKarmique(joueur) ){
+            score += this.renderer.combienDeJeton(joueur);
         }
         if(score >= echellon.getPtsNecessairePourMonter()){
             if(this.partie.getEchelle().monterCategorie(joueur).equals(NomPalier.SINGE)){

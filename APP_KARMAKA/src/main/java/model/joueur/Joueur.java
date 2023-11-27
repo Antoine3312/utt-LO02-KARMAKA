@@ -16,6 +16,9 @@ public class Joueur {
     private PileCartes vieFutur;
     private List<Carte> main;
 
+    private int nbAnneauxKarmique;
+
+
     private boolean hasWon = false;
     public Joueur(String nom) {
         this.nom = nom;
@@ -31,6 +34,10 @@ public class Joueur {
 
     public List<Carte> getMain() {
         return main;
+    }
+
+    public int getNbAnneauxKarmique() {
+        return nbAnneauxKarmique;
     }
 
     @Override
