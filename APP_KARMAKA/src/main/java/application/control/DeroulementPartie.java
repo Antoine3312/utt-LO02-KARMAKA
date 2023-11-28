@@ -61,7 +61,7 @@ public class DeroulementPartie {
             if (joueur.getMain().isEmpty() && joueur.getPile().getCartes().isEmpty()){
                 this.reincarner(joueur);
             } else {
-                this.jouer(joueur);
+//                this.jouer(joueur);
             }
         }
 
@@ -105,7 +105,7 @@ public class DeroulementPartie {
         return score;
     }
 
-    private void jouer(Joueur joueur) {
+/*    private void jouer(Joueur joueur) {
         if(!joueur.getPile().getCartes().isEmpty()){
             joueur.getMain().add(this.partie.getSource().getCartes().pop());
         }
@@ -116,7 +116,7 @@ public class DeroulementPartie {
             case DeroulementPartie.UTILISATIONFUTUR -> carte.jouerFutur();
             case DeroulementPartie.UTILISATIONPOINT -> carte.jouerPoint();
         }
-    }
+    }*/
 
 
 

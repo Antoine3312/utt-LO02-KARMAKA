@@ -186,6 +186,6 @@ public class KarmakaCommandController {
     }
 
     public int combienDeJeton(Joueur joueur) {
-        return null;
+        return 0;
     }
 }
