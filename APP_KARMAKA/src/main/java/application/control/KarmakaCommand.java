@@ -71,4 +71,14 @@ public class KarmakaCommand
     public int combienDeJeton(Joueur joueur) {
         return this.kcc.combienDeJeton(joueur);
     }
+
+    @Override
+    public Carte afficherEtChoisirCarte(Joueur joueur) {
+        return this.kcc.afficherEtChoisirCarte(joueur);
+    }
+
+    @Override
+    public int choisirUtilisation(Carte carte) {
+        return this.kcc.choisirUtilisation(carte);
+    }
 }

@@ -9,8 +9,8 @@ import model.joueur.*;
 import java.util.*;
 
 public class KarmakaCommandController {
-    private static final int DELAYDETWEENCHARPROMPTinms = 30;
-//    private static final int DELAYDETWEENCHARPROMPTinms = 0;
+//    private static final int DELAYDETWEENCHARPROMPTinms = 30;
+    private static final int DELAYDETWEENCHARPROMPTinms = 0;
 
     public void displayGameStart() {
         System.out.println("========================= KARMAKA 2023 =========================");
@@ -186,6 +186,24 @@ public class KarmakaCommandController {
     }
 
     public int combienDeJeton(Joueur joueur) {
-        return 0;
+        this.display(String.format("Vous avez %s jeton", joueur.getNbAnneauxKarmique()));
+        String input = askQuestion("Combien de jeton voulez vous utiliser ?", Optional.empty(),Optional.empty());
+        while (!input.matches("\\d+") || Integer.parseInt(input)>joueur.getNbAnneauxKarmique() || Integer.parseInt(input)<1){
+            input = askQuestion("Saisi invalide, veuillez saisir à nouveau :", Optional.empty(),Optional.empty());
+        }
+        return Integer.parseInt(input);
+    }
+
+    public Carte afficherEtChoisirCarte(Joueur joueur) {
+        this.display("Voici votre main :");
+        this.afficherCartes(joueur.getMain());
+        List<String> nomDesCartes = joueur.getMain().stream().map(Carte::getNom).toList();
+        int input = this.askMultipleChoiceQuestion("Choisissez une carte à jouer :", nomDesCartes);
+        return joueur.getMain().get(input-1);
+    }
+
+    public int choisirUtilisation(Carte carte) {
+        List<String> typeUtilisationCarte = Arrays.asList("Pour son pouvoir", "Pour votre futur", "Pour ses points");
+        return this.askMultipleChoiceQuestion("Comment voulez vous jouer cette carte ?", typeUtilisationCarte);
     }
 }

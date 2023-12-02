@@ -1,6 +1,7 @@
 package application.control;
 
 import model.EtatPartie;
+import model.carte.Carte;
 import model.carte.NomCouleur;
 import model.carte.PileCartes;
 import model.joueur.Joueur;
@@ -31,4 +32,8 @@ public interface Renderable {
     boolean utiliserJetonKarmique(Joueur joueur);
 
     int combienDeJeton(Joueur joueur);
+
+    Carte afficherEtChoisirCarte(Joueur joueur);
+
+    int choisirUtilisation(Carte carte);
 }
