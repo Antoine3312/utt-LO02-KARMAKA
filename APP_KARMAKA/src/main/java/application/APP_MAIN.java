@@ -2,9 +2,13 @@ package application;
 
 import application.control.DeroulementJeu;
 import application.control.KarmakaCommand;
+import application.control.KarmakaMainFrame;
 import application.view.ColoredText;
 import application.view.KarmakaCommandController;
+import model.carte.Carte1;
+import model.carte.Carte2;
 import model.carte.NomCouleur;
+import model.carte.PileCartes;
 import model.echelle.EchelleKarmique;
 import model.joueur.Joueur;
 

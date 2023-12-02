@@ -13,6 +13,12 @@ public abstract class Carte {
         this.renderer = renderer;
     }
 
+    public Carte(String nom, int point, NomCouleur couleur) {
+        this.nom = nom;
+        this.point = point;
+        this.couleur = couleur;
+    }
+
     public void jouerPoint(){
         System.out.println("Joueur point");
     }

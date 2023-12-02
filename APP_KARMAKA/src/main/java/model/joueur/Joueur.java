@@ -23,6 +23,11 @@ public class Joueur {
         this.nom = nom;
     }
 
+    public Joueur(List<Carte> main, int jeton) {
+        this.main = main;
+        this.nbAnneauxKarmique = jeton;
+    }
+
     public boolean isBot(){
         return false;
     }
@@ -89,5 +94,9 @@ public class Joueur {
         }
 
         return score;
+    }
+
+    public void setNbAnneauxKarmique(int nbAnneauxKarmique) {
+        this.nbAnneauxKarmique = nbAnneauxKarmique;
     }
 }

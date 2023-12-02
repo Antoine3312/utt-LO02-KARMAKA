@@ -10,6 +10,7 @@ import model.joueur.Ordinateur;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class DeroulementPartie {
@@ -72,7 +73,9 @@ public class DeroulementPartie {
         int score = this.effectuerReincarnationDe(joueur, couleurLaPlusRentable);
         Echellon echellon = this.partie.getEchelle().getEchellonOf(joueur);
         if( this.renderer.utiliserJetonKarmique(joueur) ){
-            score += this.renderer.combienDeJeton(joueur);
+            int nbAnneauxJouer = this.renderer.combienDeJeton(joueur);
+            score += nbAnneauxJouer;
+            joueur.setNbAnneauxKarmique(joueur.getNbAnneauxKarmique() - nbAnneauxJouer);
         }
         if(score >= echellon.getPtsNecessairePourMonter()){
             if(this.partie.getEchelle().monterCategorie(joueur).equals(NomPalier.SINGE)){
@@ -105,18 +108,22 @@ public class DeroulementPartie {
         return score;
     }
 
-/*    private void jouer(Joueur joueur) {
+    private void jouer(Joueur joueur) {
+        boolean jouerCarte = true;
         if(!joueur.getPile().getCartes().isEmpty()){
             joueur.getMain().add(this.partie.getSource().getCartes().pop());
+            jouerCarte = this.renderer.jouerUneCarteOuNon();
         }
-        Carte carte = this.renderer.afficherEtChoisirCarte();
-        int utilisation = this.renderer.choisirUtilisation(carte);
-        switch (utilisation){
-            case DeroulementPartie.UTILISATIONPOUVOIR -> carte.jouerPouvoir();
-            case DeroulementPartie.UTILISATIONFUTUR -> carte.jouerFutur();
-            case DeroulementPartie.UTILISATIONPOINT -> carte.jouerPoint();
+        if(jouerCarte){
+            Carte carte = this.renderer.afficherEtChoisirCarte(joueur);
+            int utilisation = this.renderer.choisirUtilisation(carte);
+            switch (utilisation){
+                case DeroulementPartie.UTILISATIONPOUVOIR -> carte.jouerPouvoir();
+                case DeroulementPartie.UTILISATIONFUTUR -> carte.jouerFutur();
+                case DeroulementPartie.UTILISATIONPOINT -> carte.jouerPoint();
+            }
         }
-    }*/
+    }
 
 
 
@@ -139,6 +146,10 @@ public class DeroulementPartie {
     }
 
     private List<Carte> loadSource(){
-        return Arrays.asList(new Carte1(), new Carte2());
+        List<Carte> jeu = Arrays.asList(
+                //cartes ici
+        );
+        Collections.shuffle(jeu);
+        return jeu;
     }
 }
