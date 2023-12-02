@@ -1,9 +1,17 @@
 package model.carte;
 
+import application.control.Renderable;
+import model.joueur.Joueur;
+
 public abstract class Carte {
     protected String nom;
     protected int point;
     protected NomCouleur couleur;
+    protected Renderable renderer;
+
+    public Carte(Renderable renderer) {
+        this.renderer = renderer;
+    }
 
     public void jouerPoint(){
         System.out.println("Joueur point");
@@ -12,7 +20,7 @@ public abstract class Carte {
         System.out.println("Joueur futur");
     }
 
-    public abstract void jouerPouvoir();
+    public abstract void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur);
 
     public String getNom() {
         return nom;

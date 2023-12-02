@@ -1,25 +1,31 @@
 package model.carte;
 
+import application.control.Renderable;
+import model.joueur.Joueur;
+import model.joueur.Ordinateur;
+
 import java.util.List;
+import java.util.Random;
 
-public class Transmigration extends Carte{
+public class Transmigration extends Carte {
+    public Transmigration(Renderable renderable) {
+        super(renderable);
+        this.point = 1;
+        this.couleur = NomCouleur.BLEU;
+    }
 
-    private List<Carte> vieFuture;
-    private Carte carte;
-
-    public Transmigration(){
-    this.point = 1;
-    this.couleur = NomCouleur.BLEU;
-}
-}
-    public void pouvoir(List<Carte> vieFuture, Carte carte) {
-        this.vieFuture = vieFuture;
-        this.carte = carte;
-        /* Placez dans votre Main n'importe quelle carte de votre Vie Future. */
-        vieFuture.remove(carte);
-}
     @Override
-    public void jouerPouvoir() {
-        System.out.println("Joue pouvoir carte "+this.nom);
+    public void jouerPouvoir (Joueur joueurAppelant, Joueur joueurReceveur) {
+        Carte carteChoisi = null;
+        List<Carte> carteVieFutur = joueurAppelant.getVieFutur().getCartes();
+        if(joueurAppelant instanceof Ordinateur){
+            carteChoisi = carteVieFutur.get(new Random().nextInt(carteVieFutur.size()));
+        } else {
+            this.renderer.afficherCartes(carteVieFutur);
+            carteChoisi = this.renderer.choisirUneCarte(carteVieFutur);
+        }
+        joueurAppelant.getVieFutur().getCartes().remove(carteChoisi);
+        joueurAppelant.getMain().add(carteChoisi);
+
     }
 }
