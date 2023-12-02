@@ -206,4 +206,8 @@ public class KarmakaCommandController {
         List<String> typeUtilisationCarte = Arrays.asList("Pour son pouvoir", "Pour votre futur", "Pour ses points");
         return this.askMultipleChoiceQuestion("Comment voulez vous jouer cette carte ?", typeUtilisationCarte);
     }
+
+    public boolean jouerUneCarteOuNon() {
+        return this.askMultipleChoiceQuestion("Voulez vous jouez une carte ou passer votre tour ?", Arrays.asList("Jouer", "Passer")) == 1;
+    }
 }

@@ -81,4 +81,9 @@ public class KarmakaCommand
     public int choisirUtilisation(Carte carte) {
         return this.kcc.choisirUtilisation(carte);
     }
+
+    @Override
+    public boolean jouerUneCarteOuNon() {
+        return this.kcc.jouerUneCarteOuNon();
+    }
 }

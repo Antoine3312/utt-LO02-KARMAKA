@@ -10,6 +10,7 @@ import model.joueur.Ordinateur;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class DeroulementPartie {
@@ -108,15 +109,19 @@ public class DeroulementPartie {
     }
 
     private void jouer(Joueur joueur) {
+        boolean jouerCarte = true;
         if(!joueur.getPile().getCartes().isEmpty()){
             joueur.getMain().add(this.partie.getSource().getCartes().pop());
+            jouerCarte = this.renderer.jouerUneCarteOuNon();
         }
-        Carte carte = this.renderer.afficherEtChoisirCarte(joueur);
-        int utilisation = this.renderer.choisirUtilisation(carte);
-        switch (utilisation){
-            case DeroulementPartie.UTILISATIONPOUVOIR -> carte.jouerPouvoir();
-            case DeroulementPartie.UTILISATIONFUTUR -> carte.jouerFutur();
-            case DeroulementPartie.UTILISATIONPOINT -> carte.jouerPoint();
+        if(jouerCarte){
+            Carte carte = this.renderer.afficherEtChoisirCarte(joueur);
+            int utilisation = this.renderer.choisirUtilisation(carte);
+            switch (utilisation){
+                case DeroulementPartie.UTILISATIONPOUVOIR -> carte.jouerPouvoir();
+                case DeroulementPartie.UTILISATIONFUTUR -> carte.jouerFutur();
+                case DeroulementPartie.UTILISATIONPOINT -> carte.jouerPoint();
+            }
         }
     }
 
@@ -141,8 +146,10 @@ public class DeroulementPartie {
     }
 
     private List<Carte> loadSource(){
-        return Arrays.asList(
+        List<Carte> jeu = Arrays.asList(
                 //cartes ici
         );
+        Collections.shuffle(jeu);
+        return jeu;
     }
 }

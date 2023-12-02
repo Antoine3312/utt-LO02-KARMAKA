@@ -36,4 +36,6 @@ public interface Renderable {
     Carte afficherEtChoisirCarte(Joueur joueur);
 
     int choisirUtilisation(Carte carte);
+
+    boolean jouerUneCarteOuNon();
 }
