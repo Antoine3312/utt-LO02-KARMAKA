@@ -110,7 +110,7 @@ public class KarmakaCommandController {
         return userInput;
     }
 
-    private void afficherCartes(List<Carte> cartes){
+    public void afficherCartes(List<Carte> cartes){
         for(Carte c : cartes){
             this.displayInColor(c.toString(), c.getCouleur());
         }
@@ -194,7 +194,7 @@ public class KarmakaCommandController {
         return Integer.parseInt(input);
     }
 
-    public Carte afficherEtChoisirCarte(Joueur joueur) {
+    public Carte afficherEtChoisirCarteMain(Joueur joueur) {
         this.display("Voici votre main :");
         this.afficherCartes(joueur.getMain());
         List<String> nomDesCartes = joueur.getMain().stream().map(Carte::getNom).toList();
@@ -209,5 +209,9 @@ public class KarmakaCommandController {
 
     public boolean jouerUneCarteOuNon() {
         return this.askMultipleChoiceQuestion("Voulez vous jouez une carte ou passer votre tour ?", Arrays.asList("Jouer", "Passer")) == 1;
+    }
+
+    public Carte choisirUneCarteVieFutur(List<Carte> carteVieFutur) {
+        return null;
     }
 }

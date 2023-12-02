@@ -22,7 +22,7 @@ public class Transmigration extends Carte {
             carteChoisi = carteVieFutur.get(new Random().nextInt(carteVieFutur.size()));
         } else {
             this.renderer.afficherCartes(carteVieFutur);
-            carteChoisi = this.renderer.choisirUneCarte(carteVieFutur);
+            carteChoisi = this.renderer.choisirUneCarteVieFutur(carteVieFutur);
         }
         joueurAppelant.getVieFutur().getCartes().remove(carteChoisi);
         joueurAppelant.getMain().add(carteChoisi);

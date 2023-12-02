@@ -9,7 +9,6 @@ import model.joueur.Joueur;
 import model.joueur.StyleJeuStrategy;
 
 import java.util.List;
-import java.util.Stack;
 
 public class KarmakaCommand
         implements Renderable
@@ -73,8 +72,8 @@ public class KarmakaCommand
     }
 
     @Override
-    public Carte afficherEtChoisirCarte(Joueur joueur) {
-        return this.kcc.afficherEtChoisirCarte(joueur);
+    public Carte afficherEtChoisirCarteMain(Joueur joueur) {
+        return this.kcc.afficherEtChoisirCarteMain(joueur);
     }
 
     @Override
@@ -85,5 +84,15 @@ public class KarmakaCommand
     @Override
     public boolean jouerUneCarteOuNon() {
         return this.kcc.jouerUneCarteOuNon();
+    }
+
+    @Override
+    public void afficherCartes(List<Carte> cartes) {
+        this.kcc.afficherCartes(cartes);
+    }
+
+    @Override
+    public Carte choisirUneCarteVieFutur(List<Carte> carteVieFutur) {
+        return this.kcc.choisirUneCarteVieFutur(carteVieFutur);
     }
 }

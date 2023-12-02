@@ -33,9 +33,13 @@ public interface Renderable {
 
     int combienDeJeton(Joueur joueur);
 
-    Carte afficherEtChoisirCarte(Joueur joueur);
+    Carte afficherEtChoisirCarteMain(Joueur joueur);
 
     int choisirUtilisation(Carte carte);
 
     boolean jouerUneCarteOuNon();
+
+    void afficherCartes(List<Carte> carteVieFutur);
+
+    Carte choisirUneCarteVieFutur(List<Carte> carteVieFutur);
 }

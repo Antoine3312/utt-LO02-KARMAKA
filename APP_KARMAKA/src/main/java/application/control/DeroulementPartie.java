@@ -115,10 +115,10 @@ public class DeroulementPartie {
             jouerCarte = this.renderer.jouerUneCarteOuNon();
         }
         if(jouerCarte){
-            Carte carte = this.renderer.afficherEtChoisirCarte(joueur);
+            Carte carte = this.renderer.afficherEtChoisirCarteMain(joueur);
             int utilisation = this.renderer.choisirUtilisation(carte);
             switch (utilisation){
-                case DeroulementPartie.UTILISATIONPOUVOIR -> carte.jouerPouvoir();
+//                case DeroulementPartie.UTILISATIONPOUVOIR -> carte.jouerPouvoir();
                 case DeroulementPartie.UTILISATIONFUTUR -> carte.jouerFutur();
                 case DeroulementPartie.UTILISATIONPOINT -> carte.jouerPoint();
             }
