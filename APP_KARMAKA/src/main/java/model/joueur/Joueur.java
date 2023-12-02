@@ -6,7 +6,6 @@ import model.carte.NomCouleur;
 import model.carte.PileCartes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Joueur {
@@ -56,7 +55,6 @@ public class Joueur {
     public PileCartes getVieFutur() {
         return vieFutur;
     }
-
 
     public void setMain(List<Carte> main) {
         this.main = main;
