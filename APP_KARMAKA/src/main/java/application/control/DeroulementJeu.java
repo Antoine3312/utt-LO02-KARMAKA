@@ -45,6 +45,7 @@ public class DeroulementJeu {
                 j1 = new Joueur(playerName);
                 playerName = this.renderer.getPlayerName(2);
                 j2 = new Joueur(playerName);
+                break;
             case 1:
                 playerName = this.renderer.getPlayerName(1);
                 j1 = new Joueur(playerName);

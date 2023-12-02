@@ -22,7 +22,7 @@ public class KarmakaCommandController {
     }
 
     public int numberOfBot() {
-        return this.askMultipleChoiceQuestion("Combien voulez-vous de BOT ?", List.of("1 ordinateur","2 ordinateurs"));
+        return this.askMultipleChoiceQuestion("Combien voulez-vous de BOT ?", List.of("Aucun", "1 ordinateur","2 ordinateurs")) - 1;
     }
 
     public String getPlayerName(int numJoueur) {
