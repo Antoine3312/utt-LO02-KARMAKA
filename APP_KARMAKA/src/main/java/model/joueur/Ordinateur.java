@@ -9,7 +9,7 @@ public class Ordinateur extends Joueur{
     }
 
     public void executeTour(){
-        this.strategy.jouerTour();
+        this.strategy.jouerTour(this);
     }
 
     public boolean isBot(){
