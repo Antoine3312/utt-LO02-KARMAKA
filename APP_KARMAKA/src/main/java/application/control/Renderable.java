@@ -42,4 +42,6 @@ public interface Renderable {
     void afficherCartes(List<Carte> carteVieFutur);
 
     Carte choisirUneCarteVieFutur(List<Carte> carteVieFutur);
-}
+
+    Carte choisirUneCarteOeuvreExposee(List<Carte> carteOeuvreExposee);
+

@@ -99,4 +99,6 @@ public class Joueur {
     public void setNbAnneauxKarmique(int nbAnneauxKarmique) {
         this.nbAnneauxKarmique = nbAnneauxKarmique;
     }
+
+    public PileCartes getOeuvreExposee() { return null; }
 }

@@ -214,4 +214,6 @@ public class KarmakaCommandController {
     public Carte choisirUneCarteVieFutur(List<Carte> carteVieFutur) {
         return null;
     }
+
+    public Carte choisirUneCarteOeuvreExposee(List<Carte> carteOeuvreExposee) { return null; }
 }

@@ -95,4 +95,10 @@ public class KarmakaCommand
     public Carte choisirUneCarteVieFutur(List<Carte> carteVieFutur) {
         return this.kcc.choisirUneCarteVieFutur(carteVieFutur);
     }
+
+    @Override
+    public Carte choisirUneCarteOeuvreExposee(List<Carte> carteOeuvreExposee) {
+        return this.kcc.choisirUneCarteOeuvreExposee(carteOeuvreExposee);
+
+    }
 }
