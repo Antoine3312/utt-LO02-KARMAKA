@@ -216,4 +216,10 @@ public class KarmakaCommandController {
     }
 
     public Carte choisirUneCarteOeuvreExposee(List<Carte> carteOeuvreExposee) { return null; }
+
+    public Carte choisirUneCarte(List<Carte> cartes){ return null; }
+
+    public Carte getCartes(List<Carte> cartes) { return null; }
+
+    public Carte getCartesJouables(List<Carte> cartesJouables) { return null; }
 }

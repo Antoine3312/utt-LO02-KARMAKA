@@ -1,5 +1,6 @@
 package model.joueur;
 
+import application.control.Renderable;
 import model.EtatPartie;
 import model.carte.Carte;
 import model.carte.NomCouleur;
@@ -101,4 +102,16 @@ public class Joueur {
     }
 
     public PileCartes getOeuvreExposee() { return null; }
+
+    public PileCartes getSource() { return null; }
+
+    public int puiserCartesSource(int i) { return i; }
+
+    public void jouerCarte(Carte carteAJouer)  {}
+
+    public Renderable getOeuvres() { return null; }
+
+    public Renderable getDefausse() { return null; }
+
+    public PileCartes getFosse() { return null; }
 }

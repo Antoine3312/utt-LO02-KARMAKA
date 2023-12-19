@@ -44,4 +44,8 @@ public abstract class Carte {
     public String toString() {
         return "("+point+")"+"  "+nom+"  ["+couleur+"]";
     }
+
+    public abstract void placerPremiereCarteVieFuturRivalSurLaVotre(Joueur joueurAppelant, Joueur joueurRival);
+
+    public abstract void jouerPouvoir(Joueur joueurAppelant);
 }

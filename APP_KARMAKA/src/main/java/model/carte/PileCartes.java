@@ -33,4 +33,8 @@ public class PileCartes {
         }
         return res;
     }
+    public void removeCartes(List<Carte> cartes) {
+
+    }
+
 }

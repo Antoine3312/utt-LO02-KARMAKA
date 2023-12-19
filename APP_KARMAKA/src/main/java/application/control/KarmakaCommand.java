@@ -10,9 +10,7 @@ import model.joueur.StyleJeuStrategy;
 
 import java.util.List;
 
-public class KarmakaCommand
-        implements Renderable
-{
+public class KarmakaCommand implements Renderable {
 
     private final KarmakaCommandController kcc = new KarmakaCommandController();
 
@@ -100,5 +98,19 @@ public class KarmakaCommand
     public Carte choisirUneCarteOeuvreExposee(List<Carte> carteOeuvreExposee) {
         return this.kcc.choisirUneCarteOeuvreExposee(carteOeuvreExposee);
 
+    }
+
+    @Override
+    public Carte choisirUneCarte(List<Carte> Cartes) {
+        return this.kcc.choisirUneCarte(Cartes);
+    }
+
+    @Override
+    public Carte getCartes(List<Carte> Cartes) {
+        return this.kcc.getCartes(Cartes);
+    }
+    @Override
+    public Carte getCartesJouables(List<Carte> CartesJouables) {
+        return this.kcc.getCartesJouables(CartesJouables);
     }
 }

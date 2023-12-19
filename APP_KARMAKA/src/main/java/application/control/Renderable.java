@@ -8,6 +8,7 @@ import model.joueur.Joueur;
 import model.joueur.StyleJeuStrategy;
 
 import java.util.List;
+import java.util.ServiceLoader;
 
 public interface Renderable {
 
@@ -44,4 +45,20 @@ public interface Renderable {
     Carte choisirUneCarteVieFutur(List<Carte> carteVieFutur);
 
     Carte choisirUneCarteOeuvreExposee(List<Carte> carteOeuvreExposee);
+
+    Carte choisirUneCarteSource(List<Carte> carteSourceJoueurAppelant);
+
+    Carte choisirUneCarte(List<Carte> Cartes);
+
+    Carte getsCartes(List<Carte> Cartes);
+
+    Carte getCartes(List<Carte> Cartes);
+
+    Carte getCartesJouables(List<Carte> CartesJouables);
+
+    <E> List<E> getCartes();
+
+    PileCartes getExposition();
+
+    ServiceLoader<Object> stream();
 
