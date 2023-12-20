@@ -13,9 +13,9 @@ public class ActionJouer {
 
     private EtatPartie partie = EtatPartie.getInstance();
 
-    private static final int UTILISATIONPOUVOIR = 1;
-    private static final int UTILISATIONFUTUR = 2;
-    private static final int UTILISATIONPOINT = 3;
+    public static final int UTILISATIONPOUVOIR = 1;
+    public static final int UTILISATIONFUTUR = 2;
+    public static final int UTILISATIONPOINT = 3;
 
     public void reincarner(Joueur joueur, NomCouleur couleurLaPlusRentable, boolean utiliserSesAnneaux, int nbAnneauxJouer) {
         int score = this.effectuerReincarnationDe(joueur, couleurLaPlusRentable);
