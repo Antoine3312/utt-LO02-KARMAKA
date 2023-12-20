@@ -5,8 +5,10 @@ import model.EtatPartie;
 import model.carte.Carte;
 import model.carte.NomCouleur;
 import model.carte.PileCartes;
+import model.echelle.Echellon;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Joueur {
@@ -20,6 +22,9 @@ public class Joueur {
 
 
     private boolean hasWon = false;
+    private Echellon partie;
+    private Collection<Object> oeuvresExposee;
+
     public Joueur(String nom) {
         this.nom = nom;
     }
@@ -114,4 +119,15 @@ public class Joueur {
     public Renderable getDefausse() { return null; }
 
     public PileCartes getFosse() { return null; }
+
+    public Echellon getPartie() {
+        return partie;
+    }
+
+    public void defausserCarte(int choixCarte) {
+    }
+
+    public List<Carte> getOeuvresExposee() {
+        return oeuvresExposee;
+    }
 }

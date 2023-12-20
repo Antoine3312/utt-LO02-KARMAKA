@@ -6,17 +6,32 @@ import model.joueur.Ordinateur;
 
 import java.util.List;
 
-// Carte "Voyage" qui hérite de la classe abstraite "Carte"
+/**
+ * Classe abstraite représentant la carte "Voyage" dans le jeu.
+ * Hérite de la classe abstraite "Carte".
+ */
 public abstract class Voyage extends Carte {
 
-    // Constructeur de la carte "Voyage"
+    /**
+     * Constructeur de la carte "Voyage".
+     *
+     * @param renderable L'objet permettant le rendu visuel.
+     */
     public Voyage(Renderable renderable) {
         super(renderable);
         this.point = 1;
         this.couleur = NomCouleur.VERTE; // Définition de la couleur de la carte
     }
 
-    // Implémentation de la méthode jouerPouvoir() définie dans l'interface PouvoirCarte
+    /**
+     * Méthode pour jouer le pouvoir de la carte "Voyage".
+     * Puise 3 cartes à la Source et permet au joueur d'en jouer une autre.
+     * Si le joueur est un ordinateur, il choisit et joue automatiquement une autre carte.
+     * Si le joueur est humain, il choisit une carte à jouer via l'interface graphique.
+     *
+     * @param joueurAppelant Le joueur qui joue la carte.
+     * @param joueurReceveur Le joueur adverse (non utilisé dans cette carte).
+     */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
         // Puisez 3 cartes à la Source
@@ -37,9 +52,14 @@ public abstract class Voyage extends Carte {
         }
     }
 
-    // Méthode pour jouer une autre carte
+    /**
+     * Méthode privée pour jouer une autre carte.
+     * Si le joueur est un ordinateur, il choisit et joue automatiquement une autre carte.
+     * Si le joueur est humain, il choisit et joue une autre carte via l'interface graphique.
+     *
+     * @param joueur Le joueur qui joue la carte.
+     */
     private void jouerAutreCarte(Joueur joueur) {
-
         if (joueur instanceof Ordinateur) {
             // Si le joueur est un ordinateur, il choisit et joue automatiquement une autre carte
             jouerAutomatiquement(joueur);
@@ -54,9 +74,13 @@ public abstract class Voyage extends Carte {
         }
     }
 
-    // Méthode pour jouer automatiquement une carte (utilisée par l'ordinateur)
+    /**
+     * Méthode privée pour jouer automatiquement une carte (utilisée par l'ordinateur).
+     * L'ordinateur choisit aléatoirement la première carte jouable dans sa main et la joue.
+     *
+     * @param joueur Le joueur qui joue la carte (ordinateur).
+     */
     private void jouerAutomatiquement(Joueur joueur) {
-
         List<Carte> cartesJouables = joueur.getMain().getCartesJouables();
 
         if (!cartesJouables.isEmpty()) {

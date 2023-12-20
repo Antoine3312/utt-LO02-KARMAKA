@@ -7,17 +7,32 @@ import model.joueur.Ordinateur;
 import java.util.List;
 import java.util.Random;
 
-// Carte "Vol" qui hérite de la classe abstraite "Carte"
+/**
+ * Classe abstraite représentant la carte "Vol" dans le jeu.
+ * Hérite de la classe abstraite "Carte".
+ */
 public abstract class Vol extends Carte {
 
-    // Constructeur de la carte "Vol"
+    /**
+     * Constructeur de la carte "Vol".
+     *
+     * @param renderable L'objet permettant le rendu visuel.
+     */
     public Vol(Renderable renderable) {
         super(renderable);
         this.point = 3; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
     }
 
-    // Implémentation de la méthode jouerPouvoir() définie dans l'interface PouvoirCarte
+    /**
+     * Méthode pour jouer le pouvoir de la carte "Vol".
+     * Si le joueur appelant est un ordinateur, il choisit aléatoirement une carte exposée dans son œuvre.
+     * Si le joueur est humain, il choisit une carte exposée en utilisant l'interface graphique.
+     * La carte choisie est retirée de l'œuvre exposée et ajoutée à la main du joueur appelant.
+     *
+     * @param joueurAppelant Le joueur qui joue la carte.
+     * @param joueurReceveur Le joueur adverse.
+     */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
         Carte oeuvreChoisi = null;

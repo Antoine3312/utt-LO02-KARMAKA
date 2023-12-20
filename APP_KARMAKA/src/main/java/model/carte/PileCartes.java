@@ -34,7 +34,11 @@ public class PileCartes {
         return res;
     }
     public void removeCartes(List<Carte> cartes) {
+    }
+
+    public void addCartes(Carte oeuvreADefausser) {
 
     }
 
+    public List<Carte> getDernieresCartesPuisees(int cartesPuisées) { return null; }
 }

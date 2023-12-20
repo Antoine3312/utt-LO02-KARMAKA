@@ -5,16 +5,30 @@ import model.joueur.Joueur;
 
 import java.util.List;
 
+/**
+ * Classe abstraite représentant la carte "Sauvetage" dans le jeu.
+ * Hérite de la classe abstraite "Carte".
+ */
 public abstract class Sauvetage extends Carte {
 
-    // Constructeur de la carte "Sauvetage"
+    /**
+     * Constructeur de la carte "Sauvetage".
+     *
+     * @param renderable L'objet permettant le rendu visuel.
+     */
     public Sauvetage(Renderable renderable) {
         super(renderable);
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.VERTE; // Définition de la couleur de la carte
     }
 
-    // Implémentation de la méthode jouerPouvoir() définie dans l'interface PouvoirCarte
+    /**
+     * Méthode pour jouer le pouvoir de la carte "Sauvetage".
+     * Ajoute à votre Main une des 3 dernières cartes de la Fosse du joueur adverse.
+     *
+     * @param joueurAppelant Le joueur qui joue la carte.
+     * @param joueurReceveur Le joueur adverse.
+     */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
         // Ajoutez à votre Main une des 3 dernières cartes de la Fosse

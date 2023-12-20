@@ -1,5 +1,7 @@
 package model.echelle;
 
+import application.control.Renderable;
+import model.carte.PileCartes;
 import model.joueur.Joueur;
 
 import java.util.ArrayList;
@@ -31,4 +33,10 @@ public class Echellon {
     public NomPalier getNom() {
         return nom;
     }
+
+    public PileCartes getSource() {return null; }
+
+    public PileCartes getDefausse() { return null; }
+
+    public Renderable getRenderer() { return null; }
 }

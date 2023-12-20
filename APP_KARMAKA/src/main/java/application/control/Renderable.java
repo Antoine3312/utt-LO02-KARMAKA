@@ -62,3 +62,10 @@ public interface Renderable {
 
     ServiceLoader<Object> stream();
 
+    int demanderEntier();
+
+    void afficherChoixRivaux(List<Joueur> joueursPossibles);
+
+    Joueur choisirUnRival(List<Joueur> joueursPossibles);
+}
+

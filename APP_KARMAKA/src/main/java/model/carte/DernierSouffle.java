@@ -4,56 +4,104 @@ import application.control.Renderable;
 import model.joueur.Joueur;
 import model.joueur.Ordinateur;
 
-// Carte "Dernier Souffle" qui hérite de la classe abstraite "Carte"
+import java.util.List;
+import java.util.Scanner;
+
+/**
+ * Carte "DernierSouffle" qui hérite de la classe abstraite "Carte".
+ * Représente une carte permettant au joueur appelant de choisir un joueur cible qui devra défausser une carte de sa main.
+ */
 public abstract class DernierSouffle extends Carte {
 
-    // Constructeur de la carte "Dernier Souffle"
+    /**
+     * Constructeur de la carte "DernierSouffle".
+     *
+     * @param renderable L'objet permettant le rendu visuel.
+     */
     public DernierSouffle(Renderable renderable) {
         super(renderable);
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.ROUGE; // Définition de la couleur de la carte
     }
 
-    // Implémentation de la méthode jouerPouvoir() définie dans l'interface PouvoirCarte
+    /**
+     * Méthode pour jouer le pouvoir de la carte "DernierSouffle".
+     * Le joueur appelant choisit un joueur cible qui doit défausser une carte de sa main.
+     *
+     * @param joueurAppelant Le joueur qui joue la carte.
+     * @param joueurReceveur Le joueur cible du pouvoir (non utilisé dans ce contexte).
+     */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        // Si le joueur appelant est un ordinateur
-        if (joueurAppelant instanceof Ordinateur) {
-            // Appel de la méthode pour défausser automatiquement une carte
-            defausserAutomatiquement(joueurReceveur);
-        } else {
-            // Si le joueur est humain
-            List<Carte> mainJoueurReceveur = joueurReceveur.getMain().getCartes();
-            this.renderer.afficherCartes(mainJoueurReceveur);
+        // Le joueur appelant choisit un joueur cible
+        Joueur joueurCible = choisirJoueurCible(joueurAppelant);
 
-            // Le joueur humain choisit une carte à défausser
-            Carte carteADefausser = this.renderer.choisirUneCarte(mainJoueurReceveur);
-
-            // Si le joueur a effectivement choisi une carte
-            if (carteADefausser != null) {
-                // Retirer la carte de la main du joueur receveur
-                joueurReceveur.getMain().getCartes().remove(carteADefausser);
-                // Ajouter la carte à la défausse du joueur receveur
-                joueurReceveur.getDefausse().getCartes().add(carteADefausser);
+        if (joueurCible != null) {
+            // Le joueur cible défausse une carte de sa main
+            if (joueurCible instanceof Ordinateur) {
+                defausserCarteAutomatiquement((Ordinateur) joueurCible);
+            } else {
+                defausserCarteHumain(joueurCible);
             }
         }
     }
 
-    // Méthode pour défausser automatiquement une carte (utilisée par l'ordinateur)
-    private void defausserAutomatiquement(Joueur joueur) {
-        // Logique pour que l'ordinateur choisisse et défausse automatiquement une carte de sa main
-        // Vous pouvez adapter cette logique en fonction des règles spécifiques du jeu
-        List<Carte> cartesDansLaMain = joueur.getMain().getCartes();
+    /**
+     * Méthode privée pour choisir un joueur cible parmi les autres joueurs de la partie.
+     *
+     * @param joueurAppelant Le joueur qui fait le choix.
+     * @return Le joueur cible choisi ou null si l'entrée n'est pas valide.
+     */
+    private Joueur choisirJoueurCible(Joueur joueurAppelant) {
+        Scanner scanner = new Scanner(System.in);
 
-        // S'il y a des cartes dans la main du joueur
-        if (!cartesDansLaMain.isEmpty()) {
-            // Choix aléatoire d'une carte à défausser
-            Carte carteADefausser = cartesDansLaMain.get(new Random().nextInt(cartesDansLaMain.size()));
+        System.out.println("Choisissez un joueur cible (entrez le numéro correspondant) :");
 
-            // Retirer la carte de la main du joueur
-            joueur.getMain().getCartes().remove(carteADefausser);
-            // Ajouter la carte à la défausse du joueur
-            joueur.getDefausse().getCartes().add(carteADefausser);
+        // Afficher la liste des joueurs possibles (excluant le joueur appelant)
+        List<Joueur> joueursPossibles = joueurAppelant.getPartie().getJoueurs();
+        joueursPossibles.remove(joueurAppelant);
+
+        for (int i = 0; i < joueursPossibles.size(); i++) {
+            System.out.println((i + 1) + ". " + joueursPossibles.get(i).getNom());
+        }
+
+        int choix = scanner.nextInt();
+
+        // Retourner le joueur cible choisi ou null si l'entrée n'est pas valide
+        return (choix > 0 && choix <= joueursPossibles.size()) ? joueursPossibles.get(choix - 1) : null;
+    }
+
+    /**
+     * Méthode privée pour demander au joueur cible humain de défausser une carte de sa main.
+     *
+     * @param joueurCible Le joueur cible qui doit défausser une carte.
+     */
+    private void defausserCarteHumain(Joueur joueurCible) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Choisissez une carte à défausser (entrez le numéro correspondant) :");
+
+        // Afficher la liste des cartes en main du joueur cible
+        this.renderer.afficherCartes(joueurCible.getMain());
+
+        int choixCarte = scanner.nextInt();
+
+        // Défausser la carte choisie par le joueur cible
+        joueurCible.defausserCarte(choixCarte);
+    }
+
+    /**
+     * Méthode privée pour que l'ordinateur défausse automatiquement une carte de sa main.
+     *
+     * @param ordinateur L'ordinateur qui doit défausser une carte.
+     */
+    private void defausserCarteAutomatiquement(Ordinateur ordinateur) {
+        // Logique pour que l'ordinateur choisisse et défausse automatiquement une carte
+        List<Carte> cartesMainOrdinateur = ordinateur.getMain().getCartes();
+
+        if (!cartesMainOrdinateur.isEmpty()) {
+            Carte carteADefausser = cartesMainOrdinateur.get(0); // Choix automatique de la première carte
+            ordinateur.defausserCarte(carteADefausser.getPoint());
         }
     }
 }

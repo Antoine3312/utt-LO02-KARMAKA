@@ -48,4 +48,6 @@ public abstract class Carte {
     public abstract void placerPremiereCarteVieFuturRivalSurLaVotre(Joueur joueurAppelant, Joueur joueurRival);
 
     public abstract void jouerPouvoir(Joueur joueurAppelant);
+
+    protected PouvoirCarte getPouvoir() { return null; }
 }

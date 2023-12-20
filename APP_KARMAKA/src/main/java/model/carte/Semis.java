@@ -6,17 +6,30 @@ import model.joueur.Ordinateur;
 
 import java.util.List;
 
-// Classe abstraite représentant la carte "Semis"
+/**
+ * Classe abstraite représentant la carte "Semis" dans le jeu.
+ * Hérite de la classe abstraite "Carte".
+ */
 public abstract class Semis extends Carte {
 
-    // Constructeur de la carte "Semis"
+    /**
+     * Constructeur de la carte "Semis".
+     *
+     * @param renderable L'objet permettant le rendu visuel.
+     */
     public Semis(Renderable renderable) {
         super(renderable);
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.VERTE; // Définition de la couleur de la carte
     }
 
-    // Implémentation de la méthode jouerPouvoir() définie dans l'interface PouvoirCarte
+    /**
+     * Méthode pour jouer le pouvoir de la carte "Semis".
+     * Puisez 2 cartes à la Source et placez sur votre Vie Future 2 cartes de votre Main.
+     *
+     * @param joueurAppelant Le joueur qui joue la carte.
+     * @param joueurReceveur Le joueur adverse (non utilisé dans ce contexte).
+     */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
         // Puisez 2 cartes à la Source
@@ -48,7 +61,11 @@ public abstract class Semis extends Carte {
         }
     }
 
-    // Méthode pour jouer une autre carte
+    /**
+     * Méthode pour jouer une autre carte.
+     *
+     * @param joueur Le joueur qui joue la carte.
+     */
     private void jouerAutreCarte(Joueur joueur) {
         List<Carte> cartesJouables = joueur.getMain().getCartesJouables();
 
@@ -59,3 +76,4 @@ public abstract class Semis extends Carte {
         }
     }
 }
+

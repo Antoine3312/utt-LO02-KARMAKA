@@ -7,17 +7,30 @@ import model.joueur.Ordinateur;
 import java.util.List;
 import java.util.Random;
 
-// Carte "Transmigration" qui hérite de la classe abstraite "Carte"
+/**
+ * Classe abstraite représentant la carte "Transmigration" dans le jeu.
+ * Hérite de la classe abstraite "Carte".
+ */
 public abstract class Transmigration extends Carte {
 
-    // Constructeur de la carte "Transmigration"
+    /**
+     * Constructeur de la carte "Transmigration".
+     *
+     * @param renderable L'objet permettant le rendu visuel.
+     */
     public Transmigration(Renderable renderable) {
         super(renderable);
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
     }
 
-    // Implémentation de la méthode jouerPouvoir() définie dans l'interface PouvoirCarte
+    /**
+     * Méthode pour jouer le pouvoir de la carte "Transmigration".
+     * Le joueur choisit une carte Vie Futur à transférer de sa Vie Futur à sa Main.
+     *
+     * @param joueurAppelant Le joueur qui joue la carte.
+     * @param joueurReceveur Le joueur adverse (non utilisé dans ce contexte).
+     */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
         Carte carteChoisi = null;
