@@ -30,15 +30,20 @@ public class Intermediaire implements StyleJeuStrategy{
     }
 
     private void reincarner(Joueur joueur) {
-        this.hasReincarnerUneFois = true;
-        List<String> couleurs = new ArrayList<>(joueur.getOeuvre().getCouleursInStack());
-        NomCouleur couleurLaPlusRentable = NomCouleur.valueOf(couleurs.get(r.nextInt(couleurs.size())));
+        NomCouleur couleurLaPlusRentable = null;
+        if(hasReincarnerUneFois){
+            List<String> couleurs = new ArrayList<>(joueur.getOeuvre().getCouleursInStack());
+            couleurLaPlusRentable = NomCouleur.valueOf(couleurs.get(r.nextInt(couleurs.size())));
+        } else {
+            couleurLaPlusRentable = this.couleurFutur;
+        }
         boolean utiliserAnneaux = this.r.nextInt(2) == 1;
         if(utiliserAnneaux){
             this.actionJouer.reincarner(joueur, couleurLaPlusRentable, true, (this.r.nextInt(joueur.getNbAnneauxKarmique())) + 1);
         } else {
             this.actionJouer.reincarner(joueur, couleurLaPlusRentable, false, 0);
         }
+        this.hasReincarnerUneFois = true;
     }
 
     private void jouer(Joueur joueur) {
@@ -48,12 +53,14 @@ public class Intermediaire implements StyleJeuStrategy{
             if(hasReincarnerUneFois){
                 this.actionJouer.jouer(joueur, true, carteAJouer, (r.nextInt(3))+1);
             } else {
-                if(carteAJouer.getCouleur() == this.couleurPouvoir){
+                if(carteAJouer.getCouleur().equals(this.couleurPouvoir)){
                     this.actionJouer.jouer(joueur, true, carteAJouer, ActionJouer.UTILISATIONPOUVOIR);
-                } else if(carteAJouer.getCouleur() == this.couleurPoint) {
+                } else if(carteAJouer.getCouleur().equals(this.couleurPoint)) {
                     this.actionJouer.jouer(joueur, true, carteAJouer, ActionJouer.UTILISATIONPOINT);
-                } else if(carteAJouer.getCouleur() == this.couleurFutur) {
+                } else if(carteAJouer.getCouleur().equals(this.couleurFutur)) {
                     this.actionJouer.jouer(joueur, true, carteAJouer, ActionJouer.UTILISATIONFUTUR);
+                } else if (carteAJouer.getCouleur().equals(NomCouleur.MOSAIQUE)){
+                    this.actionJouer.jouer(joueur, true, carteAJouer, (r.nextInt(3))+1);
                 }
             }
         } else {
@@ -76,9 +83,4 @@ public class Intermediaire implements StyleJeuStrategy{
         this.couleurPouvoir = entryList.get(2).getKey();
     }
 
-    private void resetCouleurChoisie() {
-        couleurPoint =null;
-        couleurFutur = null;
-        couleurPouvoir = null;
-    }
 }
