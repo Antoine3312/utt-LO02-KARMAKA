@@ -97,7 +97,7 @@ public abstract class DernierSouffle extends Carte {
      */
     private void defausserCarteAutomatiquement(Ordinateur ordinateur) {
         // Logique pour que l'ordinateur choisisse et défausse automatiquement une carte
-        List<Carte> cartesMainOrdinateur = ordinateur.getMain().getCartes();
+        List<Carte> cartesMainOrdinateur = ordinateur.getMain();
 
         if (!cartesMainOrdinateur.isEmpty()) {
             Carte carteADefausser = cartesMainOrdinateur.get(0); // Choix automatique de la première carte

@@ -95,13 +95,13 @@ public abstract class CoupDOeil extends Carte {
 
     // Méthode pour regarder la Main d'un rival
     private void regarderMain(Joueur rival) {
-        List<Carte> cartesMainRival = rival.getMain().getCartes();
+        List<Carte> cartesMainRival = rival.getMain();
         this.renderer.afficherCartes(cartesMainRival);
     }
 
     // Méthode pour jouer une autre carte (cas de l'ordinateur)
     private void jouerAutreCarte(Joueur joueur) {
-        List<Carte> cartesJouables = joueur.getMain().getCartesJouables();
+        List<Carte> cartesJouables = joueur.getMain();
 
         if (!cartesJouables.isEmpty()) {
             Carte carteAJouer = cartesJouables.get(0); // Choix aléatoire de la première carte jouable

@@ -36,14 +36,14 @@ public abstract class Semis extends Carte {
         joueurAppelant.puiserCartesSource(2);
 
         // Placez sur votre Vie Future 2 cartes de votre Main
-        List<Carte> cartesMain = joueurAppelant.getMain().getCartes();
+        List<Carte> cartesMain = joueurAppelant.getMain();
 
         // Vérifie s'il y a au moins 2 cartes dans la main
         if (cartesMain.size() >= 2) {
             for (int i = 0; i < 2; i++) {
                 Carte carteAVieFuture = cartesMain.get(0); // Choix arbitraire de la première carte de la main
                 joueurAppelant.getVieFutur().addCartes(carteAVieFuture);
-                joueurAppelant.getMain().removeCartes(carteAVieFuture);
+                joueurAppelant.getMain().remove(carteAVieFuture);
             }
         }
 
@@ -67,7 +67,7 @@ public abstract class Semis extends Carte {
      * @param joueur Le joueur qui joue la carte.
      */
     private void jouerAutreCarte(Joueur joueur) {
-        List<Carte> cartesJouables = joueur.getMain().getCartesJouables();
+        List<Carte> cartesJouables = joueur.getMain();
 
         // Si le joueur a des cartes jouables, il en choisit une et la joue
         if (!cartesJouables.isEmpty()) {

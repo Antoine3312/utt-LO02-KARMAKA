@@ -46,7 +46,7 @@ public abstract class Sauvetage extends Carte {
             Carte carteAAjouter = troisDernieresCartes.get(0);
 
             // Ajout de la carte à la Main du joueur appelant
-            joueurAppelant.getMain().addCartes(carteAAjouter);
+            joueurAppelant.getMain().add(carteAAjouter);
 
             // Retrait de la carte de la Fosse
             joueurReceveur.getFosse().removeCartes((List<Carte>) carteAAjouter);

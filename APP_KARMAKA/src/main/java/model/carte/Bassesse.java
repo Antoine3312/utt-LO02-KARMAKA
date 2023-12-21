@@ -91,7 +91,7 @@ public abstract class Bassesse extends Carte {
      * @param nombreCartes  Le nombre de cartes à défausser.
      */
     private void defausserAuHasard(Joueur joueur, int nombreCartes) {
-        List<Carte> cartesMain = joueur.getMain().getCartes();
+        List<Carte> cartesMain = joueur.getMain();
 
         // Vérification si le nombre de cartes à défausser est inférieur ou égal au nombre de cartes en main
         if (nombreCartes <= cartesMain.size()) {

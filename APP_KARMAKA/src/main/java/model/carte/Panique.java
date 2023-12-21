@@ -102,8 +102,8 @@ public abstract class Panique extends Carte {
             jouerAutomatiquement(joueur);
         } else {
             // Logique pour que le joueur humain choisisse et joue une autre carte
-            this.renderer.afficherCartes(joueur.getMain().getCartes());
-            Carte carteAJouer = this.renderer.choisirUneCarte(joueur.getMain().getCartes());
+            this.renderer.afficherCartes(joueur.getMain());
+            Carte carteAJouer = this.renderer.choisirUneCarte(joueur.getMain());
 
             if (carteAJouer != null) {
                 joueur.jouerCarte(carteAJouer);
@@ -119,7 +119,7 @@ public abstract class Panique extends Carte {
     private void jouerAutomatiquement(Joueur joueur) {
         // Logique pour que l'ordinateur choisisse et joue automatiquement une autre carte
         // Vous devez adapter cette logique en fonction des règles spécifiques du jeu
-        List<Carte> cartesJouables = joueur.getMain().getCartesJouables();
+        List<Carte> cartesJouables = joueur.getMain();
 
         if (!cartesJouables.isEmpty()) {
             Carte carteAJouer = cartesJouables.get(0); // Choix aléatoire de la première carte jouable

@@ -65,8 +65,8 @@ public abstract class Voyage extends Carte {
             jouerAutomatiquement(joueur);
         } else {
             // Si le joueur est humain, il choisit et joue une autre carte
-            this.renderer.afficherCartes(joueur.getMain().getCartes());
-            Carte carteAJouer = this.renderer.choisirUneCarte(joueur.getMain().getCartes());
+            this.renderer.afficherCartes(joueur.getMain());
+            Carte carteAJouer = this.renderer.choisirUneCarte(joueur.getMain());
 
             if (carteAJouer != null) {
                 joueur.jouerCarte(carteAJouer);
@@ -81,7 +81,7 @@ public abstract class Voyage extends Carte {
      * @param joueur Le joueur qui joue la carte (ordinateur).
      */
     private void jouerAutomatiquement(Joueur joueur) {
-        List<Carte> cartesJouables = joueur.getMain().getCartesJouables();
+        List<Carte> cartesJouables = joueur.getMain();
 
         if (!cartesJouables.isEmpty()) {
             Carte carteAJouer = cartesJouables.get(0); // Choix aléatoire de la première carte jouable

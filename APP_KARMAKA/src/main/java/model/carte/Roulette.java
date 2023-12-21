@@ -32,7 +32,7 @@ public abstract class Roulette extends Carte {
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
         // Défaussez jusqu'à 2 cartes de votre Main
-        List<Carte> cartesMain = joueurAppelant.getMain().getCartes();
+        List<Carte> cartesMain = joueurAppelant.getMain();
         int nombreCartesADefausser = Math.min(2, cartesMain.size());
 
         // Affichage des cartes pour permettre au joueur de choisir
@@ -43,7 +43,7 @@ public abstract class Roulette extends Carte {
 
         // Défausse des cartes choisies
         joueurAppelant.getFosse().addCartes(cartesADefausser);
-        joueurAppelant.getMain().removeCartes(cartesADefausser);
+        joueurAppelant.getMain().remove(cartesADefausser);
 
         // Vous pouvez ensuite puiser à la Source autant de carte(s) + 1
         int nombreDeCartesAPuiser = joueurAppelant.puiserCartesSource(nombreCartesADefausser + 1);

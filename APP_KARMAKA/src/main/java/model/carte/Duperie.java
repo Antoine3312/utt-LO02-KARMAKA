@@ -37,7 +37,7 @@ public abstract class Duperie extends Carte {
         Joueur rivalChoisi = choisirRival(joueurAppelant);
 
         if (rivalChoisi != null) {
-            List<Carte> cartesMainRival = rivalChoisi.getMain().getCartes();
+            List<Carte> cartesMainRival = rivalChoisi.getMain();
 
             // Affichez les 3 premières cartes de la Main du rival
             List<Carte> cartesVisible = cartesMainRival.subList(0, Math.min(cartesMainRival.size(), 3));
@@ -48,7 +48,7 @@ public abstract class Duperie extends Carte {
 
             // Ajoutez la carte choisie à votre Main
             if (carteChoisie != null) {
-                joueurAppelant.getMain().addCartes(carteChoisie);
+                joueurAppelant.getMain().add(carteChoisie);
             }
         }
     }
