@@ -35,77 +35,9 @@ public abstract class CoupDOeil extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        // Regardez la Main d'un rival
-        Joueur rivalChoisi = choisirRival(joueurAppelant);
-
-        if (rivalChoisi != null) {
-            regarderMain(rivalChoisi);
-
-            // Vous pouvez ensuite jouer une autre carte
-            if (joueurAppelant instanceof Ordinateur) {
-                jouerAutreCarte(joueurAppelant);
-            } else {
-                this.renderer.afficherCartes(joueurAppelant.getMain());
-                Carte carteAJouer = this.renderer.choisirUneCarte(joueurAppelant.getMain());
-
-                if (carteAJouer != null) {
-                    joueurAppelant.jouerCarte(carteAJouer);
-                }
-            }
+        if (!(joueurAppelant instanceof Ordinateur)){
+            this.renderer.afficherCartes(joueurReceveur.getMain());
         }
     }
 
-    /**
-     * Méthode abstraite pour copier le pouvoir de la carte.
-     *
-     * @param joueurActif Le joueur qui utilise le pouvoir.
-     * @param joueurCible Le joueur cible du pouvoir.
-     */
-    protected abstract void copierPouvoir(Joueur joueurActif, Joueur joueurCible);
-
-    // Méthode pour choisir un rival
-    private Joueur choisirRival(Joueur joueurAppelant) {
-        List<Joueur> joueursPossibles = joueurAppelant.getPartie().getJoueurs();
-        joueursPossibles.remove(joueurAppelant); // Exclure le joueur appelant
-
-        // Si le joueur est un ordinateur, il choisit automatiquement un rival
-        if (joueurAppelant instanceof Ordinateur) {
-            return choisirRivalOrdinateur(joueursPossibles);
-        }
-
-        // Si le joueur est humain, il choisit le rival
-        return choisirRivalHumain(joueursPossibles);
-    }
-
-    // Méthode pour choisir un rival (cas de l'ordinateur)
-    private Joueur choisirRivalOrdinateur(List<Joueur> joueursPossibles) {
-        // Choix aléatoire d'un rival (ordinateur)
-        Collections.shuffle(joueursPossibles);
-        return joueursPossibles.get(0);
-    }
-
-    // Méthode pour choisir un rival (cas de l'humain)
-    private Joueur choisirRivalHumain(List<Joueur> joueursPossibles) {
-        // Affichage des choix de rivaux possibles
-        this.renderer.afficherChoixRivaux(joueursPossibles);
-
-        // Sélection du rival par l'humain
-        return this.renderer.choisirUnRival(joueursPossibles);
-    }
-
-    // Méthode pour regarder la Main d'un rival
-    private void regarderMain(Joueur rival) {
-        List<Carte> cartesMainRival = rival.getMain();
-        this.renderer.afficherCartes(cartesMainRival);
-    }
-
-    // Méthode pour jouer une autre carte (cas de l'ordinateur)
-    private void jouerAutreCarte(Joueur joueur) {
-        List<Carte> cartesJouables = joueur.getMain();
-
-        if (!cartesJouables.isEmpty()) {
-            Carte carteAJouer = cartesJouables.get(0); // Choix aléatoire de la première carte jouable
-            joueur.jouerCarte(carteAJouer);
-        }
-    }
 }

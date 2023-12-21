@@ -40,7 +40,7 @@ public interface Renderable {
 
     boolean jouerUneCarteOuNon();
 
-    void afficherCartes(List<Carte> carteVieFutur);
+    void afficherCartes(List<Carte> cartes);
 
     Carte choisirUneCarteVieFutur(List<Carte> carteVieFutur);
 
@@ -67,5 +67,7 @@ public interface Renderable {
     void afficherChoixRivaux(List<Joueur> joueursPossibles);
 
     Joueur choisirUnRival(List<Joueur> joueursPossibles);
+
+    void displayErrorMessage(String s);
 }
 

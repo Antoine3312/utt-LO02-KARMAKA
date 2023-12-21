@@ -1,6 +1,7 @@
 package model.carte;
 
 import application.control.Renderable;
+import model.EtatPartie;
 import model.joueur.Joueur;
 import model.joueur.Ordinateur;
 
@@ -100,7 +101,7 @@ public abstract class Bassesse extends Carte {
             List<Carte> cartesADefausser = cartesMain.subList(0, nombreCartes);
 
             // Ajout des cartes à la défausse et suppression de la main
-            joueur.getPartie().getDefausse().addCartes(cartesADefausser);
+            EtatPartie.getInstance().getFosse().addCartes(cartesADefausser);
             cartesMain.removeAll(cartesADefausser);
         }
     }

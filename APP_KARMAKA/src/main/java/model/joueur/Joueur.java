@@ -106,7 +106,7 @@ public class Joueur {
         this.nbAnneauxKarmique = nbAnneauxKarmique;
     }
 
-    public PileCartes getOeuvreExposee() { return null; }
+/*    public PileCartes getOeuvreExposee() { return null; }
 
     public PileCartes getSource() { return null; }
 
@@ -122,10 +122,8 @@ public class Joueur {
 
     public Echellon getPartie() {
         return partie;
-    }
+    }*/
 
-    public void defausserCarte(int choixCarte) {
-    }
 
     public List<Carte> getOeuvresExposee() {
         return oeuvresExposee;

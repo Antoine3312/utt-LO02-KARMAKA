@@ -2,8 +2,10 @@ package model.carte;
 
 import application.control.Renderable;
 import model.joueur.Joueur;
+import model.joueur.Ordinateur;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Classe abstraite représentant la carte "Incarnation" dans le jeu.
@@ -31,21 +33,20 @@ public abstract class Incarnation extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        // Choisissez une de vos œuvres
-        List<Carte> oeuvresExposees = joueurAppelant.getOeuvresExposee();
 
-        if (!oeuvresExposees.isEmpty()) {
-            this.renderer.afficherCartes(oeuvresExposees);
-            Carte oeuvreChoisie = this.renderer.choisirUneCarte(oeuvresExposees);
-
-            if (oeuvreChoisie != null) {
-                // Copiez son pouvoir
-                PouvoirCarte pouvoirCopie = oeuvreChoisie.getPouvoir();
-
-                if (pouvoirCopie != null) {
-                    pouvoirCopie.appliquerPouvoir(joueurAppelant, joueurReceveur);
-                }
+        if(!joueurAppelant.getOeuvre().getCartes().isEmpty()){
+            Carte carteChoisie = null;
+            if (joueurAppelant instanceof Ordinateur){
+                Random r = new Random();
+                carteChoisie = joueurAppelant.getOeuvre().getCartes().get(r.nextInt(
+                        joueurAppelant.getOeuvre().getCartes().size()
+                ));
+            } else {
+                carteChoisie = this.renderer.choisirUneCarte(joueurAppelant.getOeuvre().getCartes());
             }
+            carteChoisie.jouerPouvoir(joueurAppelant, joueurReceveur);
+        } else {
+            this.renderer.displayErrorMessage("Votre main est vide.");
         }
     }
 }

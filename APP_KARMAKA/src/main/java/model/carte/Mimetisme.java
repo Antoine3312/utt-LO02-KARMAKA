@@ -31,38 +31,10 @@ public abstract class Mimetisme<Oeuvre> extends Carte {
      * @param joueurReceveur Le joueur adverse ciblé par le pouvoir.
      */
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        // Choisissez un Rival
-        // Dans cette implémentation, on suppose que le choix du rival se fait manuellement (par le joueur ou l'ordinateur)
-        Joueur rivalChoisi = choisirRival(joueurAppelant);
-
-        // Copiez le pouvoir de son Oeuvre Exposée
-        if (rivalChoisi != null) {
-            Oeuvre oeuvreExposeeRival = (Oeuvre) rivalChoisi.getOeuvreExposee();
-
-            if (oeuvreExposeeRival != null) {
-                // Copie du pouvoir de l'Oeuvre Exposée du rival
-                oeuvreExposeeRival.activerPouvoir(joueurAppelant, joueurReceveur);
-            }
-        }
-    }
-
-    /**
-     * Méthode pour choisir un rival (à adapter en fonction des règles spécifiques du jeu).
-     *
-     * @param joueurAppelant Le joueur qui joue la carte.
-     * @return Le rival choisi.
-     */
-    private Joueur choisirRival(Joueur joueurAppelant) {
-        // Dans cette implémentation, on suppose que le choix du rival se fait aléatoirement pour l'ordinateur
-        if (joueurAppelant instanceof Ordinateur) {
-            return joueurAppelant.getPartie().getJoueurs().stream()
-                    .filter(joueur -> !joueur.equals(joueurAppelant)) // Exclure le joueur appelant
-                    .findFirst()
-                    .orElse(null);
+        if(!joueurReceveur.getOeuvre().getCartes().isEmpty()){
+            joueurReceveur.getOeuvre().getCartes().peek().jouerPouvoir(joueurAppelant, joueurReceveur);
         } else {
-            // Dans le cas d'un joueur humain, l'interaction pour choisir le rival doit être implémentée
-            // (par exemple, via une interface utilisateur)
-            return null; // À remplacer par la logique de choix du joueur humain
+            this.renderer.displayErrorMessage("L'adversaire n'a aucune oeuvre de posé.");
         }
     }
 }

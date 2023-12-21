@@ -5,6 +5,7 @@ import model.joueur.Joueur;
 import model.joueur.Ordinateur;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -33,71 +34,19 @@ public abstract class Crise extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        // Le rival de votre choix défausse une de ses Oeuvres
-        Joueur rivalChoisi = choisirRival(joueurAppelant);
-
-        if (rivalChoisi != null) {
-            defausserOeuvre(rivalChoisi);
-        }
-    }
-
-    /**
-     * Méthode privée pour choisir un rival.
-     *
-     * @param joueurAppelant Le joueur qui fait le choix.
-     * @return Le rival choisi.
-     */
-    private Joueur choisirRival(Joueur joueurAppelant) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Choisissez un rival (entrez le numéro correspondant) :");
-        List<Joueur> joueursPossibles = joueurAppelant.getPartie().getJoueurs();
-        joueursPossibles.remove(joueurAppelant); // Exclure le joueur appelant
-
-        // Affichage des choix de rivaux possibles
-        for (int i = 0; i < joueursPossibles.size(); i++) {
-            System.out.println((i + 1) + ". " + joueursPossibles.get(i).getNom());
-        }
-
-        // Lecture de l'entrée de l'utilisateur pour choisir un rival
-        int choix = scanner.nextInt();
-        return (choix > 0 && choix <= joueursPossibles.size()) ? joueursPossibles.get(choix - 1) : null;
-    }
-
-    /**
-     * Méthode privée pour défausser une œuvre d'un joueur.
-     *
-     * @param joueur Le joueur dont une œuvre doit être défaussée.
-     */
-    private void defausserOeuvre(Joueur joueur) {
-        // Vérifier si le joueur a des œuvres exposées
-        if (!joueur.getOeuvresExposee().isEmpty()) {
-            // Obtenir la liste des œuvres exposées par le joueur
-            List<Carte> oeuvres = joueur.getOeuvresExposee();
-
-            // Vérifier si le joueur est un ordinateur
-            if (joueur instanceof Ordinateur) {
-                // Si le joueur est un ordinateur, il choisit automatiquement une œuvre à défausser
-                Carte oeuvreADefausser = oeuvres.get(0);
-                joueur.getPartie().getDefausse().addCartes(oeuvreADefausser);
-                joueur.getOeuvresExposee().remove(oeuvreADefausser);
+        Carte carteChoisie = null;
+        if(!joueurReceveur.getOeuvre().getCartes().isEmpty()){
+            if(!(joueurReceveur instanceof Ordinateur)) {
+                carteChoisie = this.renderer.choisirUneCarte(joueurReceveur.getOeuvre().getCartes());
             } else {
-                // Si le joueur est humain, il choisit l'œuvre à défausser
-                joueur.getPartie().getRenderer().afficherCartes(oeuvres);
-                System.out.println("Choisissez une œuvre à défausser (entrez le numéro correspondant) :");
-                int choix = joueur.getPartie().getRenderer().demanderEntier();
-
-                // Vérifier si le choix est valide
-                if (choix > 0 && choix <= oeuvres.size()) {
-                    // Défausser l'œuvre choisie par le joueur humain
-                    Carte oeuvreADefausser = oeuvres.get(choix - 1);
-                    joueur.getPartie().getDefausse().addCartes(oeuvreADefausser);
-                    joueur.getOeuvresExposee().remove(oeuvreADefausser);
-                }
+                Random r = new Random();
+                carteChoisie = joueurReceveur.getOeuvre().getCartes().get(r.nextInt(joueurReceveur.getOeuvre().getCartes().size()));
             }
+            joueurReceveur.getOeuvre().getCartes().remove(carteChoisie);
+        } else {
+            this.renderer.displayErrorMessage("Le rival n'a aucune oeuvre exposée.");
         }
 
     }
-
 }
 

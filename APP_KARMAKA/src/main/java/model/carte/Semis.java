@@ -42,7 +42,7 @@ public abstract class Semis extends Carte {
         if (cartesMain.size() >= 2) {
             for (int i = 0; i < 2; i++) {
                 Carte carteAVieFuture = cartesMain.get(0); // Choix arbitraire de la première carte de la main
-                joueurAppelant.getVieFutur().addCartes(carteAVieFuture);
+                joueurAppelant.getVieFutur().(carteAVieFuture);
                 joueurAppelant.getMain().remove(carteAVieFuture);
             }
         }

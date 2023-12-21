@@ -4,8 +4,10 @@ import application.control.Renderable;
 import model.carte.Carte;
 import model.carte.NomCouleur;
 import model.joueur.Joueur;
+import model.joueur.Ordinateur;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -35,10 +37,10 @@ public abstract class Deni extends Carte {
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
         // Le joueur appelant défausse une carte de sa main
-        defausserCarte(joueurAppelant);
+        Carte carteDefausser = defausserCarte(joueurAppelant);
 
         // Copiez le pouvoir de la carte défaussée
-        copierPouvoirCarte(joueurAppelant);
+        copierPouvoirCarte(carteDefausser, joueurAppelant, joueurReceveur);
     }
 
     /**
@@ -46,37 +48,30 @@ public abstract class Deni extends Carte {
      *
      * @param joueur Le joueur qui défausse la carte.
      */
-    private void defausserCarte(Joueur joueur) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Choisissez une carte à défausser (entrez le numéro correspondant) :");
-
-        // Afficher la liste des cartes en main du joueur
-        this.renderer.afficherCartes(joueur.getMain());
-
-        int choixCarte = scanner.nextInt();
-
-        // Défausser la carte choisie par le joueur
-        joueur.defausserCarte(choixCarte);
+    private Carte defausserCarte(Joueur joueur) {
+        Carte carteChoisi = null;
+        if(!joueur.getMain().isEmpty()){
+            if(!(joueur instanceof Ordinateur)){
+                carteChoisi = this.renderer.choisirUneCarte(joueur.getMain());
+            } else {
+                Random r = new Random();
+                carteChoisi = joueur.getMain().get(r.nextInt(joueur.getMain().size()));
+            }
+            // Défausser la carte choisie par le joueur
+            joueur.getMain().remove(carteChoisi);
+        }
+        return carteChoisi;
     }
 
     /**
      * Méthode privée pour copier le pouvoir de la carte défaussée.
      *
-     * @param joueur Le joueur qui copie le pouvoir.
+     * @param carteDefausser La carte à utiliser le pouvoir
      */
-    private void copierPouvoirCarte(Joueur joueur) {
-        // Logique pour copier le pouvoir de la carte défaussée
-
-        List<Carte> cartesDefaussees = joueur.getPartie().getDefausse().getCartes();
-        if (!cartesDefaussees.isEmpty()) {
-            Carte carteDefaussee = cartesDefaussees.get(cartesDefaussees.size() - 1); // Dernière carte défaussée
-            getPouvoir pouvoirCopie = carteDefaussee.getPouvoir();
-
-            // Appliquer le pouvoir copié
-            if (pouvoirCopie != null) {
-                pouvoirCopie.appliquerPouvoir(joueur, joueur);
-            }
+    private void copierPouvoirCarte(Carte carteDefausser, Joueur joueurAppelant, Joueur joueurReceveur) {
+        // Logique pour copier le pouvoir de la carte défaussée (appliquer son pouvoir)
+        if(carteDefausser != null){
+            carteDefausser.jouerPouvoir(joueurAppelant, joueurReceveur);
         }
     }
 }
