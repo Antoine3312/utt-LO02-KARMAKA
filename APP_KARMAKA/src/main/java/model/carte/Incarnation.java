@@ -47,7 +47,7 @@ public class Incarnation extends Carte {
             }
             carteChoisie.jouerPouvoir(joueurAppelant, joueurReceveur);
         } else {
-            this.renderer.displayErrorMessage("Impossible : Votre main est vide.");
+            this.renderer.displayErrorMessage("Impossible : Vous n'avez aucune oeuvre.");
         }
     }
 }

@@ -49,6 +49,10 @@ public interface Renderable {
 
     Carte choisirUneCarte(List<Carte> cartes);
 
-    void displayMessage(String format);
+    void displayMessage(String message);
+
+    void afficherInfoJoueur(Joueur joueur);
+
+    void afficherInfoReincarnation(Joueur joueur);
 }
 

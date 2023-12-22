@@ -1,6 +1,7 @@
 package model.joueur;
 
 import application.control.ActionJouer;
+import application.control.Renderable;
 import model.carte.Carte;
 import model.carte.NomCouleur;
 
@@ -15,9 +16,11 @@ public class Expert implements StyleJeuStrategy{
     public ActionJouer actionJouer = new ActionJouer();
 
     public Random r = new Random();
+    private Renderable renderer;
 
     @Override
-    public void jouerTour(Joueur joueur) {
+    public void jouerTour(Joueur joueur, Renderable renderer) {
+        this.renderer = renderer;
         if (joueur.getMain().isEmpty() && joueur.getPile().getCartes().isEmpty()){
             this.choisirCouleurCartes(joueur.getMain());
             this.reincarner(joueur);
@@ -41,6 +44,7 @@ public class Expert implements StyleJeuStrategy{
             }
         } else {
             this.actionJouer.jouer(joueur, false, null, 0);
+            this.renderer.displayErrorMessage(String.format("%s décide de passer son tour. Attention, il prépare sûrement un plan diabolique ...", joueur.getNom()));
         }
     }
 

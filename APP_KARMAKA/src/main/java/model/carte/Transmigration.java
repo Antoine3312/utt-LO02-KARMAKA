@@ -46,7 +46,7 @@ public class Transmigration extends Carte {
             joueurAppelant.getMain().add(carteChoisi);
             joueurAppelant.getVieFutur().getCartes().remove(carteChoisi);
         } else {
-            this.renderer.displayErrorMessage("Impossible : Le joueur appelant a moins de 1 carte dans sa vie future.");
+            this.renderer.displayErrorMessage("Impossible : Le joueur appelant n'a aucune carte dans sa vie future.");
         }
     }
 }

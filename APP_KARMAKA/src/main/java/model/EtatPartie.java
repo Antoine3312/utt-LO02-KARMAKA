@@ -56,6 +56,10 @@ public class EtatPartie {
         return numTour;
     }
 
+    public void setNumTour(int numTour) {
+        this.numTour = numTour;
+    }
+
     @Override
     public String toString() {
         return "EtatPartie{" +

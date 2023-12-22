@@ -108,4 +108,14 @@ public class KarmakaCommand implements Renderable {
     public void displayMessage(String message) {
         this.kcc.displayMessage(message);
     }
+
+    @Override
+    public void afficherInfoJoueur(Joueur joueur) {
+        this.kcc.afficherInfoJoueur(joueur);
+    }
+
+    @Override
+    public void afficherInfoReincarnation(Joueur joueur) {
+        this.kcc.afficherInfoReicarnation(joueur);
+    }
 }

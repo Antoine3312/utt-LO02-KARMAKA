@@ -227,4 +227,16 @@ public class KarmakaCommandController {
     public void displayMessage(String message) {
         this.display(message);
     }
+
+    public void afficherInfoJoueur(Joueur joueur) {
+        this.display(String.format("    Echellon : %s", EtatPartie.getInstance().getEchelle().getEchellonOf(joueur).getNom()));
+        this.display(String.format("    Nombre de jeton karmique : %s", joueur.getNbAnneauxKarmique()));
+        this.display(String.format("    Nombre de Cartes dans la  Pile : %s", joueur.getPile().getCartes().size()));
+        this.display(String.format("    Oeuvre exposées : %s", joueur.getOeuvre().getCartes().isEmpty() ? "Aucune" : joueur.getOeuvre().getCartes().peek()));
+    }
+
+    public void afficherInfoReicarnation(Joueur joueur) {
+        this.display("Voici les cartes qu'il a dans sa vie futur :");
+        this.afficherCartes(joueur.getVieFutur().getCartes());
+    }
 }

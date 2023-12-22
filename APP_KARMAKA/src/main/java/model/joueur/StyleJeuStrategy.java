@@ -1,9 +1,9 @@
 package model.joueur;
 
-import application.control.ActionJouer;
+import application.control.Renderable;
 
 public interface StyleJeuStrategy {
 
 
-    public void jouerTour(Joueur _j);
+    public void jouerTour(Joueur _j, Renderable renderer);
 }

@@ -42,16 +42,18 @@ public class DeroulementPartie {
         PileCartes source = new PileCartes();
         source.getCartes().addAll(loadSource());
         PileCartes fosse = new PileCartes();
-        int numTour = 0;
+        int numTour = 1;
         this.partie.init(echelle,joueurs.get(0),joueurs.get(1),source,fosse,numTour);
     }
     private void jouerPartie(){
         while (!this.partie.getJoueur1().hasWon() || !this.partie.getJoueur2().hasWon()){
+            this.renderer.displayMessage(String.format("================= Tour %s =================", this.partie.getNumTour()));
             this.jouerTour(this.partie.getJoueur1());
             if(this.partie.getJoueur1().hasWon()){
                 break;
             }
             this.jouerTour(this.partie.getJoueur2());
+            this.partie.setNumTour(this.partie.getNumTour()+1);
         }
         this.finDePartie();
     }
@@ -61,6 +63,8 @@ public class DeroulementPartie {
     }
 
     private void jouerTour(Joueur joueur) {
+        this.renderer.displayMessage(String.format("Au tour de %s de jouer. Voici un résumé de son avancé :", joueur.getNom()));
+        this.renderer.afficherInfoJoueur(joueur);
         if(joueur instanceof Ordinateur){
             ((Ordinateur) joueur).executeTour();
         } else {
@@ -74,6 +78,8 @@ public class DeroulementPartie {
     }
 
     private void reincarner(Joueur joueur) {
+        this.renderer.displayMessage(String.format("%s n'a plus aucune carte dans sa main et dans sa pile, il va se réincarner ...", joueur.getNom()));
+        this.renderer.afficherInfoReincarnation(joueur);
         NomCouleur couleurLaPlusRentable = this.renderer.choisirCouleur(joueur.getOeuvre());
         if(this.renderer.utiliserJetonKarmique(joueur)) {
             this.actionJouer.reincarner(joueur, couleurLaPlusRentable, true, this.renderer.combienDeJeton(joueur));

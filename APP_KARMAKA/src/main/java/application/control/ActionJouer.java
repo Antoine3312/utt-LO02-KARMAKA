@@ -35,7 +35,7 @@ public class ActionJouer {
 
     public void jouer(Joueur joueurAppelant, boolean jouerUneCarte, Carte carteJouer, int utilisation) {
         if(!joueurAppelant.getPile().getCartes().isEmpty()){
-            joueurAppelant.getMain().add(this.partie.getSource().getCartes().pop());
+            joueurAppelant.getMain().add(joueurAppelant.getPile().getCartes().pop());
         }
         if(jouerUneCarte){
             List<Joueur> joueursPartie = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());
