@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EchelleKarmique implements Serializable {
+
+    private static final long serialVersionUID = 2711998155099132322L;
     private final Echellon bousier = new Echellon(4, NomPalier.BOUSIER);
     private final Echellon serpent = new Echellon(5, NomPalier.SERPENT);
     private final Echellon loup = new Echellon(6, NomPalier.LOUP);
@@ -61,5 +63,10 @@ public class EchelleKarmique implements Serializable {
                 break;
         }
         return current;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("bousier(%s), Serpent(%s), Loup(%s), Singe(%s)", this.bousier.getJoueurs(), this.serpent.getJoueurs(), this.loup.getJoueurs(), this.singe.getJoueurs());
     }
 }

@@ -6,6 +6,9 @@ import model.joueur.Joueur;
 import java.io.Serializable;
 
 public abstract class Carte implements Serializable {
+
+    private static final long serialVersionUID = 2711998155099132322L;
+
     protected String nom;
     protected int point;
     protected NomCouleur couleur;

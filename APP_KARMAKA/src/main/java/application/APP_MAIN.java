@@ -19,15 +19,16 @@ public class APP_MAIN {
     public static void main(String[] args) {
         DeroulementJeu game = new DeroulementJeu(new KarmakaCommand()); // COMMAND PROMPT MODE
 //        DeroulementJeu game = new DeroulementJeu(new KarmakaMainFrame()); // GRAPHIC PROMPT MODE
-//      game.beginGame();
+      game.beginGame();
 
-        GestionnaireSauvegardePartie gsp = new GestionnaireSauvegardePartie();
+//        GestionnaireSauvegardePartie gsp = new GestionnaireSauvegardePartie();
+//        EtatPartie partie = EtatPartie.getInstance();
 //        partie.setNumTour(10);
 //        partie.setJoueur1(new Joueur("Antoine"));
 //        gsp.sauvegarderPartie("test", partie);
-        EtatPartie.setInstance(gsp.chargerPartie("test.txt"));
-        EtatPartie partie = EtatPartie.getInstance();
-        System.out.println(partie.getJoueur1());
+////        EtatPartie.setInstance(gsp.chargerPartie("test"));
+////        EtatPartie partie = EtatPartie.getInstance();
+////        System.out.println(partie.getJoueur1());
 
 
 

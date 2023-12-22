@@ -6,9 +6,13 @@ import model.carte.NomCouleur;
 import model.carte.PileCartes;
 import model.joueur.*;
 
+import java.io.File;
+import java.io.Serializable;
 import java.util.*;
 
-public class KarmakaCommandController {
+public class KarmakaCommandController implements Serializable {
+
+    private static final long serialVersionUID = 2711998155099132322L;
         private static final int DELAYDETWEENCHARPROMPTinms = 0;
 //    private static final int DELAYDETWEENCHARPROMPTinms = 30;
 
@@ -44,8 +48,13 @@ public class KarmakaCommandController {
     }
 
 
-    public void loadSave() {
-        System.out.println("Chargement d'une sauvegarde ...");
+    public String loadSave() {
+        File[] files = new File("parties/").listFiles();
+        if(files.length>0){
+            int input = this.askMultipleChoiceQuestion("Quelle partie voulez vous charger ?", Arrays.stream(files).map(File::getName).toList());
+            return files[input-1].getName();
+        }
+        return null;
     }
 
     public StyleJeuStrategy getBotDifficulty(String botName) {
@@ -263,5 +272,34 @@ public class KarmakaCommandController {
         this.displayInColor( EtatPartie.getInstance().getJoueur2().hasWon() ? String.format("Félication à %s pour sa Victoire !!", EtatPartie.getInstance().getJoueur2().getNom()) : String.format("Dommage pour ta défaire %s ...", EtatPartie.getInstance().getJoueur2().getNom()) ,
                 EtatPartie.getInstance().getJoueur2().hasWon() ? NomCouleur.MOSAIQUE : NomCouleur.ROUGE
         );
+    }
+
+    public boolean sauvegarderEtQuitter() {
+        int input = this.askMultipleChoiceQuestion("Voulez vous continuez de jouer ou sauvegarder et vous arretez ?", Arrays.asList("Continuer", "Sauvegarder et quitter"));
+        boolean choice = false;
+        switch (input){
+            case 1 -> choice=false;
+            case 2 -> choice=true;
+        }
+        return choice;
+    }
+
+    public String getNomSauvegarde() {
+        return this.askQuestion("Choisissez le nom de votre sauvegarde", Optional.of(10), Optional.of(3));
+    }
+
+    public void afficherPartieEnPause() {
+        this.display("\n================= PARTIE MIS EN PAUSE =================");
+        this.display("Au revoir et à bientôt !");
+    }
+
+    public boolean playNewOrLoadSave() {
+        int input = this.askMultipleChoiceQuestion("Voulez vous créer une nouvelle partie ou en charger une existante ?", Arrays.asList("Créer une partie", "Charger une partie"));
+        boolean choice = false;
+        switch (input){
+            case 1 -> choice=true;
+            case 2 -> choice=false;
+        }
+        return choice;
     }
 }

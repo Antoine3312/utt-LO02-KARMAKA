@@ -10,6 +10,7 @@ import java.util.*;
 
 public class Intermediaire implements StyleJeuStrategy, Serializable {
 
+    private static final long serialVersionUID = 2711998155099132322L;
     private boolean hasReincarnerUneFois = false;
 
     private NomCouleur couleurPoint = null;

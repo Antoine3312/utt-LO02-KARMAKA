@@ -21,7 +21,7 @@ public interface Renderable {
 
     String getPlayerName(int numJoueur);
 
-    void loadSave();
+    String loadSave();
 
     StyleJeuStrategy getBotDifficulty(String botName);
 
@@ -56,5 +56,11 @@ public interface Renderable {
     void displayTourInfo(EtatPartie partie);
 
     void afficherFinDePartie();
+
+    boolean sauvegarderEtQuitter();
+
+    String getNomSauvegarde();
+
+    void afficherPartieEnPause();
 }
 

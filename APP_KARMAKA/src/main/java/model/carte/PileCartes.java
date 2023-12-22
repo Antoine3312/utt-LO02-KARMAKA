@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.*;
 
 public class PileCartes implements Serializable {
+
+    private static final long serialVersionUID = 2711998155099132322L;
     private Stack<Carte> cartes;
 
     public PileCartes() {

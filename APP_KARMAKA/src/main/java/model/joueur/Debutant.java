@@ -13,6 +13,8 @@ import java.util.Random;
 
 public class Debutant implements StyleJeuStrategy, Serializable {
 
+    private static final long serialVersionUID = 2711998155099132322L;
+
     public ActionJouer actionJouer;
 
     public Random r = new Random();

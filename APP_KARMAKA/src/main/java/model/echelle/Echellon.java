@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Echellon implements Serializable {
+
+    private static final long serialVersionUID = 2711998155099132322L;
+
     private List<Joueur> joueurs;
     private int ptsNecessairePourMonter;
     private NomPalier nom;

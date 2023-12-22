@@ -1,6 +1,7 @@
 package application.control;
 
 import model.EtatPartie;
+import model.GestionnaireSauvegardePartie;
 import model.carte.*;
 import model.echelle.EchelleKarmique;
 import model.joueur.Joueur;
@@ -14,7 +15,7 @@ public class DeroulementPartie {
 
     private final DeroulementJeu dj;
     private Renderable renderer;
-    private EtatPartie partie;
+    private EtatPartie partie = EtatPartie.getInstance();;
     private ActionJouer actionJouer;
 
     public DeroulementPartie(Renderable renderer, DeroulementJeu dj) {
@@ -24,10 +25,14 @@ public class DeroulementPartie {
     }
 
     public void startNewGame(List<Joueur> joueurs) {
-        this.partie = EtatPartie.getInstance();
         this.initGame(joueurs);
         this.initHands();
         this.initPile();
+        this.jouerPartie();
+    }
+
+    public void startNewGame(EtatPartie partie){
+        this.partie.setInstance(partie);
         this.jouerPartie();
     }
 
@@ -41,8 +46,17 @@ public class DeroulementPartie {
         this.partie.init(echelle,joueurs.get(0),joueurs.get(1),source,fosse,numTour);
     }
     private void jouerPartie(){
+        boolean partieEnPause = false;
         while (!this.partie.getJoueur1().hasWon() && !this.partie.getJoueur2().hasWon()){
             this.renderer.displayTourInfo(this.partie);
+            if((!(this.partie.getJoueur1() instanceof Ordinateur) || !(this.partie.getJoueur2() instanceof Ordinateur)) && this.renderer.sauvegarderEtQuitter()){
+                String fileName = this.renderer.getNomSauvegarde();
+                GestionnaireSauvegardePartie gsp = new GestionnaireSauvegardePartie();
+                gsp.sauvegarderPartie(fileName, partie);
+                partieEnPause = true;
+                break;
+            }
+
             this.jouerTour(this.partie.getJoueur1());
             if(this.partie.getJoueur1().hasWon()){
                 break;
@@ -50,11 +64,20 @@ public class DeroulementPartie {
             this.jouerTour(this.partie.getJoueur2());
             this.partie.setNumTour(this.partie.getNumTour()+1);
         }
-        this.finDePartie();
+        if(partieEnPause){
+            this.partieEnPause();
+        } else {
+            this.finDePartie();
+        }
     }
 
     private void finDePartie() {
         this.renderer.afficherFinDePartie();
+        this.dj.beginGame();
+    }
+
+    private void partieEnPause(){
+        this.renderer.afficherPartieEnPause();
         this.dj.beginGame();
     }
 
@@ -101,7 +124,7 @@ public class DeroulementPartie {
     private void initHands() {
         List<Joueur> joueurs = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());
         for (Joueur j : joueurs){
-            for (int i = 0; i<1; i++){
+            for (int i = 0; i<4; i++){
                 j.getMain().add(this.partie.getSource().getCartes().pop());
             }
         }
@@ -110,7 +133,7 @@ public class DeroulementPartie {
     private void initPile() {
         List<Joueur> joueurs = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());
         for (Joueur j : joueurs){
-            for (int i = 0; i<0; i++){
+            for (int i = 0; i<2; i++){
                 j.getPile().getCartes().push(this.partie.getSource().getCartes().pop());
             }
         }

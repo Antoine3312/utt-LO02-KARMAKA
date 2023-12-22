@@ -79,8 +79,13 @@ public class EtatPartie implements Serializable {
         this.joueur1 = joueur1;
     }
 
-    public static void setInstance(EtatPartie instance) {
-        EtatPartie.instance = instance;
+    public void setInstance(EtatPartie instance) {
+        this.joueur1 = instance.getJoueur1();
+        this.joueur2 = instance.getJoueur2();
+        this.echelle = instance.getEchelle();
+        this.source = instance.getSource();
+        this.fosse = instance.getFosse();
+        this.numTour = instance.getNumTour();
     }
 
     @Override

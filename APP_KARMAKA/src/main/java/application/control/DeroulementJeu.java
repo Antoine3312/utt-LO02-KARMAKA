@@ -1,6 +1,7 @@
 package application.control;
 
 import model.EtatPartie;
+import model.GestionnaireSauvegardePartie;
 import model.echelle.EchelleKarmique;
 import model.joueur.Joueur;
 import model.joueur.Ordinateur;
@@ -27,7 +28,10 @@ public class DeroulementJeu {
             this.renderer.showPlayer(joueurs);
             this.dp.startNewGame(joueurs);
         } else {
-            loadSave();
+            String nomSauvegarde = loadSave();
+            GestionnaireSauvegardePartie gsp = new GestionnaireSauvegardePartie();
+            EtatPartie partie = gsp.chargerPartie(nomSauvegarde);
+            this.dp.startNewGame(partie);
         }
     }
 
@@ -63,8 +67,8 @@ public class DeroulementJeu {
         return Arrays.asList(j1, j2);
     }
 
-    private void loadSave() {
-        this.renderer.loadSave();
+    private String loadSave() {
+        return this.renderer.loadSave();
     }
 
 

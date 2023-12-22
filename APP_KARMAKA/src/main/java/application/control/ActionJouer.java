@@ -8,13 +8,15 @@ import model.echelle.Echellon;
 import model.echelle.NomPalier;
 import model.joueur.Joueur;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-public class ActionJouer {
+public class ActionJouer implements Serializable {
 
+    private static final long serialVersionUID = 2711998155099132322L;
     private final Renderable renderer;
     private EtatPartie partie = EtatPartie.getInstance();
 

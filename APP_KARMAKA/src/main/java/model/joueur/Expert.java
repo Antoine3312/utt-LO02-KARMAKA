@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Expert implements StyleJeuStrategy, Serializable {
-
+    private static final long serialVersionUID = 2711998155099132322L;
     private NomCouleur couleurPoint = null;
     private NomCouleur couleurFutur = null;
     private NomCouleur couleurPouvoir = null;

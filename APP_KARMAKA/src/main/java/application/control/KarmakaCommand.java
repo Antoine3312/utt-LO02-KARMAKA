@@ -8,9 +8,11 @@ import model.carte.PileCartes;
 import model.joueur.Joueur;
 import model.joueur.StyleJeuStrategy;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class KarmakaCommand implements Renderable {
+public class KarmakaCommand implements Renderable, Serializable {
+    private static final long serialVersionUID = 2711998155099132322L;
 
     private final KarmakaCommandController kcc = new KarmakaCommandController();
 
@@ -26,7 +28,7 @@ public class KarmakaCommand implements Renderable {
 
     @Override
     public boolean playNewOrLoadSave() {
-        return true;
+        return this.kcc.playNewOrLoadSave();
     }
 
     @Override
@@ -40,8 +42,8 @@ public class KarmakaCommand implements Renderable {
     }
 
     @Override
-    public void loadSave() {
-        this.kcc.loadSave();
+    public String loadSave() {
+        return this.kcc.loadSave();
     }
 
     @Override
@@ -127,5 +129,20 @@ public class KarmakaCommand implements Renderable {
     @Override
     public void afficherFinDePartie() {
         this.kcc.afficherFinDePartie();
+    }
+
+    @Override
+    public boolean sauvegarderEtQuitter() {
+        return this.kcc.sauvegarderEtQuitter();
+    }
+
+    @Override
+    public String getNomSauvegarde() {
+        return this.kcc.getNomSauvegarde();
+    }
+
+    @Override
+    public void afficherPartieEnPause() {
+        this.kcc.afficherPartieEnPause();
     }
 }
