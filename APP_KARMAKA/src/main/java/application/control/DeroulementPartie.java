@@ -12,13 +12,15 @@ import java.util.List;
 
 public class DeroulementPartie {
 
+    private final DeroulementJeu dj;
     private Renderable renderer;
     private EtatPartie partie;
     private ActionJouer actionJouer;
 
-    public DeroulementPartie(Renderable renderer) {
+    public DeroulementPartie(Renderable renderer, DeroulementJeu dj) {
         this.renderer = renderer;
         this.actionJouer = new ActionJouer(this.renderer);
+        this.dj = dj;
     }
 
     public void startNewGame(List<Joueur> joueurs) {
@@ -40,8 +42,6 @@ public class DeroulementPartie {
     }
     private void jouerPartie(){
         while (!this.partie.getJoueur1().hasWon() && !this.partie.getJoueur2().hasWon()){
-            System.out.println("Jouer 1 a gagner : "+EtatPartie.getInstance().getJoueur1().hasWon());
-            System.out.println("Jouer 2 a gagner : "+EtatPartie.getInstance().getJoueur2().hasWon());
             this.renderer.displayTourInfo(this.partie);
             this.jouerTour(this.partie.getJoueur1());
             if(this.partie.getJoueur1().hasWon()){
@@ -54,9 +54,8 @@ public class DeroulementPartie {
     }
 
     private void finDePartie() {
-        System.out.println("fin de partie");
-        System.out.println(this.partie.getJoueur1()+" a gagné:"+this.partie.getJoueur1().hasWon());
-        System.out.println(this.partie.getJoueur2()+" a gagné:"+this.partie.getJoueur2().hasWon());
+        this.renderer.afficherFinDePartie();
+        this.dj.beginGame();
     }
 
     private void jouerTour(Joueur joueur) {

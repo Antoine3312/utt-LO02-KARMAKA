@@ -40,13 +40,17 @@ public class Incarnation extends Carte {
             if (joueurAppelant instanceof Ordinateur){
                 Random r = new Random();
                 List<Carte> cartesAChosisir = joueurAppelant.getOeuvre().getCartes().stream().filter(carte -> carte.getNom()!=this.getNom()).toList();
-                carteChoisie = cartesAChosisir.get(r.nextInt(
-                        joueurAppelant.getOeuvre().getCartes().size()
-                ));
+                if (cartesAChosisir.isEmpty()) {
+                    this.renderer.displayErrorMessage("Impossible : Impossible de copier le pouvoir de la carte qui viens d'être jouée.");
+                } else {
+                    carteChoisie = cartesAChosisir.get(r.nextInt(cartesAChosisir.size()));
+                }
             } else {
                 carteChoisie = this.renderer.choisirUneCarte(joueurAppelant.getOeuvre().getCartes());
             }
-            carteChoisie.jouerPouvoir(joueurAppelant, joueurReceveur);
+            if (carteChoisie != null){
+                carteChoisie.jouerPouvoir(joueurAppelant, joueurReceveur);
+            }
         } else {
             this.renderer.displayErrorMessage("Impossible : Vous n'avez aucune oeuvre.");
         }

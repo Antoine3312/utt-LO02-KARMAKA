@@ -85,7 +85,9 @@ public class Intermediaire implements StyleJeuStrategy{
         couleurs.forEach(c -> couleurCarteMain.put(c, 0));
 
         for(Carte c : main){
-            couleurCarteMain.put(c.getCouleur(), couleurCarteMain.get(c.getCouleur())+1);
+            if(c.getCouleur() != NomCouleur.MOSAIQUE){
+                couleurCarteMain.put(c.getCouleur(), couleurCarteMain.get(c.getCouleur())+1);
+            }
         }
         List<Map.Entry<NomCouleur, Integer>> entryList = new ArrayList<>(couleurCarteMain.entrySet());
         entryList.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));

@@ -254,4 +254,14 @@ public class KarmakaCommandController {
     public void diplayTourInfo(EtatPartie partie) {
         this.displayMessage(String.format("\n================= Tour %s =================", partie.getNumTour()));
     }
+
+    public void afficherFinDePartie() {
+        this.display("\n================= FIN DE LA PARTIE =================");
+        this.displayInColor( EtatPartie.getInstance().getJoueur1().hasWon() ? String.format("Félication à %s pour sa Victoire !!", EtatPartie.getInstance().getJoueur1().getNom()) : String.format("Dommage pour ta défaire %s ...", EtatPartie.getInstance().getJoueur1().getNom()) ,
+                EtatPartie.getInstance().getJoueur1().hasWon() ? NomCouleur.MOSAIQUE : NomCouleur.ROUGE
+        );
+        this.displayInColor( EtatPartie.getInstance().getJoueur2().hasWon() ? String.format("Félication à %s pour sa Victoire !!", EtatPartie.getInstance().getJoueur2().getNom()) : String.format("Dommage pour ta défaire %s ...", EtatPartie.getInstance().getJoueur2().getNom()) ,
+                EtatPartie.getInstance().getJoueur2().hasWon() ? NomCouleur.MOSAIQUE : NomCouleur.ROUGE
+        );
+    }
 }

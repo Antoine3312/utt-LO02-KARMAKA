@@ -15,7 +15,7 @@ public class DeroulementJeu {
 
     public DeroulementJeu(Renderable renderer) {
         this.renderer = renderer;
-        this.dp = new DeroulementPartie(this.renderer);
+        this.dp = new DeroulementPartie(this.renderer, this);
     }
 
     public void beginGame(){

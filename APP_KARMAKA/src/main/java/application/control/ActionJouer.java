@@ -38,7 +38,6 @@ public class ActionJouer {
                 if(this.partie.getEchelle().monterCategorie(joueur).equals(NomPalier.SINGE)){
                     EtatPartie.getInstance().getJoueur(joueur).setHasWon(true);
                 };
-                System.out.println("&& "+this.partie.getEchelle().monterCategorie(joueur).equals(NomPalier.SINGE));
             } else {
                 joueur.setNbAnneauxKarmique(joueur.getNbAnneauxKarmique() + 1);
                 this.renderer.displayErrorMessage(String.format("%s n'a pas assez de point pour monter de catégorie (%s sur %s), il recoit alors 1 anneaux Karmique en compensation", joueur.getNom(), score, EtatPartie.getInstance().getEchelle().getEchellonOf(joueur).getPtsNecessairePourMonter()));

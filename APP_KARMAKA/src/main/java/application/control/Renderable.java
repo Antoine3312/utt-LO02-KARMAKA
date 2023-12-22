@@ -54,5 +54,7 @@ public interface Renderable {
     void afficherInfoReincarnation(Joueur joueur);
 
     void displayTourInfo(EtatPartie partie);
+
+    void afficherFinDePartie();
 }
 

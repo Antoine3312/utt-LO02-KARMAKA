@@ -18,13 +18,20 @@ public class Expert implements StyleJeuStrategy{
     public Random r = new Random();
     private Renderable renderer;
 
+    private boolean hasInit = false;
+
     @Override
     public void jouerTour(Joueur joueur, Renderable renderer) {
         this.renderer = renderer;
         this.actionJouer = new ActionJouer(this.renderer);
-        if (joueur.getMain().isEmpty() && joueur.getPile().getCartes().isEmpty()){
+        if (!this.hasInit){
             this.choisirCouleurCartes(joueur.getMain());
+            this.hasInit = false;
+        }
+
+        if (joueur.getMain().isEmpty() && joueur.getPile().getCartes().isEmpty()){
             this.reincarner(joueur);
+            this.choisirCouleurCartes(joueur.getMain());
         } else {
             this.jouer(joueur);
         }
@@ -45,6 +52,8 @@ public class Expert implements StyleJeuStrategy{
                 this.actionJouer.jouer(joueur, carteAJouer, ActionJouer.UTILISATIONFUTUR);
             } else if (carteAJouer.getCouleur().equals(NomCouleur.MOSAIQUE)){
                 this.actionJouer.jouer(joueur, carteAJouer, (r.nextInt(3))+1);
+            } else {
+                System.out.println("null");
             }
         } else {
             this.renderer.displayErrorMessage(String.format("%s décide de passer son tour. Attention, il prépare sûrement un plan diabolique ...", joueur.getNom()));
@@ -64,16 +73,17 @@ public class Expert implements StyleJeuStrategy{
         } else {
             this.actionJouer.reincarner(joueur, couleurLaPlusRentable, false, 0);
         }
-        this.choisirCouleurCartes(joueur.getMain());
+
     }
 
     private void choisirCouleurCartes(List<Carte> main){
         List<NomCouleur> couleurs = Arrays.asList(NomCouleur.BLEU, NomCouleur.ROUGE, NomCouleur.VERTE);
         Map<NomCouleur, Integer> couleurCarteMain = new HashMap<>();
         couleurs.forEach(c -> couleurCarteMain.put(c, 0));
-
         for(Carte c : main){
-            couleurCarteMain.put(c.getCouleur(), couleurCarteMain.get(c.getCouleur())+1);
+            if(c.getCouleur() != NomCouleur.MOSAIQUE){
+                couleurCarteMain.put(c.getCouleur(), couleurCarteMain.get(c.getCouleur())+1);
+            }
         }
         List<Map.Entry<NomCouleur, Integer>> entryList = new ArrayList<>(couleurCarteMain.entrySet());
         entryList.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));

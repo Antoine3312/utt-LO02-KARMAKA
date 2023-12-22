@@ -123,4 +123,9 @@ public class KarmakaCommand implements Renderable {
     public void displayTourInfo(EtatPartie partie) {
         this.kcc.diplayTourInfo(partie);
     }
+
+    @Override
+    public void afficherFinDePartie() {
+        this.kcc.afficherFinDePartie();
+    }
 }
