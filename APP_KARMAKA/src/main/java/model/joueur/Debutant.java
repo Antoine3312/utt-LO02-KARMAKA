@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class Debutant implements StyleJeuStrategy {
 
-    public ActionJouer actionJouer = new ActionJouer();
+    public ActionJouer actionJouer;
 
     public Random r = new Random();
     private Renderable renderer;
@@ -20,6 +20,7 @@ public class Debutant implements StyleJeuStrategy {
     @Override
     public void jouerTour(Joueur joueur, Renderable renderer) {
         this.renderer = renderer;
+        this.actionJouer = new ActionJouer(this.renderer);
         if (joueur.getMain().isEmpty() && joueur.getPile().getCartes().isEmpty()){
             this.reincarner(joueur);
         } else {
@@ -40,7 +41,7 @@ public class Debutant implements StyleJeuStrategy {
     }
 
     private void jouer(Joueur joueur){
-        boolean jouerCarte = (this.r.nextInt(1) == 1);
+        boolean jouerCarte = !(this.r.nextInt(4) == 1);
         if(jouerCarte) {
             Carte careAJouer = joueur.getMain().get(this.r.nextInt(joueur.getMain().size()));
             this.actionJouer.jouer(joueur, true, careAJouer, (r.nextInt(3))+1);

@@ -21,10 +21,12 @@ public abstract class Carte {
 
     public void jouerPoint(Joueur joueurAppelant){
         this.renderer.displayMessage(String.format("%s utilise la carte %s pour ses points.", joueurAppelant, this.nom));
+        joueurAppelant.getMain().remove(this);
         joueurAppelant.getOeuvre().getCartes().push(this);
     }
     public void jouerFutur(Joueur joueurAppelant){
         this.renderer.displayMessage(String.format("%s utilise la carte %s pour sa vie futur.", joueurAppelant, this.nom));
+        joueurAppelant.getMain().remove(this);
         joueurAppelant.getVieFutur().getCartes().push(this);
     }
 

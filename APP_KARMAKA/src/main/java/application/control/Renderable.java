@@ -8,8 +8,6 @@ import model.joueur.Joueur;
 import model.joueur.StyleJeuStrategy;
 
 import java.util.List;
-import java.util.ServiceLoader;
-import java.util.Stack;
 
 public interface Renderable {
 
@@ -51,8 +49,10 @@ public interface Renderable {
 
     void displayMessage(String message);
 
-    void afficherInfoJoueur(Joueur joueur);
+    void afficherInfoJoueurDebutTour(Joueur joueur);
 
     void afficherInfoReincarnation(Joueur joueur);
+
+    void displayTourInfo(EtatPartie partie);
 }
 

@@ -3,12 +3,9 @@ package application.control;
 import model.EtatPartie;
 import model.carte.*;
 import model.echelle.EchelleKarmique;
-import model.echelle.Echellon;
-import model.echelle.NomPalier;
 import model.joueur.Joueur;
 import model.joueur.Ordinateur;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -22,7 +19,7 @@ public class DeroulementPartie {
     private static final int UTILISATIONFUTUR = 2;
     private static final int UTILISATIONPOINT = 3;
 
-    private final ActionJouer actionJouer = new ActionJouer();
+    private final ActionJouer actionJouer = new ActionJouer(this.renderer);
 
     public DeroulementPartie(Renderable renderer) {
         this.renderer = renderer;
@@ -47,7 +44,7 @@ public class DeroulementPartie {
     }
     private void jouerPartie(){
         while (!this.partie.getJoueur1().hasWon() || !this.partie.getJoueur2().hasWon()){
-            this.renderer.displayMessage(String.format("================= Tour %s =================", this.partie.getNumTour()));
+            this.renderer.displayTourInfo(this.partie);
             this.jouerTour(this.partie.getJoueur1());
             if(this.partie.getJoueur1().hasWon()){
                 break;
@@ -63,8 +60,7 @@ public class DeroulementPartie {
     }
 
     private void jouerTour(Joueur joueur) {
-        this.renderer.displayMessage(String.format("Au tour de %s de jouer. Voici un résumé de son avancé :", joueur.getNom()));
-        this.renderer.afficherInfoJoueur(joueur);
+        this.renderer.afficherInfoJoueurDebutTour(joueur);
         if(joueur instanceof Ordinateur){
             ((Ordinateur) joueur).executeTour();
         } else {
@@ -78,14 +74,18 @@ public class DeroulementPartie {
     }
 
     private void reincarner(Joueur joueur) {
-        this.renderer.displayMessage(String.format("%s n'a plus aucune carte dans sa main et dans sa pile, il va se réincarner ...", joueur.getNom()));
         this.renderer.afficherInfoReincarnation(joueur);
-        NomCouleur couleurLaPlusRentable = this.renderer.choisirCouleur(joueur.getOeuvre());
-        if(this.renderer.utiliserJetonKarmique(joueur)) {
-            this.actionJouer.reincarner(joueur, couleurLaPlusRentable, true, this.renderer.combienDeJeton(joueur));
+        if(!joueur.getOeuvre().getCartes().isEmpty()){
+            NomCouleur couleurLaPlusRentable = this.renderer.choisirCouleur(joueur.getOeuvre());
+            if(this.renderer.utiliserJetonKarmique(joueur)) {
+                this.actionJouer.reincarner(joueur, couleurLaPlusRentable, true, this.renderer.combienDeJeton(joueur));
+            } else {
+                this.actionJouer.reincarner(joueur, couleurLaPlusRentable, false, 0);
+            }
         } else {
-            this.actionJouer.reincarner(joueur, couleurLaPlusRentable, false, 0);
+            this.renderer.displayErrorMessage(String.format("%s n'a joué aucune carte pour leurs point. Il reste donc sur le même Echellon ...", joueur.getNom()));
         }
+        this.actionJouer.creerNouvellePileEtMain(joueur);
     }
 
     private void jouer(Joueur joueur) {
@@ -102,7 +102,7 @@ public class DeroulementPartie {
     private void initHands() {
         List<Joueur> joueurs = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());
         for (Joueur j : joueurs){
-            for (int i = 0; i<4; i++){
+            for (int i = 0; i<1; i++){
                 j.getMain().add(this.partie.getSource().getCartes().pop());
             }
         }
@@ -111,7 +111,7 @@ public class DeroulementPartie {
     private void initPile() {
         List<Joueur> joueurs = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());
         for (Joueur j : joueurs){
-            for (int i = 0; i<2; i++){
+            for (int i = 0; i<0; i++){
                 j.getPile().getCartes().push(this.partie.getSource().getCartes().pop());
             }
         }

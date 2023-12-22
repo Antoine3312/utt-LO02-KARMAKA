@@ -110,12 +110,17 @@ public class KarmakaCommand implements Renderable {
     }
 
     @Override
-    public void afficherInfoJoueur(Joueur joueur) {
-        this.kcc.afficherInfoJoueur(joueur);
+    public void afficherInfoJoueurDebutTour(Joueur joueur) {
+        this.kcc.afficherInfoJoueurDebutTour(joueur);
     }
 
     @Override
     public void afficherInfoReincarnation(Joueur joueur) {
         this.kcc.afficherInfoReicarnation(joueur);
+    }
+
+    @Override
+    public void displayTourInfo(EtatPartie partie) {
+        this.kcc.diplayTourInfo(partie);
     }
 }

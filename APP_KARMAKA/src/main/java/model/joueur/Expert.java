@@ -13,7 +13,7 @@ public class Expert implements StyleJeuStrategy{
     private NomCouleur couleurFutur = null;
     private NomCouleur couleurPouvoir = null;
 
-    public ActionJouer actionJouer = new ActionJouer();
+    public ActionJouer actionJouer;
 
     public Random r = new Random();
     private Renderable renderer;
@@ -21,6 +21,7 @@ public class Expert implements StyleJeuStrategy{
     @Override
     public void jouerTour(Joueur joueur, Renderable renderer) {
         this.renderer = renderer;
+        this.actionJouer = new ActionJouer(this.renderer);
         if (joueur.getMain().isEmpty() && joueur.getPile().getCartes().isEmpty()){
             this.choisirCouleurCartes(joueur.getMain());
             this.reincarner(joueur);
@@ -30,7 +31,7 @@ public class Expert implements StyleJeuStrategy{
     }
 
     private void jouer(Joueur joueur) {
-        boolean jouerCarte = this.r.nextInt(2) == 1;
+        boolean jouerCarte = !(this.r.nextInt(4) == 1);
         if(jouerCarte) {
             Carte carteAJouer  = joueur.getMain().get(this.r.nextInt(joueur.getMain().size()));
             if(carteAJouer.getCouleur().equals(this.couleurPouvoir)){

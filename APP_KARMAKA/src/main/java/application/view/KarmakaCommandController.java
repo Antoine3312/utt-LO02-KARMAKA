@@ -228,7 +228,8 @@ public class KarmakaCommandController {
         this.display(message);
     }
 
-    public void afficherInfoJoueur(Joueur joueur) {
+    public void afficherInfoJoueurDebutTour(Joueur joueur) {
+        this.display(String.format("Au tour de %s de jouer. Voici un résumé de son avancé :", joueur.getNom()));
         this.display(String.format("    Echellon : %s", EtatPartie.getInstance().getEchelle().getEchellonOf(joueur).getNom()));
         this.display(String.format("    Nombre de jeton karmique : %s", joueur.getNbAnneauxKarmique()));
         this.display(String.format("    Nombre de Cartes dans la  Pile : %s", joueur.getPile().getCartes().size()));
@@ -236,7 +237,12 @@ public class KarmakaCommandController {
     }
 
     public void afficherInfoReicarnation(Joueur joueur) {
+        this.display(String.format("%s n'a plus aucune carte dans sa main et dans sa pile, il va se réincarner ...", joueur.getNom()));
         this.display("Voici les cartes qu'il a dans sa vie futur :");
         this.afficherCartes(joueur.getVieFutur().getCartes());
+    }
+
+    public void diplayTourInfo(EtatPartie partie) {
+        this.displayMessage(String.format("================= Tour %s =================", partie.getNumTour()));
     }
 }

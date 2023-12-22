@@ -82,6 +82,10 @@ public class Joueur {
     public void setNbAnneauxKarmique(int nbAnneauxKarmique) {
         this.nbAnneauxKarmique = nbAnneauxKarmique;
     }
+
+    public void setPile(PileCartes pile) {
+        this.pile = pile;
+    }
 }
 
 
