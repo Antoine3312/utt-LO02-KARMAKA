@@ -2,10 +2,11 @@ package model.echelle;
 
 import model.joueur.Joueur;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public class EchelleKarmique {
+public class EchelleKarmique implements Serializable {
     private final Echellon bousier = new Echellon(4, NomPalier.BOUSIER);
     private final Echellon serpent = new Echellon(5, NomPalier.SERPENT);
     private final Echellon loup = new Echellon(6, NomPalier.LOUP);

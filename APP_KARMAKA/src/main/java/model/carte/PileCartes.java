@@ -1,8 +1,9 @@
 package model.carte;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class PileCartes {
+public class PileCartes implements Serializable {
     private Stack<Carte> cartes;
 
     public PileCartes() {

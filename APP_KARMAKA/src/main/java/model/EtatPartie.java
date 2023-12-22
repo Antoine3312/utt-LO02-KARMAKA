@@ -4,10 +4,13 @@ import model.carte.PileCartes;
 import model.echelle.EchelleKarmique;
 import model.joueur.Joueur;
 
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class EtatPartie {
+public class EtatPartie implements Serializable {
+
+    private static final long serialVersionUID = 2711998155099132322L;
     private EchelleKarmique echelle;
     private Joueur joueur1;
     private Joueur joueur2;
@@ -70,6 +73,14 @@ public class EtatPartie {
 
     public void setNumTour(int numTour) {
         this.numTour = numTour;
+    }
+
+    public void setJoueur1(Joueur joueur1) {
+        this.joueur1 = joueur1;
+    }
+
+    public static void setInstance(EtatPartie instance) {
+        EtatPartie.instance = instance;
     }
 
     @Override

@@ -7,11 +7,12 @@ import model.carte.NomCouleur;
 import model.carte.PileCartes;
 import model.echelle.Echellon;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Joueur {
+public class Joueur implements Serializable {
     protected String nom;
     private PileCartes oeuvre;
     private PileCartes pile;

@@ -4,10 +4,11 @@ import application.control.Renderable;
 import model.carte.PileCartes;
 import model.joueur.Joueur;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Echellon {
+public class Echellon implements Serializable {
     private List<Joueur> joueurs;
     private int ptsNecessairePourMonter;
     private NomPalier nom;

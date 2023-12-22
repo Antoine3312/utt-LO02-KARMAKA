@@ -5,12 +5,13 @@ import application.control.Renderable;
 import model.carte.Carte;
 import model.carte.NomCouleur;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 
-public class Debutant implements StyleJeuStrategy {
+public class Debutant implements StyleJeuStrategy, Serializable {
 
     public ActionJouer actionJouer;
 

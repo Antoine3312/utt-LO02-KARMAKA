@@ -3,7 +3,9 @@ package model.carte;
 import application.control.Renderable;
 import model.joueur.Joueur;
 
-public abstract class Carte {
+import java.io.Serializable;
+
+public abstract class Carte implements Serializable {
     protected String nom;
     protected int point;
     protected NomCouleur couleur;

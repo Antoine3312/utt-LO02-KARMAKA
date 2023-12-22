@@ -2,7 +2,9 @@ package model.joueur;
 
 import application.control.Renderable;
 
-public class Ordinateur extends Joueur{
+import java.io.Serializable;
+
+public class Ordinateur extends Joueur implements Serializable {
     private final Renderable renderer;
     private StyleJeuStrategy strategy;
 

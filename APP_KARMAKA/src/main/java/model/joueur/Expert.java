@@ -5,9 +5,10 @@ import application.control.Renderable;
 import model.carte.Carte;
 import model.carte.NomCouleur;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Expert implements StyleJeuStrategy{
+public class Expert implements StyleJeuStrategy, Serializable {
 
     private NomCouleur couleurPoint = null;
     private NomCouleur couleurFutur = null;

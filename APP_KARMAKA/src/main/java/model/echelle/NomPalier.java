@@ -1,5 +1,7 @@
 package model.echelle;
 
-public enum NomPalier {
+import java.io.Serializable;
+
+public enum NomPalier implements Serializable {
     BOUSIER, SERPENT, LOUP, SINGE
 }
