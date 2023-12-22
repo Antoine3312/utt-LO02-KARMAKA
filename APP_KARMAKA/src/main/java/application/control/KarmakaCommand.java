@@ -90,14 +90,13 @@ public class KarmakaCommand implements Renderable {
     }
 
     @Override
-    public Carte choisirUneCarteVieFutur(List<Carte> carteVieFutur) {
-        return this.kcc.choisirUneCarteVieFutur(carteVieFutur);
+    public void displayErrorMessage(String s) {
+        this.kcc.displayErrorMessage(s);
     }
 
     @Override
-    public Carte choisirUneCarteOeuvreExposee(List<Carte> carteOeuvreExposee) {
-        return this.kcc.choisirUneCarteOeuvreExposee(carteOeuvreExposee);
-
+    public List<Carte> choisirDeuxCarte(List<Carte> cartes) {
+        return this.kcc.choisirDeuxCarte(cartes);
     }
 
     @Override
@@ -106,11 +105,7 @@ public class KarmakaCommand implements Renderable {
     }
 
     @Override
-    public Carte getCartes(List<Carte> Cartes) {
-        return this.kcc.getCartes(Cartes);
-    }
-    @Override
-    public Carte getCartesJouables(List<Carte> CartesJouables) {
-        return this.kcc.getCartesJouables(CartesJouables);
+    public void displayMessage(String message) {
+        this.kcc.displayMessage(message);
     }
 }

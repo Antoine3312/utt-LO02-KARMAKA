@@ -1,6 +1,7 @@
 package model.carte;
 
 import application.control.Renderable;
+import model.EtatPartie;
 import model.carte.Carte;
 import model.carte.NomCouleur;
 import model.joueur.Joueur;
@@ -37,6 +38,7 @@ public abstract class Deni extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
+        this.renderer.displayMessage(String.format("%s utilise la carte %s", joueurAppelant.getNom(), this.getNom()));
         // Le joueur appelant défausse une carte de sa main
         Carte carteDefausser = defausserCarte(joueurAppelant);
 
@@ -59,6 +61,7 @@ public abstract class Deni extends Carte {
                 carteChoisi = joueur.getMain().get(r.nextInt(joueur.getMain().size()));
             }
             // Défausser la carte choisie par le joueur
+            EtatPartie.getInstance().getFosse().getCartes().add(carteChoisi);
             joueur.getMain().remove(carteChoisi);
         }
         return carteChoisi;

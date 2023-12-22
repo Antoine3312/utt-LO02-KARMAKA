@@ -19,11 +19,13 @@ public abstract class Carte {
         this.couleur = couleur;
     }
 
-    public void jouerPoint(){
-        System.out.println("Joueur point");
+    public void jouerPoint(Joueur joueurAppelant){
+        this.renderer.displayMessage(String.format("%s utilise la carte %s pour ses points.", joueurAppelant, this.nom));
+        joueurAppelant.getOeuvre().getCartes().push(this);
     }
-    public void jouerFutur(){
-        System.out.println("Joueur futur");
+    public void jouerFutur(Joueur joueurAppelant){
+        this.renderer.displayMessage(String.format("%s utilise la carte %s pour sa vie futur.", joueurAppelant, this.nom));
+        joueurAppelant.getVieFutur().getCartes().push(this);
     }
 
     public abstract void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur);
@@ -44,7 +46,5 @@ public abstract class Carte {
     public String toString() {
         return "("+point+")"+"  "+nom+"  ["+couleur+"]";
     }
-
-    public abstract void placerPremiereCarteVieFuturRivalSurLaVotre(Joueur joueurAppelant, Joueur joueurRival);
 
 }

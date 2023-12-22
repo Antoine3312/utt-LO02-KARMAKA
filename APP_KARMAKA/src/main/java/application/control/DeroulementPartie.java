@@ -119,8 +119,8 @@ public class DeroulementPartie {
             int utilisation = this.renderer.choisirUtilisation(carte);
             switch (utilisation){
 //                case DeroulementPartie.UTILISATIONPOUVOIR -> carte.jouerPouvoir();
-                case DeroulementPartie.UTILISATIONFUTUR -> carte.jouerFutur();
-                case DeroulementPartie.UTILISATIONPOINT -> carte.jouerPoint();
+//                case DeroulementPartie.UTILISATIONFUTUR -> carte.jouerFutur();
+//                case DeroulementPartie.UTILISATIONPOINT -> carte.jouerPoint();
             }
         }
     }

@@ -1,10 +1,12 @@
 package model.carte;
 
 import application.control.Renderable;
+import model.EtatPartie;
 import model.joueur.Joueur;
 import model.joueur.Ordinateur;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Classe abstraite représentant la carte "Semis" dans le jeu.
@@ -33,48 +35,27 @@ public abstract class Semis extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        // Puisez 2 cartes à la Source
-        joueurAppelant.puiserCartesSource(2);
-
-        // Placez sur votre Vie Future 2 cartes de votre Main
-        List<Carte> cartesMain = joueurAppelant.getMain();
-
-        // Vérifie s'il y a au moins 2 cartes dans la main
-        if (cartesMain.size() >= 2) {
-            for (int i = 0; i < 2; i++) {
-                Carte carteAVieFuture = cartesMain.get(0); // Choix arbitraire de la première carte de la main
-                joueurAppelant.getVieFutur().(carteAVieFuture);
-                joueurAppelant.getMain().remove(carteAVieFuture);
+        this.renderer.displayMessage(String.format("%s utilise la carte %s", joueurAppelant.getNom(), this.getNom()));
+        if(EtatPartie.getInstance().getSource().getCartes().size()>=2) {
+            for (int i =0; i<2; i++){
+                joueurAppelant.getMain().add(EtatPartie.getInstance().getSource().getCartes().pop());
             }
-        }
-
-        // Vous pouvez ensuite jouer une autre carte
-        if (joueurAppelant instanceof Ordinateur) {
-            jouerAutreCarte(joueurAppelant);
+            List<Carte> cartesChoisies = null;
+            if(!(joueurAppelant instanceof Ordinateur)){
+                cartesChoisies = this.renderer.choisirDeuxCarte(joueurAppelant.getMain());
+                joueurAppelant.getMain().removeAll(cartesChoisies);
+            } else {
+                Random r = new Random();
+                for(int i =0 ;i<2; i++){
+                    cartesChoisies.add(joueurAppelant.getMain().get(r.nextInt(joueurAppelant.getMain().size())));
+                    joueurAppelant.getMain().removeAll(cartesChoisies);
+                }
+            }
+            joueurAppelant.getVieFutur().getCartes().addAll(cartesChoisies);
         } else {
-            this.renderer.afficherCartes(joueurAppelant.getMain());
-            Carte carteAJouer = this.renderer.choisirUneCarte(joueurAppelant.getMain());
-
-            // Si le joueur a choisi une carte, il la joue
-            if (carteAJouer != null) {
-                joueurAppelant.jouerCarte(carteAJouer);
-            }
+            this.renderer.displayErrorMessage("Impossible : Il y a moins de 2 cartes dans la source.");
         }
     }
 
-    /**
-     * Méthode pour jouer une autre carte.
-     *
-     * @param joueur Le joueur qui joue la carte.
-     */
-    private void jouerAutreCarte(Joueur joueur) {
-        List<Carte> cartesJouables = joueur.getMain();
-
-        // Si le joueur a des cartes jouables, il en choisit une et la joue
-        if (!cartesJouables.isEmpty()) {
-            Carte carteAJouer = cartesJouables.get(0); // Choix aléatoire de la première carte jouable
-            joueur.jouerCarte(carteAJouer);
-        }
-    }
 }
 

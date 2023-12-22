@@ -40,7 +40,7 @@ public abstract class Destinee extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        this.renderer.displayMessage(String.format("%s utilise la carte %s sur %s", joueurAppelant.getNom(), this.getNom(), joueurReceveur.getNom()));
+        this.renderer.displayMessage(String.format("%s utilise la carte %s", joueurAppelant.getNom(), this.getNom()));
         EtatPartie etatPartie = EtatPartie.getInstance();
         if(!etatPartie.getSource().getCartes().isEmpty()){
             List<Carte> troisPremièresCarteSource = Arrays.asList(etatPartie.getSource().getCartes().pop(), etatPartie.getSource().getCartes().pop(), etatPartie.getSource().getCartes().pop());
@@ -51,14 +51,14 @@ public abstract class Destinee extends Carte {
             } else {
                 List<Carte> carteAAjouter = null;
                 Random r = new Random();
-                carteAAjouter.add(troisPremièresCarteSource.get(r.nextInt(troisPremièresCarteSource.size())));
-                troisPremièresCarteSource.removeAll(carteAAjouter);
-                carteAAjouter.add(troisPremièresCarteSource.get(troisPremièresCarteSource.size()));
-                troisPremièresCarteSource.removeAll(carteAAjouter);
+                for(int i=0; i>2 ;i++){
+                    carteAAjouter.add(troisPremièresCarteSource.get(r.nextInt(troisPremièresCarteSource.size())));
+                    troisPremièresCarteSource.removeAll(carteAAjouter);
+                }
             }
             etatPartie.getSource().getCartes().addAll(troisPremièresCarteSource);
         } else {
-            this.renderer.displayErrorMessage("Impossible de jouer la car car la source est vide.");
+            this.renderer.displayErrorMessage("Impossible de jouer la carte car la source est vide.");
         }
     }
 }

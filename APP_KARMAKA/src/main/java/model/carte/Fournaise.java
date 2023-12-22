@@ -1,6 +1,7 @@
 package model.carte;
 
 import application.control.Renderable;
+import model.EtatPartie;
 import model.joueur.Joueur;
 import model.joueur.Ordinateur;
 
@@ -34,40 +35,15 @@ public abstract class Fournaise extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        int nombreCartesADefausser = 2;
-
-        // Vérifie si le joueur cible a au moins 2 cartes dans sa Vie Future
-        if (joueurReceveur.carteVieFut().size() >= nombreCartesADefausser) {
-            // Défaussez les 2 premières cartes de la Vie Future du joueur cible
-            for (int i = 0; i < nombreCartesADefausser; i++) {
-                Carte carteChoisie = choisirCarteADefausser(joueurReceveur);
-                joueurReceveur.getVieFuture().remove(carteChoisie);
+        this.renderer.displayMessage(String.format("%s utilise la carte %s sur %s", joueurAppelant.getNom(), this.getNom(), joueurReceveur.getNom()));
+        if (joueurReceveur.getVieFutur().getCartes().size() >= 2) {
+            for (int i = 0; i<2; i++){
+                Carte carteADefosser = joueurReceveur.getVieFutur().getCartes().pop();
+                EtatPartie.getInstance().getFosse().getCartes().add(carteADefosser);
             }
         } else {
-            this.renderer.displayErrorMessage("Le rival n'a pas assez de cartes dans sa Vie Future.");
+            this.renderer.displayErrorMessage("Impossible : Le rival n'a pas assez de cartes dans sa Vie Future.");
         }
-    }
-
-    /**
-     * Méthode pour choisir une carte à défausser parmi les cartes de la Vie Future d'un joueur.
-     *
-     * @param joueur Le joueur cible.
-     * @return La carte choisie à défausser.
-     */
-    private Carte choisirCarteADefausser(Joueur joueur) {
-        Carte carteChoisie = null;
-
-        // Vérifie si le joueur cible est un ordinateur
-        if (joueur instanceof Ordinateur) {
-            // Si le joueur est un ordinateur, choisissez une carte de manière aléatoire
-            Random r = new Random();
-            carteChoisie = joueur.getVieFuture().get(r.nextInt(joueur.getVieFuture().size()));
-        } else {
-            // Si le joueur n'est pas un ordinateur, utilisez l'interface Renderer pour choisir une carte à défausser
-            carteChoisie = this.renderer.choisirUneCarte(joueur.getVieFuture());
-        }
-
-        return carteChoisie;
     }
 }
 

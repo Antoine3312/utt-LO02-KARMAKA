@@ -1,6 +1,7 @@
 package model.carte;
 
 import application.control.Renderable;
+import model.EtatPartie;
 import model.joueur.Joueur;
 import model.joueur.Ordinateur;
 
@@ -36,22 +37,11 @@ public abstract class Vol extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        Carte oeuvreChoisi = null;
-
-        // Récupération de la liste des cartes exposées dans l'œuvre du joueur appelant
-        List<Carte> carteOeuvreExposee = joueurAppelant.getOeuvreExposee().getCartes();
-
-        // Si le joueur appelant est un ordinateur, il choisit aléatoirement une carte exposée
-        if (joueurAppelant instanceof Ordinateur) {
-            oeuvreChoisi = carteOeuvreExposee.get(new Random().nextInt(carteOeuvreExposee.size()));
+        this.renderer.displayMessage(String.format("%s utilise la carte %s sur %s", joueurAppelant.getNom(), this.getNom(), joueurReceveur.getNom()));
+        if(!joueurReceveur.getVieFutur().getCartes().isEmpty()){
+            joueurAppelant.getMain().add(joueurReceveur.getVieFutur().getCartes().pop());
         } else {
-            // Si le joueur est humain, il choisit une carte exposée en utilisant l'interface graphique
-            this.renderer.afficherCartes(carteOeuvreExposee);
-            oeuvreChoisi = this.renderer.choisirUneCarteOeuvreExposee(carteOeuvreExposee);
+            this.renderer.displayErrorMessage("Impossible : Le rival n'a aucune oeuvre exposée.");
         }
-
-        // Retrait de la carte choisie de l'œuvre exposée et ajout dans la main du joueur appelant
-        joueurAppelant.getOeuvreExposee().getCartes().remove(oeuvreChoisi);
-        joueurAppelant.getMain().add(oeuvreChoisi);
     }
 }

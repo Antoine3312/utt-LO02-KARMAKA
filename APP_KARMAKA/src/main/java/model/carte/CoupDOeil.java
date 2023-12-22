@@ -36,6 +36,7 @@ public abstract class CoupDOeil extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
+        this.renderer.displayMessage(String.format("%s utilise la carte %s", joueurAppelant.getNom(), this.getNom(), joueurReceveur.getNom()));
         if (!(joueurAppelant instanceof Ordinateur)){
             this.renderer.afficherCartes(joueurReceveur.getMain());
         }

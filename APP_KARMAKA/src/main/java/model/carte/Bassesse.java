@@ -34,6 +34,7 @@ public abstract class Bassesse extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
+        this.renderer.displayMessage(String.format("%s utilise la carte %s sur %s", joueurAppelant.getNom(), this.getNom(), joueurReceveur.getNom()));
         // Défaussez au hasard 2 cartes de la Main d'un rival
         this.defausserAuHasard(joueurReceveur, 2);
     }
@@ -52,7 +53,7 @@ public abstract class Bassesse extends Carte {
             cartesMain.removeAll(cartesADefausser);
 
         }else{
-            this.renderer.displayErrorMessage("Le rival n'a pas assez de cartes en main");
+            this.renderer.displayErrorMessage("Impossible : Le rival n'a pas assez de cartes en main");
         }
 
     }

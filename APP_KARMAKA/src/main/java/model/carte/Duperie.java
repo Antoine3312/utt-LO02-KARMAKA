@@ -5,6 +5,7 @@ import model.joueur.Joueur;
 import model.joueur.Ordinateur;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -35,15 +36,18 @@ public abstract class Duperie extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        if (!(joueurAppelant instanceof Ordinateur)){
-            List<Carte> cartesMainReceveur = joueurReceveur.getMain();
-
-            if (!cartesMainReceveur.isEmpty()) {
-                // Choisissez une carte à afficher
-                Carte carteAafficher = cartesMainReceveur.get(0);
-                this.renderer.afficherCartes(carteAafficher);
+        this.renderer.displayMessage(String.format("%s utilise la carte %s sur %s", joueurAppelant.getNom(), this.getNom(), joueurReceveur.getNom()));
+        if (joueurReceveur.getMain().size()<3){
+            Carte carteChoisi = null;
+            if (!(joueurAppelant instanceof Ordinateur)) {
+                carteChoisi = this.renderer.choisirUneCarte(joueurReceveur.getMain().subList(0, 2));
             } else {
-                this.renderer.displayErrorMessage("Le joueur cible n'a aucune carte en main.");
+                Random r = new Random();
+                carteChoisi = joueurReceveur.getMain().get(r.nextInt(joueurReceveur.getMain().size()));
             }
+            joueurAppelant.getMain().add(carteChoisi);
+        } else {
+            this.renderer.displayErrorMessage("Impossible : Le joueur cible n'a pas assez de carte dans sa main (- de 3 cartes)");
         }
     }
+}

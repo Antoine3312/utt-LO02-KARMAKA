@@ -1,6 +1,7 @@
 package model.carte;
 
 import application.control.Renderable;
+import model.EtatPartie;
 import model.joueur.Joueur;
 
 import java.util.List;
@@ -32,14 +33,15 @@ public abstract class Longevite extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        // Placez 2 cartes puisées à la Source sur la Pile du joueur adverse
-        int nombreCartesAPuiser = 2;
+        this.renderer.displayMessage(String.format("%s utilise la carte %s sur %s", joueurAppelant.getNom(), this.getNom(), joueurReceveur.getNom()));
+        if(!EtatPartie.getInstance().getSource().getCartes().isEmpty()){
+            for (int i =0; i<2; i++) {
+                Carte cartePiochee = EtatPartie.getInstance().getSource().getCartes().pop();
+                joueurReceveur.getPile().getCartes().push(cartePiochee);
+            }
+        } else {
+            this.renderer.displayErrorMessage("Impossible : la source est vide.");
+        }
 
-        // Puisez 2 cartes à la Source
-        int cartesPuisées = joueurAppelant.puiserCartesSource(nombreCartesAPuiser);
-
-        // Placez les cartes sur la Pile du joueur adverse (joueurReceveur)
-        List<Carte> cartesPuisees = joueurAppelant.getSource().getDernieresCartesPuisees(cartesPuisées);
-        joueurReceveur.getPile().addCartes(cartesPuisees);
     }
 }

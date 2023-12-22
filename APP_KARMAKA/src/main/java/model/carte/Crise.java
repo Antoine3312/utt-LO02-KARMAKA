@@ -35,6 +35,7 @@ public abstract class Crise extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
+        this.renderer.displayMessage(String.format("%s utilise la carte %s sur %s", joueurAppelant.getNom(), this.getNom(), joueurReceveur.getNom()));
         Carte carteChoisie = null;
         if(!joueurReceveur.getOeuvre().getCartes().isEmpty()){
             if(!(joueurReceveur instanceof Ordinateur)) {
@@ -45,7 +46,7 @@ public abstract class Crise extends Carte {
             }
             joueurReceveur.getOeuvre().getCartes().remove(carteChoisie);
         } else {
-            this.renderer.displayErrorMessage("Le rival n'a aucune oeuvre exposée.");
+            this.renderer.displayErrorMessage("Impossible : Le rival n'a aucune oeuvre exposée.");
         }
 
     }

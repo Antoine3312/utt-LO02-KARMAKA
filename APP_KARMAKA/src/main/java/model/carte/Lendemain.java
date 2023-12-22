@@ -1,6 +1,7 @@
 package model.carte;
 
 import application.control.Renderable;
+import model.EtatPartie;
 import model.joueur.Joueur;
 
 import java.util.List;
@@ -32,25 +33,12 @@ public abstract class Lendemain extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        Carte cartePiochee = null;
-        List<Carte> carteSourceJoueurAppelant = joueurAppelant.getSource().getCartes();
-
-        if (!carteSourceJoueurAppelant.isEmpty()) {
-            // Piocher la première carte de la source du joueur appelant
-            cartePiochee = carteSourceJoueurAppelant.get(0);
-
-            // Retirer la carte de la Source du joueur appelant
-            joueurAppelant.getSource().getCartes().remove(cartePiochee);
-
-            // Ajouter la carte à la main du joueur appelant
-            joueurAppelant.getMain().add(cartePiochee);
-
-            System.out.println("Vous avez puisé la carte Lendemain de la Source.");
-
-            // Permettre au joueur d'effectuer une autre action si nécessaire
-            // (vous devrez implémenter la logique associée à cette action supplémentaire)
+        this.renderer.displayMessage(String.format("%s utilise la carte %s", joueurAppelant.getNom(), this.getNom()));
+        if(!EtatPartie.getInstance().getSource().getCartes().isEmpty()){
+            joueurAppelant.getMain().add(EtatPartie.getInstance().getSource().getCartes().pop());
         } else {
-            System.out.println("La Source est vide, vous ne pouvez pas piocher la carte Lendemain.");
+            this.renderer.displayErrorMessage("Impossible : la source est vide.");
         }
+
     }
 }

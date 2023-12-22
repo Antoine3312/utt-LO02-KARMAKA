@@ -34,20 +34,19 @@ public abstract class Transmigration extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        Carte carteChoisi = null;
-        List<Carte> carteVieFutur = joueurAppelant.getVieFutur().getCartes();
-
-        // Si le joueur appelant est un ordinateur, il choisit aléatoirement une carte Vie Futur à transférer
-        if (joueurAppelant instanceof Ordinateur) {
-            carteChoisi = carteVieFutur.get(new Random().nextInt(carteVieFutur.size()));
+        this.renderer.displayMessage(String.format("%s utilise la carte %s", joueurAppelant.getNom(), this.getNom()));
+        if(!joueurAppelant.getVieFutur().getCartes().isEmpty()) {
+            Carte carteChoisi = null;
+            if(!(joueurAppelant instanceof  Ordinateur)){
+                carteChoisi = this.renderer.choisirUneCarte(joueurAppelant.getVieFutur().getCartes());
+            } else {
+                Random r = new Random();
+                carteChoisi = joueurAppelant.getVieFutur().getCartes().get(r.nextInt(joueurAppelant.getVieFutur().getCartes().size()));
+            }
+            joueurAppelant.getMain().add(carteChoisi);
+            joueurAppelant.getVieFutur().getCartes().remove(carteChoisi);
         } else {
-            // Si le joueur est humain, il choisit une carte Vie Futur à transférer
-            this.renderer.afficherCartes(carteVieFutur);
-            carteChoisi = this.renderer.choisirUneCarteVieFutur(carteVieFutur);
+            this.renderer.displayErrorMessage("Impossible : Le joueur appelant a moins de 1 carte dans sa vie future.");
         }
-
-        // Retirer la carte Vie Futur choisie du joueur appelant et la placer dans sa main
-        joueurAppelant.getVieFutur().getCartes().remove(carteChoisi);
-        joueurAppelant.getMain().add(carteChoisi);
     }
 }

@@ -34,23 +34,13 @@ public abstract class ReveBrises extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        List<Carte> carteVieFuturRival = joueurReceveur.getVieFutur().getCartes();
-
-        // Vérifier si le rival a des cartes dans sa Vie Futur
-        if (!carteVieFuturRival.isEmpty()) {
-            Carte carteRival = null;
-
-            // Si le joueur appelant est un ordinateur, il choisit aléatoirement une carte Vie Futur du rival
-            if (joueurAppelant instanceof Ordinateur) {
-                carteRival = carteVieFuturRival.get(new Random().nextInt(carteVieFuturRival.size()));
-            } else {
-                // Si le joueur est humain, il choisit la première carte Vie Futur du rival
-                carteRival = carteVieFuturRival.get(0);
-            }
-
-            // Transférer la carte Vie Futur du rival à la Vie Futur du joueur appelant
-            joueurReceveur.getVieFutur().getCartes().remove(carteRival);
-            joueurAppelant.getVieFutur().getCartes().add(carteRival);
+        this.renderer.displayMessage(String.format("%s utilise la carte %s sur %s", joueurAppelant.getNom(), this.getNom(), joueurReceveur.getNom()));
+        if(!joueurReceveur.getVieFutur().getCartes().isEmpty()){
+            joueurAppelant.getVieFutur().getCartes().push(
+                    joueurReceveur.getVieFutur().getCartes().pop()
+            );
+        } else {
+            this.renderer.displayErrorMessage("Impossible : la vie futur du rival n'a aucune carte.");
         }
     }
 }

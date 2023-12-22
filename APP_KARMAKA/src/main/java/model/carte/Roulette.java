@@ -1,9 +1,12 @@
 package model.carte;
 
 import application.control.Renderable;
+import model.EtatPartie;
 import model.joueur.Joueur;
+import model.joueur.Ordinateur;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Classe abstraite représentant la carte "Roulette" dans le jeu.
@@ -32,23 +35,24 @@ public abstract class Roulette extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        // Défaussez jusqu'à 2 cartes de votre Main
-        List<Carte> cartesMain = joueurAppelant.getMain();
-        int nombreCartesADefausser = Math.min(2, cartesMain.size());
-
-        // Affichage des cartes pour permettre au joueur de choisir
-        this.renderer.afficherCartes(cartesMain);
-
-        // Choix des cartes à défausser (on suppose ici que le joueur choisit les deux premières cartes)
-        List<Carte> cartesADefausser = cartesMain.subList(0, nombreCartesADefausser);
-
-        // Défausse des cartes choisies
-        joueurAppelant.getFosse().addCartes(cartesADefausser);
-        joueurAppelant.getMain().remove(cartesADefausser);
-
-        // Vous pouvez ensuite puiser à la Source autant de carte(s) + 1
-        int nombreDeCartesAPuiser = joueurAppelant.puiserCartesSource(nombreCartesADefausser + 1);
-
-        System.out.println("Vous avez puisé " + nombreDeCartesAPuiser + " carte(s) + 1 à la Source.");
+        if(EtatPartie.getInstance().getSource().getCartes().size()>=3 && joueurAppelant.getMain().size()>=2){
+            if(!(joueurAppelant instanceof Ordinateur)){
+                List<Carte> cartesChoisies = this.renderer.choisirDeuxCarte(joueurAppelant.getMain());
+                EtatPartie.getInstance().getFosse().getCartes().addAll(cartesChoisies);
+                joueurAppelant.getMain().removeAll(cartesChoisies);
+            } else {
+                Random r = new Random();
+                for (int i=0; i<2; i++){
+                    Carte carteADefausser = joueurAppelant.getMain().get(r.nextInt(joueurAppelant.getMain().size()));
+                    EtatPartie.getInstance().getFosse().getCartes().add(carteADefausser);
+                    joueurAppelant.getMain().remove(carteADefausser);
+                }
+            }
+            for (int i=0; i<3; i++){
+                joueurAppelant.getMain().add(EtatPartie.getInstance().getSource().getCartes().pop());
+            }
+        } else {
+            this.renderer.displayErrorMessage("Impossible : Le joueur appellant a moins de 2 cartes en main, et il y a moins de 3 cartes dans la pioche.");
+        }
     }
 }

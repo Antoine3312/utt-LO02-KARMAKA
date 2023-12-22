@@ -1,9 +1,12 @@
 package model.carte;
 
 import application.control.Renderable;
+import model.EtatPartie;
 import model.joueur.Joueur;
+import model.joueur.Ordinateur;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * Classe abstraite représentant la carte "Recyclage" dans le jeu.
@@ -32,25 +35,19 @@ public abstract class Recyclage extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-        // Ajoutez à votre Vie Future une des 3 dernières cartes de la Fosse
-        List<Carte> cartesFosse = joueurReceveur.getFosse().getCartes();
-        int tailleFosse = cartesFosse.size();
-
-        if (tailleFosse >= 3) {
-            // Choix des 3 dernières cartes de la Fosse
-            List<Carte> troisDernieresCartes = cartesFosse.subList(tailleFosse - 3, tailleFosse);
-
-            // Affichage des cartes pour permettre au joueur de choisir
-            this.renderer.afficherCartes(troisDernieresCartes);
-
-            // Choix de la carte à ajouter à la Vie Future (on suppose ici que le joueur choisit la première carte)
-            Carte carteAAjouter = troisDernieresCartes.get(0);
-
-            // Ajout de la carte à la Vie Future du joueur appelant
-            joueurAppelant.getVieFutur().addCartes((List<Carte>) carteAAjouter);
-
-            // Retrait de la carte de la Fosse
-            joueurReceveur.getFosse().removeCartes((List<Carte>) carteAAjouter);
+        this.renderer.displayMessage(String.format("%s utilise la carte %s", joueurAppelant.getNom(), this.getNom()));
+        List<Carte> fosse = EtatPartie.getInstance().getFosse().getCartes();
+        if(fosse.size() >= 3) {
+            Carte carteChoisie = null;
+            if(!(joueurAppelant instanceof Ordinateur)){
+                carteChoisie = this.renderer.choisirUneCarte(fosse.subList(fosse.size()-1, fosse.size()-4));
+            } else {
+                Random r = new Random();
+                carteChoisie = fosse.get(r.nextInt(fosse.size()));
+            }
+            joueurAppelant.getVieFutur().getCartes().push(carteChoisie);
+        } else {
+            this.renderer.displayErrorMessage("Impossible : la source possède moins de 3 cartes.");
         }
     }
 }

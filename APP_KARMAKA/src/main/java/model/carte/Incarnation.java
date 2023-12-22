@@ -34,7 +34,7 @@ public abstract class Incarnation extends Carte {
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
-
+        this.renderer.displayMessage(String.format("%s utilise la carte %s.", joueurAppelant.getNom(), this.getNom()));
         if(!joueurAppelant.getOeuvre().getCartes().isEmpty()){
             Carte carteChoisie = null;
             if (joueurAppelant instanceof Ordinateur){
@@ -47,7 +47,7 @@ public abstract class Incarnation extends Carte {
             }
             carteChoisie.jouerPouvoir(joueurAppelant, joueurReceveur);
         } else {
-            this.renderer.displayErrorMessage("Votre main est vide.");
+            this.renderer.displayErrorMessage("Impossible : Votre main est vide.");
         }
     }
 }

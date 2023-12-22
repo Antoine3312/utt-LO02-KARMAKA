@@ -32,6 +32,7 @@ public abstract class Mimetisme<Oeuvre> extends Carte {
      * @param joueurReceveur Le joueur adverse ciblé par le pouvoir.
      */
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
+        this.renderer.displayMessage(String.format("%s utilise la carte %s sur %s", joueurAppelant.getNom(), this.getNom(), joueurReceveur.getNom()));
         if(!joueurReceveur.getOeuvre().getCartes().isEmpty()){
             joueurReceveur.getOeuvre().getCartes().peek().jouerPouvoir(joueurAppelant, joueurReceveur);
         } else {
