@@ -1,3 +1,8 @@
+/**
+ * La classe {@code Deni} représente une carte du jeu avec le pouvoir spécifique de défausser
+ * une carte de sa main et d'utiliser le pouvoir de cette carte.
+ * Elle hérite de la classe abstraite {@link Carte}.
+ */
 package model.carte;
 
 import application.control.Renderable;
@@ -11,16 +16,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-/**
- * Carte "Deni" qui hérite de la classe abstraite "Carte".
- * Représente une carte permettant au joueur de défausser une carte de sa main et de copier le pouvoir de la carte défaussée.
- */
+
 public class Deni extends Carte {
 
     /**
-     * Constructeur de la carte "Deni".
+     * Constructeur de la classe Deni.
      *
-     * @param renderable L'objet permettant le rendu visuel.
+     * @param renderable L'objet permettant d'afficher des messages dans l'interface utilisateur.
      */
     public Deni(Renderable renderable) {
         super(renderable);
@@ -31,11 +33,10 @@ public class Deni extends Carte {
     }
 
     /**
-     * Méthode pour jouer le pouvoir de la carte "Deni".
-     * Le joueur appelant défausse une carte de sa main et copie le pouvoir de la carte défaussée.
+     * Méthode pour jouer le pouvoir de la carte Deni.
      *
-     * @param joueurAppelant Le joueur qui joue la carte.
-     * @param joueurReceveur Le joueur cible du pouvoir (non utilisé dans ce contexte).
+     * @param joueurAppelant Le joueur qui utilise la carte.
+     * @param joueurReceveur Le joueur sur lequel la carte est jouée.
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
@@ -51,13 +52,17 @@ public class Deni extends Carte {
      * Méthode privée pour défausser une carte de la main du joueur.
      *
      * @param joueur Le joueur qui défausse la carte.
+     * @return La carte défaussée.
      */
     private Carte defausserCarte(Joueur joueur) {
         Carte carteChoisi = null;
-        if(!joueur.getMain().isEmpty()){
-            if(!(joueur instanceof Ordinateur)){
+        // Vérifie si la main du joueur n'est pas vide
+        if (!joueur.getMain().isEmpty()) {
+            // Si le joueur n'est pas un ordinateur, permet au joueur de choisir la carte à défausser
+            if (!(joueur instanceof Ordinateur)) {
                 carteChoisi = this.renderer.choisirUneCarte(joueur.getMain());
             } else {
+                // Si le joueur est un ordinateur, choisit aléatoirement une carte à défausser
                 Random r = new Random();
                 carteChoisi = joueur.getMain().get(r.nextInt(joueur.getMain().size()));
             }
@@ -73,14 +78,14 @@ public class Deni extends Carte {
     /**
      * Méthode privée pour copier le pouvoir de la carte défaussée.
      *
-     * @param carteDefausser La carte à utiliser le pouvoir
+     * @param carteDefausser La carte dont le pouvoir doit être copié.
+     * @param joueurAppelant Le joueur qui utilise le pouvoir.
+     * @param joueurReceveur Le joueur sur lequel le pouvoir est appliqué.
      */
     private void copierPouvoirCarte(Carte carteDefausser, Joueur joueurAppelant, Joueur joueurReceveur) {
         // Logique pour copier le pouvoir de la carte défaussée (appliquer son pouvoir)
-        if(carteDefausser != null){
+        if (carteDefausser != null) {
             carteDefausser.jouerPouvoir(joueurAppelant, joueurReceveur);
         }
     }
 }
-
-

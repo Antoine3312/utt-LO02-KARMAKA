@@ -1,3 +1,8 @@
+/**
+ * La classe {@code Bassesse} représente une carte du jeu avec le pouvoir spécifique de défausser
+ * au hasard deux cartes de la main d'un adversaire.
+ * Elle hérite de la classe abstraite {@link Carte}.
+ */
 package model.carte;
 
 import application.control.Renderable;
@@ -9,15 +14,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Classe abstraite représentant une carte de type "Bassesse". Cette classe hérite de la classe abstraite "Carte".
- */
 public class Bassesse extends Carte {
 
     /**
-     * Constructeur de la carte "Bassesse".
+     * Constructeur de la classe Bassesse.
      *
-     * @param renderable L'objet renderable associé à la carte.
+     * @param renderable L'objet permettant d'afficher des messages dans l'interface utilisateur.
      */
     public Bassesse(Renderable renderable) {
         super(renderable);
@@ -28,10 +30,10 @@ public class Bassesse extends Carte {
     }
 
     /**
-     * Implémentation de la méthode jouerPouvoir() définie dans l'interface PouvoirCarte.
+     * Méthode pour jouer le pouvoir de la carte Bassesse.
      *
-     * @param joueurAppelant Le joueur qui utilise le pouvoir de la carte.
-     * @param joueurReceveur Le joueur ciblé par le pouvoir de la carte.
+     * @param joueurAppelant Le joueur qui utilise la carte.
+     * @param joueurReceveur Le joueur sur lequel la carte est jouée.
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
@@ -40,6 +42,12 @@ public class Bassesse extends Carte {
         this.defausserAuHasard(joueurReceveur, 2);
     }
 
+    /**
+     * Méthode privée pour défausser au hasard un certain nombre de cartes d'une main.
+     *
+     * @param joueur       Le joueur dont les cartes seront défaussées.
+     * @param nombreCartes Le nombre de cartes à défausser.
+     */
     private void defausserAuHasard(Joueur joueur, int nombreCartes) {
         List<Carte> cartesMain = joueur.getMain();
 
@@ -53,9 +61,10 @@ public class Bassesse extends Carte {
             EtatPartie.getInstance().getFosse().getCartes().addAll(cartesADefausser);
             cartesMain.removeAll(cartesADefausser);
 
-        }else{
+        } else {
+            // Affichage d'un message d'erreur si le rival n'a pas assez de cartes en main
             this.renderer.displayErrorMessage("Impossible : Le rival n'a pas assez de cartes en main");
         }
-
     }
 }
+

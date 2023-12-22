@@ -1,3 +1,9 @@
+/**
+ * La classe {@code CoupDOeil} représente une carte du jeu avec le pouvoir spécifique de regarder
+ * la main d'un adversaire.
+ * Elle hérite de la classe abstraite {@link Carte}.
+
+ */
 package model.carte;
 
 import application.control.Renderable;
@@ -9,16 +15,13 @@ import model.joueur.Ordinateur;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Classe abstraite représentant la carte "Coup d'Œil" dans le jeu.
- * Hérite de la classe abstraite "Carte".
- */
+
 public class CoupDOeil extends Carte {
 
     /**
-     * Constructeur de la carte "Coup d'Œil".
+     * Constructeur de la classe CoupDOeil.
      *
-     * @param renderable L'objet permettant le rendu visuel.
+     * @param renderable L'objet permettant d'afficher des messages dans l'interface utilisateur.
      */
     public CoupDOeil(Renderable renderable) {
         super(renderable);
@@ -29,18 +32,18 @@ public class CoupDOeil extends Carte {
     }
 
     /**
-     * Méthode pour jouer le pouvoir de la carte "Coup d'Œil".
-     * Regardez la Main d'un rival. Vous pouvez ensuite jouer une autre carte.
+     * Méthode pour jouer le pouvoir de la carte CoupDOeil.
      *
-     * @param joueurAppelant Le joueur qui joue la carte.
-     * @param joueurReceveur Le joueur cible du pouvoir.
+     * @param joueurAppelant Le joueur qui utilise la carte.
+     * @param joueurReceveur Le joueur sur lequel la carte est jouée.
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
         this.renderer.displayMessage(String.format("%s utilise la carte %s", joueurAppelant.getNom(), this.getNom(), joueurReceveur.getNom()));
-        if (!(joueurAppelant instanceof Ordinateur)){
+        // Vérifie si le joueur appelant n'est pas un ordinateur avant d'afficher la main du joueur receveur
+        if (!(joueurAppelant instanceof Ordinateur)) {
             this.renderer.afficherCartes(joueurReceveur.getMain());
         }
     }
-
 }
+

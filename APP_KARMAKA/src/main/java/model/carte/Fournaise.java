@@ -1,3 +1,8 @@
+/**
+ * La classe {@code Fournaise} représente une carte du jeu avec le pouvoir spécifique de défausser
+ * les deux premières cartes de la Vie Future d'un adversaire.
+ * Elle hérite de la classe abstraite {@link Carte}.
+ */
 package model.carte;
 
 import application.control.Renderable;
@@ -8,16 +13,13 @@ import model.joueur.Ordinateur;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Classe abstraite représentant une carte de type "Fournaise" dans le jeu.
- * Hérite de la classe abstraite "Carte".
- */
+
 public class Fournaise extends Carte {
 
     /**
-     * Constructeur de la carte "Fournaise".
+     * Constructeur de la classe Fournaise.
      *
-     * @param renderable L'objet permettant le rendu visuel.
+     * @param renderable L'objet permettant d'afficher des messages dans l'interface utilisateur.
      */
     public Fournaise(Renderable renderable) {
         super(renderable);
@@ -28,17 +30,18 @@ public class Fournaise extends Carte {
     }
 
     /**
-     * Méthode pour jouer le pouvoir de la carte "Fournaise".
-     * Défausse les 2 premières cartes de la Vie Future d'un rival.
+     * Méthode pour jouer le pouvoir de la carte Fournaise.
      *
-     * @param joueurAppelant Non utilisé dans ce contexte.
-     * @param joueurReceveur Le joueur dont la Vie Future est affectée.
+     * @param joueurAppelant Le joueur qui utilise la carte.
+     * @param joueurReceveur Le joueur sur lequel la carte est jouée.
      */
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
         this.renderer.displayMessage(String.format("%s utilise la carte %s sur %s", joueurAppelant.getNom(), this.getNom(), joueurReceveur.getNom()));
+        // Vérifie si le joueur cible a au moins deux cartes dans sa Vie Future
         if (joueurReceveur.getVieFutur().getCartes().size() >= 2) {
-            for (int i = 0; i<2; i++){
+            // Défausse les deux premières cartes de la Vie Future du joueur cible
+            for (int i = 0; i < 2; i++) {
                 Carte carteADefosser = joueurReceveur.getVieFutur().getCartes().pop();
                 EtatPartie.getInstance().getFosse().getCartes().add(carteADefosser);
             }
