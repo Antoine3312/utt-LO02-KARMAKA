@@ -30,6 +30,7 @@ public class Debutant implements StyleJeuStrategy {
     }
 
     private void reincarner(Joueur joueur){
+        this.renderer.displayMessage(String.format("%s n'a plus aucune carte dans sa main et dans sa pile, il va se réincarner ...", joueur.getNom()));
         NomCouleur couleurLaPlusRentable = null;
         if(!joueur.getOeuvre().getCartes().isEmpty()) {
             List<String> couleurs = new ArrayList<>(joueur.getOeuvre().getCouleursInStack());
