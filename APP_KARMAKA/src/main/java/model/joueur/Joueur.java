@@ -17,16 +17,16 @@ public class Joueur {
     private PileCartes pile;
     private PileCartes vieFutur;
     private List<Carte> main;
-
     private int nbAnneauxKarmique;
-
-
     private boolean hasWon = false;
-    private Echellon partie;
-    private Collection<Object> oeuvresExposee;
 
     public Joueur(String nom) {
         this.nom = nom;
+        this.oeuvre = new PileCartes();
+        this.pile = new PileCartes();
+        this.vieFutur = new PileCartes();
+        this.main = new ArrayList<>();
+        this.nbAnneauxKarmique = 0;
     }
 
     public Joueur(List<Carte> main, int jeton) {

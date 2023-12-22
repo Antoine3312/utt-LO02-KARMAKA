@@ -18,7 +18,7 @@ public class EtatPartie {
 
     public static EtatPartie getInstance(){
         if(instance == null){
-            return new EtatPartie();
+            instance = new EtatPartie();
         }
         return instance;
     }
@@ -54,5 +54,17 @@ public class EtatPartie {
 
     public int getNumTour() {
         return numTour;
+    }
+
+    @Override
+    public String toString() {
+        return "EtatPartie{" +
+                "echelle=" + echelle +
+                ", joueur1=" + joueur1 +
+                ", joueur2=" + joueur2 +
+                ", source=" + source +
+                ", fosse=" + fosse +
+                ", numTour=" + numTour +
+                '}';
     }
 }

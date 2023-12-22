@@ -211,11 +211,13 @@ public class KarmakaCommandController {
         return this.askMultipleChoiceQuestion("Voulez vous jouez une carte ou passer votre tour ?", Arrays.asList("Jouer", "Passer")) == 1;
     }
 
-    public Carte choisirUneCarte(List<Carte> cartes){ return null; }
+    public Carte choisirUneCarte(List<Carte> cartes){
+        return null;
+    }
 
 
     public void displayErrorMessage(String s){
-
+        this.displayInColor(s, NomCouleur.ROUGE);
     }
 
     public List<Carte> choisirDeuxCarte(List<Carte> cartes) {
@@ -223,5 +225,6 @@ public class KarmakaCommandController {
     }
 
     public void displayMessage(String message) {
+        this.display(message);
     }
 }

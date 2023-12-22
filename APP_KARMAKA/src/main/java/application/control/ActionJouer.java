@@ -8,6 +8,8 @@ import model.echelle.NomPalier;
 import model.joueur.Joueur;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ActionJouer {
 
@@ -31,17 +33,24 @@ public class ActionJouer {
         }
     }
 
-    public void jouer(Joueur joueur, boolean jouerUneCarte, Carte carteJouer, int utilisation) {
-        if(!joueur.getPile().getCartes().isEmpty()){
-            joueur.getMain().add(this.partie.getSource().getCartes().pop());
+    public void jouer(Joueur joueurAppelant, boolean jouerUneCarte, Carte carteJouer, int utilisation) {
+        if(!joueurAppelant.getPile().getCartes().isEmpty()){
+            joueurAppelant.getMain().add(this.partie.getSource().getCartes().pop());
         }
         if(jouerUneCarte){
-            switch (utilisation){
-//                case ActionJouer.UTILISATIONPOUVOIR -> carteJouer.jouerPouvoir();
-//                case ActionJouer.UTILISATIONFUTUR -> carteJouer.jouerFutur();
-//                case ActionJouer.UTILISATIONPOINT -> carteJouer.jouerPoint();
+            List<Joueur> joueursPartie = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());
+            Joueur jouerReceveur = null;
+            for(Joueur j : joueursPartie){
+                if(j != joueurAppelant) {
+                    jouerReceveur = j;
+                }
             }
-            joueur.getMain().remove(carteJouer);
+            switch (utilisation){
+                case ActionJouer.UTILISATIONPOUVOIR -> carteJouer.jouerPouvoir(joueurAppelant, jouerReceveur);
+                case ActionJouer.UTILISATIONFUTUR -> carteJouer.jouerFutur(joueurAppelant);
+                case ActionJouer.UTILISATIONPOINT -> carteJouer.jouerPoint(joueurAppelant);
+            }
+            joueurAppelant.getMain().remove(carteJouer);
         }
     }
 

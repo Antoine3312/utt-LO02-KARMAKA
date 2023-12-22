@@ -22,7 +22,7 @@ public class DeroulementPartie {
     private static final int UTILISATIONFUTUR = 2;
     private static final int UTILISATIONPOINT = 3;
 
-    private ActionJouer actionJouer;
+    private final ActionJouer actionJouer = new ActionJouer();
 
     public DeroulementPartie(Renderable renderer) {
         this.renderer = renderer;
@@ -33,6 +33,7 @@ public class DeroulementPartie {
         this.initGame(joueurs);
         this.initHands();
         this.initPile();
+        this.jouerPartie();
     }
 
     private void initGame(List<Joueur> joueurs) {
@@ -43,18 +44,20 @@ public class DeroulementPartie {
         PileCartes fosse = new PileCartes();
         int numTour = 0;
         this.partie.init(echelle,joueurs.get(0),joueurs.get(1),source,fosse,numTour);
-
-        this.jouerPartie();
     }
     private void jouerPartie(){
-        while (this.partie.getJoueur1().hasWon() || this.partie.getJoueur2().hasWon()){
-//            this.jouerTour(this.partie.getJoueur1());
+        while (!this.partie.getJoueur1().hasWon() || !this.partie.getJoueur2().hasWon()){
+            this.jouerTour(this.partie.getJoueur1());
             if(this.partie.getJoueur1().hasWon()){
                 break;
             }
-//            this.jouerTour(this.partie.getJoueur2());
+            this.jouerTour(this.partie.getJoueur2());
         }
-//        this.finDePartie();
+        this.finDePartie();
+    }
+
+    private void finDePartie() {
+        System.out.println("fin");
     }
 
     private void jouerTour(Joueur joueur) {
@@ -64,7 +67,7 @@ public class DeroulementPartie {
             if (joueur.getMain().isEmpty() && joueur.getPile().getCartes().isEmpty()){
                 this.reincarner(joueur);
             } else {
-//                this.jouer(joueur);
+                this.jouer(joueur);
             }
         }
 
