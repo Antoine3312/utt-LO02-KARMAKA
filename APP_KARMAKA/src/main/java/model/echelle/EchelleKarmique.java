@@ -43,20 +43,19 @@ public class EchelleKarmique {
             case BOUSIER :
                 this.bousier.getJoueurs().remove(joueur);
                 this.serpent.getJoueurs().add(joueur);
-                current = NomPalier.BOUSIER;
+                current = NomPalier.SERPENT;
                 break;
             case SERPENT:
                 this.serpent.getJoueurs().remove(joueur);
                 this.loup.getJoueurs().add(joueur);
-                current = NomPalier.SERPENT;
+                current = NomPalier.LOUP;
                 break;
             case LOUP:
                 this.loup.getJoueurs().remove(joueur);
                 this.singe.getJoueurs().add(joueur);
-                current = NomPalier.LOUP;
+                current = NomPalier.SINGE;
                 break;
             case SINGE:
-                this.singe.getJoueurs().remove(joueur);
                 current = NomPalier.SINGE;
                 break;
         }

@@ -5,6 +5,7 @@ import model.EtatPartie;
 import model.joueur.Joueur;
 import model.joueur.Ordinateur;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -40,7 +41,7 @@ public class Semis extends Carte {
             for (int i =0; i<2; i++){
                 joueurAppelant.getMain().add(EtatPartie.getInstance().getSource().getCartes().pop());
             }
-            List<Carte> cartesChoisies = null;
+            List<Carte> cartesChoisies = new ArrayList<>();
             if(!(joueurAppelant instanceof Ordinateur)){
                 cartesChoisies = this.renderer.choisirDeuxCarte(joueurAppelant.getMain());
                 joueurAppelant.getMain().removeAll(cartesChoisies);

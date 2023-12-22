@@ -39,7 +39,8 @@ public class Incarnation extends Carte {
             Carte carteChoisie = null;
             if (joueurAppelant instanceof Ordinateur){
                 Random r = new Random();
-                carteChoisie = joueurAppelant.getOeuvre().getCartes().get(r.nextInt(
+                List<Carte> cartesAChosisir = joueurAppelant.getOeuvre().getCartes().stream().filter(carte -> carte.getNom()!=this.getNom()).toList();
+                carteChoisie = cartesAChosisir.get(r.nextInt(
                         joueurAppelant.getOeuvre().getCartes().size()
                 ));
             } else {

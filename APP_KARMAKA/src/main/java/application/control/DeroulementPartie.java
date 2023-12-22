@@ -14,11 +14,6 @@ public class DeroulementPartie {
 
     private Renderable renderer;
     private EtatPartie partie;
-
-    private static final int UTILISATIONPOUVOIR = 1;
-    private static final int UTILISATIONFUTUR = 2;
-    private static final int UTILISATIONPOINT = 3;
-
     private ActionJouer actionJouer;
 
     public DeroulementPartie(Renderable renderer) {
@@ -44,7 +39,9 @@ public class DeroulementPartie {
         this.partie.init(echelle,joueurs.get(0),joueurs.get(1),source,fosse,numTour);
     }
     private void jouerPartie(){
-        while (!this.partie.getJoueur1().hasWon() || !this.partie.getJoueur2().hasWon()){
+        while (!this.partie.getJoueur1().hasWon() && !this.partie.getJoueur2().hasWon()){
+            System.out.println("Jouer 1 a gagner : "+EtatPartie.getInstance().getJoueur1().hasWon());
+            System.out.println("Jouer 2 a gagner : "+EtatPartie.getInstance().getJoueur2().hasWon());
             this.renderer.displayTourInfo(this.partie);
             this.jouerTour(this.partie.getJoueur1());
             if(this.partie.getJoueur1().hasWon()){
@@ -57,7 +54,9 @@ public class DeroulementPartie {
     }
 
     private void finDePartie() {
-        System.out.println("fin");
+        System.out.println("fin de partie");
+        System.out.println(this.partie.getJoueur1()+" a gagné:"+this.partie.getJoueur1().hasWon());
+        System.out.println(this.partie.getJoueur2()+" a gagné:"+this.partie.getJoueur2().hasWon());
     }
 
     private void jouerTour(Joueur joueur) {

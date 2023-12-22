@@ -9,8 +9,8 @@ import model.joueur.*;
 import java.util.*;
 
 public class KarmakaCommandController {
-    private static final int DELAYDETWEENCHARPROMPTinms = 30;
-//    private static final int DELAYDETWEENCHARPROMPTinms = 0;
+        private static final int DELAYDETWEENCHARPROMPTinms = 0;
+//    private static final int DELAYDETWEENCHARPROMPTinms = 30;
 
     public void displayGameStart() {
         System.out.println("========================= KARMAKA 2023 =========================");
@@ -211,16 +211,24 @@ public class KarmakaCommandController {
     }
 
     public Carte choisirUneCarte(List<Carte> cartes){
-        return null;
-    }
-
-
-    public void displayErrorMessage(String s){
-        this.displayInColor(s, NomCouleur.ROUGE);
+        List<String> nomDesCartes = cartes.stream().map(Carte::getNom).toList();
+        int input = this.askMultipleChoiceQuestion("Choisissez une carte :", nomDesCartes);
+        return cartes.get(input-1);
     }
 
     public List<Carte> choisirDeuxCarte(List<Carte> cartes) {
-        return null;
+        List<Carte> carteParams = new ArrayList<>(cartes);
+        List<Carte> cartesChoisies = new ArrayList<>();
+        for(int i=0; i<2; i++){
+            Carte carteChoisi = this.choisirUneCarte(carteParams);
+            carteParams.remove(carteChoisi);
+            cartesChoisies.add(carteChoisi);
+        }
+        return cartesChoisies;
+    }
+
+    public void displayErrorMessage(String s){
+        this.displayInColor(s, NomCouleur.ROUGE);
     }
 
     public void displayMessage(String message) {
