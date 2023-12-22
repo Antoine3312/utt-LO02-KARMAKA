@@ -36,15 +36,17 @@ public class Intermediaire implements StyleJeuStrategy{
 
     private void reincarner(Joueur joueur) {
         NomCouleur couleurLaPlusRentable = null;
-        if(hasReincarnerUneFois){
-            List<String> couleurs = new ArrayList<>(joueur.getOeuvre().getCouleursInStack());
-            couleurLaPlusRentable = NomCouleur.valueOf(couleurs.get(r.nextInt(couleurs.size())));
-        } else {
-            couleurLaPlusRentable = this.couleurFutur;
+        if(!joueur.getOeuvre().getCartes().isEmpty()) {
+            if(hasReincarnerUneFois){
+                List<String> couleurs = new ArrayList<>(joueur.getOeuvre().getCouleursInStack());
+                couleurLaPlusRentable = NomCouleur.valueOf(couleurs.get(r.nextInt(couleurs.size())));
+            } else {
+                couleurLaPlusRentable = this.couleurFutur;
+            }
         }
         boolean utiliserAnneaux = this.r.nextInt(2) == 1;
         if(utiliserAnneaux){
-            this.actionJouer.reincarner(joueur, couleurLaPlusRentable, true, (this.r.nextInt(joueur.getNbAnneauxKarmique())) + 1);
+            this.actionJouer.reincarner(joueur, couleurLaPlusRentable, true, this.r.nextInt(joueur.getNbAnneauxKarmique()+ 1));
         } else {
             this.actionJouer.reincarner(joueur, couleurLaPlusRentable, false, 0);
         }

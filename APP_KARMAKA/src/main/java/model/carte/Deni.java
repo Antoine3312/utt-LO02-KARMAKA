@@ -63,6 +63,8 @@ public class Deni extends Carte {
             // Défausser la carte choisie par le joueur
             EtatPartie.getInstance().getFosse().getCartes().add(carteChoisi);
             joueur.getMain().remove(carteChoisi);
+        } else {
+            this.renderer.displayErrorMessage("Impossible : Votre main est vide.");
         }
         return carteChoisi;
     }

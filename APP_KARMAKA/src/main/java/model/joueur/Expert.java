@@ -52,11 +52,14 @@ public class Expert implements StyleJeuStrategy{
     }
 
     private void reincarner(Joueur joueur) {
-        List<String> couleurs = new ArrayList<>(joueur.getOeuvre().getCouleursInStack());
-        NomCouleur couleurLaPlusRentable = NomCouleur.valueOf(couleurs.get(r.nextInt(couleurs.size())));
+        NomCouleur couleurLaPlusRentable = null;
+        if(!joueur.getOeuvre().getCartes().isEmpty()) {
+            List<String> couleurs = new ArrayList<>(joueur.getOeuvre().getCouleursInStack());
+            couleurLaPlusRentable = NomCouleur.valueOf(couleurs.get(r.nextInt(couleurs.size())));
+        }
         boolean utiliserAnneaux = this.r.nextInt(2) == 1;
         if(utiliserAnneaux){
-            this.actionJouer.reincarner(joueur, couleurLaPlusRentable, true, (this.r.nextInt(joueur.getNbAnneauxKarmique())) + 1);
+            this.actionJouer.reincarner(joueur, couleurLaPlusRentable, true, this.r.nextInt(joueur.getNbAnneauxKarmique()+ 1) );
         } else {
             this.actionJouer.reincarner(joueur, couleurLaPlusRentable, false, 0);
         }

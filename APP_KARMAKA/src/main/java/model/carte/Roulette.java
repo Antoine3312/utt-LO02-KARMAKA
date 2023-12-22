@@ -52,7 +52,7 @@ public class Roulette extends Carte {
                 joueurAppelant.getMain().add(EtatPartie.getInstance().getSource().getCartes().pop());
             }
         } else {
-            this.renderer.displayErrorMessage("Impossible : Le joueur appellant a moins de 2 cartes en main, et il y a moins de 3 cartes dans la pioche.");
+            this.renderer.displayErrorMessage("Impossible : Le joueur appellant a moins de 2 cartes en main, ou il y a moins de 3 cartes dans la pioche.");
         }
     }
 }

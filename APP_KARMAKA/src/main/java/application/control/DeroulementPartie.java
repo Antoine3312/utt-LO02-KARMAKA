@@ -63,7 +63,7 @@ public class DeroulementPartie {
     private void jouerTour(Joueur joueur) {
         this.renderer.afficherInfoJoueurDebutTour(joueur);
         if(joueur instanceof Ordinateur){
-//            ((Ordinateur) joueur).executeTour();
+            ((Ordinateur) joueur).executeTour();
         } else {
             if (joueur.getMain().isEmpty() && joueur.getPile().getCartes().isEmpty()){
                 this.reincarner(joueur);
@@ -78,7 +78,7 @@ public class DeroulementPartie {
         this.renderer.afficherInfoReincarnation(joueur);
         NomCouleur couleurLaPlusRentable = null;
         if(!joueur.getOeuvre().getCartes().isEmpty()) {
-                couleurLaPlusRentable = this.renderer.choisirCouleur(joueur.getOeuvre());
+            couleurLaPlusRentable = this.renderer.choisirCouleur(joueur.getOeuvre());
         }
         if(joueur.getNbAnneauxKarmique()>0 && this.renderer.utiliserJetonKarmique(joueur)) {
             this.actionJouer.reincarner(joueur, couleurLaPlusRentable, true, this.renderer.combienDeJeton(joueur));
@@ -89,6 +89,7 @@ public class DeroulementPartie {
 
     private void jouer(Joueur joueur) {
         if(!joueur.getPile().getCartes().isEmpty()){
+            this.renderer.displayMessage(String.format("%s pioche une carte.", joueur.getNom()));
             joueur.getMain().add(joueur.getPile().getCartes().pop());
         }
         if(this.renderer.jouerUneCarteOuNon()){

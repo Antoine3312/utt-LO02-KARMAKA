@@ -30,7 +30,6 @@ public class KarmakaCommandController {
     }
 
     public NomCouleur choisirCouleur(PileCartes cartes) {
-        this.afficherCartes(cartes.getCartes());
         List<String> couleursDesCartes = new ArrayList<>(cartes.getCouleursInStack());
 
         int choixUtilisateur = this.askMultipleChoiceQuestion("Choisissez la couleur que vous estimez la plus rentable. ", couleursDesCartes);
@@ -229,7 +228,7 @@ public class KarmakaCommandController {
     }
 
     public void afficherInfoJoueurDebutTour(Joueur joueur) {
-        this.display(String.format("Au tour de %s de jouer. Voici un résumé de son avancé :", joueur.getNom()));
+        this.display(String.format("\nAu tour de %s de jouer. Voici un résumé de son avancé :", joueur.getNom()));
         this.display(String.format("    Echellon : %s", EtatPartie.getInstance().getEchelle().getEchellonOf(joueur).getNom()));
         this.display(String.format("    Nombre de jeton karmique : %s", joueur.getNbAnneauxKarmique()));
         this.display(String.format("    Nombre de Cartes dans la  Pile : %s", joueur.getPile().getCartes().size()));
@@ -238,11 +237,13 @@ public class KarmakaCommandController {
 
     public void afficherInfoReicarnation(Joueur joueur) {
         this.display(String.format("%s n'a plus aucune carte dans sa main et dans sa pile, il va se réincarner ...", joueur.getNom()));
-        this.display("Voici les oeuvres qu'il a joué durant cette vie :");
-        this.afficherCartes(joueur.getVieFutur().getCartes());
+        if(!joueur.getOeuvre().getCartes().isEmpty()){
+            this.display("Voici les oeuvres qu'il a joué durant cette vie :");
+            this.afficherCartes(joueur.getOeuvre().getCartes());
+        }
     }
 
     public void diplayTourInfo(EtatPartie partie) {
-        this.displayMessage(String.format("================= Tour %s =================", partie.getNumTour()));
+        this.displayMessage(String.format("\n================= Tour %s =================", partie.getNumTour()));
     }
 }
