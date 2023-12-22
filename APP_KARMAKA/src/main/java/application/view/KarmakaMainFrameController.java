@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controleur de vue de l'interface en mode graphique
+ * (NON IMPLÉMENTÉ)
+ */
 public class KarmakaMainFrameController implements Initializable {
 
 

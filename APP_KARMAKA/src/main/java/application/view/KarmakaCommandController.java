@@ -10,11 +10,15 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * Controleur de vue de l'affichage de l'interface en ligne de commande à l'utilisateur.
+ * Gère toute les interactions avec ce dernier, pour vérifier que ces saisies sont correctees, etc.
+ */
 public class KarmakaCommandController implements Serializable {
 
     private static final long serialVersionUID = 2711998155099132322L;
-        private static final int DELAYDETWEENCHARPROMPTinms = 0;
-//    private static final int DELAYDETWEENCHARPROMPTinms = 30;
+//        private static final int DELAYDETWEENCHARPROMPTinms = 0;
+    private static final int DELAYDETWEENCHARPROMPTinms = 10;
 
     public void displayGameStart() {
         System.out.println("========================= KARMAKA 2023 =========================");
@@ -178,9 +182,9 @@ public class KarmakaCommandController implements Serializable {
     }
 
     public void showPlayer(List<Joueur> joueurs) {
-        System.out.println("Voici les deux joueurs de la partie :");
-        System.out.println(String.format("Joueur 1 : %s", joueurs.get(0)));
-        System.out.println(String.format("Joueur 2 : %s", joueurs.get(1)));
+        this.display("Voici les deux joueurs de la partie :");
+        this.display(String.format("Joueur 1 : %s", joueurs.get(0)));
+        this.display(String.format("Joueur 2 : %s", joueurs.get(1)));
     }
 
     public boolean utiliserJetonKarmique(Joueur joueur) {

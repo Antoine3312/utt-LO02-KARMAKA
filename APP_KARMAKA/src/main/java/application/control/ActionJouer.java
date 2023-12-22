@@ -14,6 +14,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
+/**
+ * La classe ActionJouer représente les actions de jeu effectuées par les joueurs dans le cadre d'une partie.
+ * Ces actions incluent la réincarnation d'un joueur, le jeu de cartes avec différentes utilisations (pouvoir, futur, points).
+ * Les méthodes de cette classe interagissent avec les différents éléments du modèle de jeu, tels que les cartes, les joueurs,
+ * l'échelle spirituelle, etc.
+ *
+ */
 public class ActionJouer implements Serializable {
 
     private static final long serialVersionUID = 2711998155099132322L;
@@ -28,6 +35,14 @@ public class ActionJouer implements Serializable {
         this.renderer = renderer;
     }
 
+    /**
+     * Réincarne un joueur en fonction de la couleur la plus rentable et de certaines conditions.
+     *
+     * @param joueur             Le joueur à réincarner.
+     * @param couleurLaPlusRentable La couleur la plus rentable pour la réincarnation.
+     * @param utiliserSesAnneaux Indique si le joueur doit utiliser ses anneaux karmiques.
+     * @param nbAnneauxJouer     Le nombre d'anneaux karmiques à jouer.
+     */
     public void reincarner(Joueur joueur, NomCouleur couleurLaPlusRentable, boolean utiliserSesAnneaux, int nbAnneauxJouer) {
         int score = this.effectuerReincarnationDe(joueur, couleurLaPlusRentable);
         if (!(couleurLaPlusRentable == null)){
@@ -50,7 +65,13 @@ public class ActionJouer implements Serializable {
     }
 
 
-
+    /**
+     * Effectue une action de jeu en utilisant une carte spécifiée.
+     *
+     * @param joueurAppelant Le joueur qui effectue l'action.
+     * @param carteJouer      La carte à jouer.
+     * @param utilisation     Le type d'utilisation de la carte (pouvoir, futur, points).
+     */
     public void jouer(Joueur joueurAppelant, Carte carteJouer, int utilisation) {
         List<Joueur> joueursPartie = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());
         Joueur jouerReceveur = null;
@@ -68,7 +89,14 @@ public class ActionJouer implements Serializable {
         joueurAppelant.getMain().remove(carteJouer);
     }
 
-
+    /**
+     * Effectue la réincarnation d'un joueur en fonction de la couleur spécifiée.
+     * Cette méthode est utilisée en interne par la méthode reincarner.
+     *
+     * @param joueur  Le joueur à réincarner.
+     * @param couleur La couleur pour laquelle calculer le score de réincarnation.
+     * @return Le score de réincarnation pour la couleur spécifiée.
+     */
     private int effectuerReincarnationDe(Joueur joueur, NomCouleur couleur) {
         // Calcul du score de la couleur la plus rentable
         int score = 0;

@@ -11,6 +11,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * La classe DeroulementPartie gère le déroulement d'une partie du jeu, coordonnant les différentes étapes
+ * telles que l'initialisation du jeu, le déroulement des tours, la réincarnation des joueurs, le jeu de cartes, etc.
+ * Elle interagit avec l'interface utilisateur via un objet Renderable et utilise la classe ActionJouer pour effectuer
+ * les actions de jeu.
+ *
+ */
 public class DeroulementPartie {
 
     private final DeroulementJeu dj;
@@ -18,12 +25,23 @@ public class DeroulementPartie {
     private EtatPartie partie = EtatPartie.getInstance();;
     private ActionJouer actionJouer;
 
+    /**
+     * Constructeur de la classe DeroulementPartie.
+     *
+     * @param renderer L'objet Renderable utilisé pour afficher des messages dans l'interface utilisateur.
+     * @param dj       L'objet DeroulementJeu auquel cette instance est associée.
+     */
     public DeroulementPartie(Renderable renderer, DeroulementJeu dj) {
         this.renderer = renderer;
         this.actionJouer = new ActionJouer(this.renderer);
         this.dj = dj;
     }
 
+    /**
+     * Démarre une nouvelle partie du jeu avec les joueurs spécifiés.
+     *
+     * @param joueurs La liste des joueurs participant à la nouvelle partie.
+     */
     public void startNewGame(List<Joueur> joueurs) {
         this.initGame(joueurs);
         this.initHands();
@@ -31,11 +49,23 @@ public class DeroulementPartie {
         this.jouerPartie();
     }
 
+
+    /**
+     * Démarre une nouvelle partie du jeu à partir d'une sauvegarde existante.
+     * Utilisé lors du chargement d'une partie existante.
+     *
+     * @param partie L'état de partie chargé à partir de la sauvegarde.
+     */
     public void startNewGame(EtatPartie partie){
         this.partie.setInstance(partie);
         this.jouerPartie();
     }
 
+    /**
+     * Initialise les différent élèments d'une partie (Echelle karmique, pile, source, fosse, etc)
+     *
+     * @param joueurs La liste des joueurs participant à la nouvelle partie.
+     */
     private void initGame(List<Joueur> joueurs) {
         EchelleKarmique echelle = new EchelleKarmique();
         echelle.getBousier().addPlayers(joueurs);
@@ -45,6 +75,11 @@ public class DeroulementPartie {
         int numTour = 1;
         this.partie.init(echelle,joueurs.get(0),joueurs.get(1),source,fosse,numTour);
     }
+
+    /**
+     * Gère le déroulement de la partie en bouclant sur les tours des joueurs jusqu'à ce qu'un joueur remporte la partie
+     * ou que la partie soit mise en pause.
+     */
     private void jouerPartie(){
         boolean partieEnPause = false;
         while (!this.partie.getJoueur1().hasWon() && !this.partie.getJoueur2().hasWon()){
@@ -71,16 +106,27 @@ public class DeroulementPartie {
         }
     }
 
+    /**
+     * Affiche les messages de fin de partie et démarre une nouvelle partie.
+     */
     private void finDePartie() {
         this.renderer.afficherFinDePartie();
         this.dj.beginGame();
     }
 
+    /**
+     * Affiche le message de partie en pause et démarre une nouvelle partie.
+     */
     private void partieEnPause(){
         this.renderer.afficherPartieEnPause();
         this.dj.beginGame();
     }
 
+    /**
+     * Gère le tour d'un joueur, en exécutant les actions appropriées en fonction du type de joueur.
+     *
+     * @param joueur Le joueur dont c'est le tour.
+     */
     private void jouerTour(Joueur joueur) {
         this.renderer.afficherInfoJoueurDebutTour(joueur);
         if(joueur instanceof Ordinateur){
@@ -95,6 +141,11 @@ public class DeroulementPartie {
 
     }
 
+    /**
+     * Réincarne un joueur en affichant les informations nécessaires à l'interface utilisateur et en effectuant la réincarnation.
+     *
+     * @param joueur Le joueur à réincarner.
+     */
     private void reincarner(Joueur joueur) {
         this.renderer.afficherInfoReincarnation(joueur);
         NomCouleur couleurLaPlusRentable = null;
@@ -108,6 +159,11 @@ public class DeroulementPartie {
         }
     }
 
+    /**
+     * Gère le jeu d'un joueur en piochant une carte et en effectuant une action en fonction des choix de l'interface utilisateur.
+     *
+     * @param joueur Le joueur dont c'est le tour.
+     */
     private void jouer(Joueur joueur) {
         if(!joueur.getPile().getCartes().isEmpty()){
             this.renderer.displayMessage(String.format("%s pioche une carte.", joueur.getNom()));
@@ -121,6 +177,9 @@ public class DeroulementPartie {
 
 
 
+    /**
+     * Initialise les mains des joueurs en distribuant quatre cartes à chacun depuis la pile source.
+     */
     private void initHands() {
         List<Joueur> joueurs = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());
         for (Joueur j : joueurs){
@@ -130,6 +189,9 @@ public class DeroulementPartie {
         }
     }
 
+    /**
+     * Initialise la pile de chaque joueur en y plaçant deux cartes depuis la pile source.
+     */
     private void initPile() {
         List<Joueur> joueurs = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());
         for (Joueur j : joueurs){
@@ -139,6 +201,11 @@ public class DeroulementPartie {
         }
     }
 
+    /**
+     * Initialise la source.
+     *
+     * @return la source contenant toutes les cartes.
+     */
     private List<Carte> loadSource(){
         List<Carte> jeu = Arrays.asList(
                 // Cartes Bleues

@@ -11,6 +11,12 @@ import model.joueur.StyleJeuStrategy;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Controleur gérant le dialogue entre les classes du Model et la vue en mode commande (KarmakaCommandControleur)
+ *
+ * Contient uniquement des méthodes gérent les erreurs potentielle lié à l'interface (très peu car interface en ligne de commande)
+ * (Aurait été plus remplie si nous avions créée une interface graphique, aurait récupérer toutes les erreurs toutes lié à une BD, au droit d'accès, ...)
+ */
 public class KarmakaCommand implements Renderable, Serializable {
     private static final long serialVersionUID = 2711998155099132322L;
 
