@@ -23,7 +23,7 @@ public abstract class CoupDOeil extends Carte {
     public CoupDOeil(Renderable renderable) {
         super(renderable);
         this.point = 1; // Définition du nombre de points attribués par cette carte
-        this.couleur = NomCouleur.ROUGE; // Définition de la couleur de la carte
+        this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
     }
 
     /**

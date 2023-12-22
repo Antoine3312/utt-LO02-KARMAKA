@@ -19,7 +19,7 @@ public abstract class Voyage extends Carte {
      */
     public Voyage(Renderable renderable) {
         super(renderable);
-        this.point = 1;
+        this.point = 3;
         this.couleur = NomCouleur.VERTE; // Définition de la couleur de la carte
     }
 

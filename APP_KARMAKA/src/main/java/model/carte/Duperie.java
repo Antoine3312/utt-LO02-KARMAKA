@@ -20,7 +20,7 @@ public abstract class Duperie extends Carte {
      */
     public Duperie(Renderable renderable) {
         super(renderable);
-        this.point = 1; // Définition du nombre de points attribués par cette carte
+        this.point = 3; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
     }
 

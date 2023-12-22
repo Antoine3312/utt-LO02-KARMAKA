@@ -20,7 +20,7 @@ public abstract class Jubile extends Carte {
      */
     public Jubile(Renderable renderable) {
         super(renderable);
-        this.point = 1; // Définition du nombre de points attribués par cette carte
+        this.point = 3; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.VERTE; // Définition de la couleur de la carte
     }
 

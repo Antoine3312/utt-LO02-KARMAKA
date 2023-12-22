@@ -20,7 +20,7 @@ public abstract class Destinee extends Carte {
      */
     public Destinee(Renderable renderable) {
         super(renderable);
-        this.point = 1; // Définition du nombre de points attribués par cette carte
+        this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
     }
 
