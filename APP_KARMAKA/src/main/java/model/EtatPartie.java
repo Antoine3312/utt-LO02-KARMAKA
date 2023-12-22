@@ -4,6 +4,9 @@ import model.carte.PileCartes;
 import model.echelle.EchelleKarmique;
 import model.joueur.Joueur;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class EtatPartie {
     private EchelleKarmique echelle;
     private Joueur joueur1;
@@ -30,6 +33,15 @@ public class EtatPartie {
         this.source = source;
         this.fosse = fosse;
         this.numTour = numTour;
+    }
+
+    public Joueur getJoueur(Joueur _j){
+        List<Joueur> joueurs = Arrays.asList(joueur1, joueur2);
+        for (Joueur j : joueurs){
+            if(_j == j)
+                return j;
+        }
+        return null;
     }
 
     public Joueur getJoueur1() {

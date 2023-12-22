@@ -11,6 +11,7 @@ import model.joueur.Joueur;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 public class ActionJouer {
 
@@ -38,10 +39,15 @@ public class ActionJouer {
                     joueur.setHasWon(true);
                 };
             } else {
-                joueur.setNbAnneauxKarmique();
+                joueur.setNbAnneauxKarmique(joueur.getNbAnneauxKarmique() + 1);
+                this.renderer.displayErrorMessage(String.format("%s n'a pas assez de point pour monter de catégorie (%s sur %s), il recoit alors 1 anneaux Karmique en compensation", joueur.getNom(), score, EtatPartie.getInstance().getEchelle().getEchellonOf(joueur).getPtsNecessairePourMonter()));
             }
+        } else {
+            this.renderer.displayErrorMessage(String.format("%s n'a joué aucune carte pour leurs points. Il reste donc sur le même Echellon ...", joueur.getNom()));
         }
     }
+
+
 
     public void jouer(Joueur joueurAppelant, boolean jouerUneCarte, Carte carteJouer, int utilisation) {
         if(!joueurAppelant.getPile().getCartes().isEmpty()){
@@ -55,6 +61,7 @@ public class ActionJouer {
                     jouerReceveur = j;
                 }
             }
+            System.out.println();
             switch (utilisation){
                 case ActionJouer.UTILISATIONPOUVOIR -> carteJouer.jouerPouvoir(joueurAppelant, jouerReceveur);
                 case ActionJouer.UTILISATIONFUTUR -> carteJouer.jouerFutur(joueurAppelant);
@@ -62,24 +69,6 @@ public class ActionJouer {
             }
             joueurAppelant.getMain().remove(carteJouer);
         }
-    }
-
-    public void creerNouvellePileEtMain(Joueur joueur){
-        PileCartes nouvellePile = new PileCartes();
-        List<Carte> nouvelleMain = joueur.getVieFutur().getCartes();
-        if(nouvelleMain.size()<6){
-            for(int i=0; i<6 - nouvelleMain.size(); i++){
-                nouvellePile.getCartes().push(this.partie.getSource().getCartes().pop());
-            }
-        }
-        List<Joueur> joueurs = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());
-        for(Joueur j : joueurs){
-            if (j == joueur){
-                j.setPile(nouvellePile);
-                j.setMain(nouvelleMain);
-            }
-        }
-
     }
 
 
@@ -93,6 +82,7 @@ public class ActionJouer {
         }
         // Défosser toutes les oeuvres
         partie.getFosse().getCartes().addAll(joueur.getOeuvre().getCartes());
+        joueur.getOeuvre().viderCartes();
 
         // Composition de la nouvelle main
         joueur.setMain( new ArrayList<Carte>(joueur.getVieFutur().getCartes()));

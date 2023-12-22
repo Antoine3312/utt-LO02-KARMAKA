@@ -19,10 +19,11 @@ public class DeroulementPartie {
     private static final int UTILISATIONFUTUR = 2;
     private static final int UTILISATIONPOINT = 3;
 
-    private final ActionJouer actionJouer = new ActionJouer(this.renderer);
+    private ActionJouer actionJouer;
 
     public DeroulementPartie(Renderable renderer) {
         this.renderer = renderer;
+        this.actionJouer = new ActionJouer(this.renderer);
     }
 
     public void startNewGame(List<Joueur> joueurs) {
@@ -62,7 +63,7 @@ public class DeroulementPartie {
     private void jouerTour(Joueur joueur) {
         this.renderer.afficherInfoJoueurDebutTour(joueur);
         if(joueur instanceof Ordinateur){
-            ((Ordinateur) joueur).executeTour();
+//            ((Ordinateur) joueur).executeTour();
         } else {
             if (joueur.getMain().isEmpty() && joueur.getPile().getCartes().isEmpty()){
                 this.reincarner(joueur);
@@ -75,17 +76,15 @@ public class DeroulementPartie {
 
     private void reincarner(Joueur joueur) {
         this.renderer.afficherInfoReincarnation(joueur);
-        if(!joueur.getOeuvre().getCartes().isEmpty()){
-            NomCouleur couleurLaPlusRentable = this.renderer.choisirCouleur(joueur.getOeuvre());
-            if(this.renderer.utiliserJetonKarmique(joueur)) {
-                this.actionJouer.reincarner(joueur, couleurLaPlusRentable, true, this.renderer.combienDeJeton(joueur));
-            } else {
-                this.actionJouer.reincarner(joueur, couleurLaPlusRentable, false, 0);
-            }
-        } else {
-            this.renderer.displayErrorMessage(String.format("%s n'a joué aucune carte pour leurs point. Il reste donc sur le même Echellon ...", joueur.getNom()));
+        NomCouleur couleurLaPlusRentable = null;
+        if(!joueur.getOeuvre().getCartes().isEmpty()) {
+                couleurLaPlusRentable = this.renderer.choisirCouleur(joueur.getOeuvre());
         }
-        this.actionJouer.creerNouvellePileEtMain(joueur);
+        if(joueur.getNbAnneauxKarmique()>0 && this.renderer.utiliserJetonKarmique(joueur)) {
+            this.actionJouer.reincarner(joueur, couleurLaPlusRentable, true, this.renderer.combienDeJeton(joueur));
+        } else {
+            this.actionJouer.reincarner(joueur, couleurLaPlusRentable, false, 0);
+        }
     }
 
     private void jouer(Joueur joueur) {

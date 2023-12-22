@@ -238,7 +238,7 @@ public class KarmakaCommandController {
 
     public void afficherInfoReicarnation(Joueur joueur) {
         this.display(String.format("%s n'a plus aucune carte dans sa main et dans sa pile, il va se réincarner ...", joueur.getNom()));
-        this.display("Voici les cartes qu'il a dans sa vie futur :");
+        this.display("Voici les oeuvres qu'il a joué durant cette vie :");
         this.afficherCartes(joueur.getVieFutur().getCartes());
     }
 
