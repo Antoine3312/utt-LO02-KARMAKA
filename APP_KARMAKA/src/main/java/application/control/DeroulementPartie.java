@@ -22,6 +22,8 @@ public class DeroulementPartie {
     private static final int UTILISATIONFUTUR = 2;
     private static final int UTILISATIONPOINT = 3;
 
+    private ActionJouer actionJouer;
+
     public DeroulementPartie(Renderable renderer) {
         this.renderer = renderer;
     }
@@ -70,58 +72,19 @@ public class DeroulementPartie {
 
     private void reincarner(Joueur joueur) {
         NomCouleur couleurLaPlusRentable = this.renderer.choisirCouleur(joueur.getOeuvre());
-        int score = this.effectuerReincarnationDe(joueur, couleurLaPlusRentable);
-        Echellon echellon = this.partie.getEchelle().getEchellonOf(joueur);
-        if( this.renderer.utiliserJetonKarmique(joueur) ){
-            int nbAnneauxJouer = this.renderer.combienDeJeton(joueur);
-            score += nbAnneauxJouer;
-            joueur.setNbAnneauxKarmique(joueur.getNbAnneauxKarmique() - nbAnneauxJouer);
+        if(this.renderer.utiliserJetonKarmique(joueur)) {
+            this.actionJouer.reincarner(joueur, couleurLaPlusRentable, true, this.renderer.combienDeJeton(joueur));
+        } else {
+            this.actionJouer.reincarner(joueur, couleurLaPlusRentable, false, 0);
         }
-        if(score >= echellon.getPtsNecessairePourMonter()){
-            if(this.partie.getEchelle().monterCategorie(joueur).equals(NomPalier.SINGE)){
-                joueur.setHasWon(true);
-            };
-        }
-    }
-
-    private int effectuerReincarnationDe(Joueur joueur, NomCouleur couleur) {
-        // Calcul du score de la couleur la plus rentable
-        int score = 0;
-        for(Carte c : joueur.getOeuvre().getCartes()){
-            if(c.getCouleur().equals(couleur)){
-                score += c.getPoint();
-            }
-        }
-        // Défosser toutes les oeuvres
-        partie.getFosse().addCartes(joueur.getOeuvre().getCartes());
-
-        // Composition de la nouvelle main
-        joueur.setMain( new ArrayList<Carte>(joueur.getVieFutur().getCartes()));
-        joueur.getVieFutur().viderCartes();
-
-        // Composition de la nouvelle
-        int carteAPiocher = 6 - joueur.getMain().size();
-        for(int i = 0; i < carteAPiocher; i++){
-            joueur.getPile().getCartes().push(partie.getSource().getCartes().peek());
-        }
-
-        return score;
     }
 
     private void jouer(Joueur joueur) {
-        boolean jouerCarte = true;
-        if(!joueur.getPile().getCartes().isEmpty()){
-            joueur.getMain().add(this.partie.getSource().getCartes().pop());
-            jouerCarte = this.renderer.jouerUneCarteOuNon();
-        }
-        if(jouerCarte){
-            Carte carte = this.renderer.afficherEtChoisirCarteMain(joueur);
-            int utilisation = this.renderer.choisirUtilisation(carte);
-            switch (utilisation){
-//                case DeroulementPartie.UTILISATIONPOUVOIR -> carte.jouerPouvoir();
-//                case DeroulementPartie.UTILISATIONFUTUR -> carte.jouerFutur();
-//                case DeroulementPartie.UTILISATIONPOINT -> carte.jouerPoint();
-            }
+        if(this.renderer.jouerUneCarteOuNon()){
+            Carte carteAJouer = this.renderer.afficherEtChoisirCarteMain(joueur);
+            this.actionJouer.jouer(joueur, true, carteAJouer, this.renderer.choisirUtilisation(carteAJouer));
+        }else{
+            this.actionJouer.jouer(joueur, false, null, 0);
         }
     }
 
