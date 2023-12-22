@@ -52,24 +52,26 @@ public class Intermediaire implements StyleJeuStrategy{
     }
 
     private void jouer(Joueur joueur) {
+        if(!joueur.getPile().getCartes().isEmpty()){
+            joueur.getMain().add(joueur.getPile().getCartes().pop());
+        }
         boolean jouerCarte = !(this.r.nextInt(4) == 1);
         if(jouerCarte) {
             Carte carteAJouer  = joueur.getMain().get(this.r.nextInt(joueur.getMain().size()));
             if(hasReincarnerUneFois){
-                this.actionJouer.jouer(joueur, true, carteAJouer, (r.nextInt(3))+1);
+                this.actionJouer.jouer(joueur, carteAJouer, (r.nextInt(3))+1);
             } else {
                 if(carteAJouer.getCouleur().equals(this.couleurPouvoir)){
-                    this.actionJouer.jouer(joueur, true, carteAJouer, ActionJouer.UTILISATIONPOUVOIR);
+                    this.actionJouer.jouer(joueur, carteAJouer, ActionJouer.UTILISATIONPOUVOIR);
                 } else if(carteAJouer.getCouleur().equals(this.couleurPoint)) {
-                    this.actionJouer.jouer(joueur, true, carteAJouer, ActionJouer.UTILISATIONPOINT);
+                    this.actionJouer.jouer(joueur, carteAJouer, ActionJouer.UTILISATIONPOINT);
                 } else if(carteAJouer.getCouleur().equals(this.couleurFutur)) {
-                    this.actionJouer.jouer(joueur, true, carteAJouer, ActionJouer.UTILISATIONFUTUR);
+                    this.actionJouer.jouer(joueur, carteAJouer, ActionJouer.UTILISATIONFUTUR);
                 } else if (carteAJouer.getCouleur().equals(NomCouleur.MOSAIQUE)){
-                    this.actionJouer.jouer(joueur, true, carteAJouer, (r.nextInt(3))+1);
+                    this.actionJouer.jouer(joueur, carteAJouer, (r.nextInt(3))+1);
                 }
             }
         } else {
-            this.actionJouer.jouer(joueur, false, null, 0);
             this.renderer.displayErrorMessage(String.format("%s décide de passer son tour. Attention, il prépare sûrement un plan diabolique ...", joueur.getNom()));
         }
     }

@@ -88,11 +88,12 @@ public class DeroulementPartie {
     }
 
     private void jouer(Joueur joueur) {
+        if(!joueur.getPile().getCartes().isEmpty()){
+            joueur.getMain().add(joueur.getPile().getCartes().pop());
+        }
         if(this.renderer.jouerUneCarteOuNon()){
             Carte carteAJouer = this.renderer.afficherEtChoisirCarteMain(joueur);
-            this.actionJouer.jouer(joueur, true, carteAJouer, this.renderer.choisirUtilisation(carteAJouer));
-        }else{
-            this.actionJouer.jouer(joueur, false, null, 0);
+            this.actionJouer.jouer(joueur, carteAJouer, this.renderer.choisirUtilisation(carteAJouer));
         }
     }
 

@@ -49,26 +49,21 @@ public class ActionJouer {
 
 
 
-    public void jouer(Joueur joueurAppelant, boolean jouerUneCarte, Carte carteJouer, int utilisation) {
-        if(!joueurAppelant.getPile().getCartes().isEmpty()){
-            joueurAppelant.getMain().add(joueurAppelant.getPile().getCartes().pop());
-        }
-        if(jouerUneCarte){
-            List<Joueur> joueursPartie = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());
-            Joueur jouerReceveur = null;
-            for(Joueur j : joueursPartie){
-                if(j != joueurAppelant) {
-                    jouerReceveur = j;
-                }
+    public void jouer(Joueur joueurAppelant, Carte carteJouer, int utilisation) {
+        List<Joueur> joueursPartie = Arrays.asList(this.partie.getJoueur1(), this.partie.getJoueur2());
+        Joueur jouerReceveur = null;
+        for(Joueur j : joueursPartie){
+            if(j != joueurAppelant) {
+                jouerReceveur = j;
             }
-            System.out.println();
-            switch (utilisation){
-                case ActionJouer.UTILISATIONPOUVOIR -> carteJouer.jouerPouvoir(joueurAppelant, jouerReceveur);
-                case ActionJouer.UTILISATIONFUTUR -> carteJouer.jouerFutur(joueurAppelant);
-                case ActionJouer.UTILISATIONPOINT -> carteJouer.jouerPoint(joueurAppelant);
-            }
-            joueurAppelant.getMain().remove(carteJouer);
         }
+        System.out.println();
+        switch (utilisation){
+            case ActionJouer.UTILISATIONPOUVOIR -> carteJouer.jouerPouvoir(joueurAppelant, jouerReceveur);
+            case ActionJouer.UTILISATIONFUTUR -> carteJouer.jouerFutur(joueurAppelant);
+            case ActionJouer.UTILISATIONPOINT -> carteJouer.jouerPoint(joueurAppelant);
+        }
+        joueurAppelant.getMain().remove(carteJouer);
     }
 
 
