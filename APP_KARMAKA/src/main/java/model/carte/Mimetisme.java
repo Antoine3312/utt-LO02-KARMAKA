@@ -5,10 +5,9 @@ import model.joueur.Joueur;
 import model.joueur.Ordinateur;
 
 /**
- * Classe abstraite représentant la carte "Mimétisme" dans le jeu.
+ * Classe représentant la carte "Mimétisme" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  *
- * @param <Oeuvre> Le type d'objet représentant une œuvre (à adapter en fonction de la conception du jeu).
  */
 public class Mimetisme extends Carte {
 
@@ -22,6 +21,7 @@ public class Mimetisme extends Carte {
         this.nom = "Mimetisme";
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.MOSAIQUE; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Utilisez le pouvoir de l'Oeuvre Exposée de votre rival";
     }
 
     /**

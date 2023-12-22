@@ -22,6 +22,7 @@ public class Lendemain extends Carte {
         this.nom = "Lendemain";
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.VERTE; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Puisez une carte à la Source";
     }
 
     /**

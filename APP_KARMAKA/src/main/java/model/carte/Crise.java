@@ -24,6 +24,7 @@ public class Crise extends Carte {
         this.nom = "Crise";
         this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.ROUGE; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Votre rival doit défausser une de ses oeuvres";
     }
 
     /**

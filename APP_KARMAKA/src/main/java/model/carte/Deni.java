@@ -27,6 +27,7 @@ public class Deni extends Carte {
         this.nom = "Deni";
         this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Défaussez une carte de votre Main et utilisez son pouvoir";
     }
 
     /**

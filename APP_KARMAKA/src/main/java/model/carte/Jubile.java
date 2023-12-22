@@ -23,6 +23,7 @@ public class Jubile extends Carte {
         this.nom = "Jubile";
         this.point = 3; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.VERTE; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Placez 2 cartes de votre Main sur vos Oeuvres";
     }
 
     /**

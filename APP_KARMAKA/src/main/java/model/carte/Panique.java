@@ -23,6 +23,7 @@ public class Panique extends Carte {
         this.nom = "Panique";
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.ROUGE; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Défaussez la première carte de la Pile de votre rival";
     }
 
     /**

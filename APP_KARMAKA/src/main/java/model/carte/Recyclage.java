@@ -24,6 +24,7 @@ public class Recyclage extends Carte {
         this.nom = "Recyclage";
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.VERTE; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Ajoutez à votre Vie Future une des 3 dernières cartes de la Fosse";
     }
 
     /**

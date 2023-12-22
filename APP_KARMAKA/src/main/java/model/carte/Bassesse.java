@@ -24,6 +24,7 @@ public class Bassesse extends Carte {
         this.nom = "Bassesse";
         this.point = 3; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.ROUGE; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Défaussez au hasard 2 cartes de la Main de votre rival";
     }
 
     /**

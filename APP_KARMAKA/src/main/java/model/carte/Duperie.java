@@ -24,6 +24,7 @@ public class Duperie extends Carte {
         this.nom = "Duperie";
         this.point = 3; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Regardez 3 cartes de la Main de votre rival, et ajoutez-en une à votre Main";
     }
 
     /**

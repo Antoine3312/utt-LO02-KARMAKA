@@ -23,6 +23,7 @@ public class ReveBrises extends Carte {
         this.nom = "ReveBrises";
         this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Placez la première carte de la Vie Future de votre rival dans la votre";
     }
 
     /**

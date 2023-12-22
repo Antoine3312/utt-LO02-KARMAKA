@@ -25,6 +25,7 @@ public class CoupDOeil extends Carte {
         this.nom = "Coup d'Oeil";
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Regardez la Main d'un rival";
     }
 
     /**

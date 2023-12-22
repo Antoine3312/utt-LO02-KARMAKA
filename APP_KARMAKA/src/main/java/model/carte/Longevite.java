@@ -22,6 +22,7 @@ public class Longevite extends Carte {
         this.nom = "Longevite";
         this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.VERTE; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Placez 2 cartes puisées à la Source sur votre Source";
     }
 
     /**

@@ -24,6 +24,7 @@ public class Vol extends Carte {
         this.nom = "Vol";
         this.point = 3; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Placez dans votre main l'Oeuvre exposée d'un rival";
     }
 
     /**

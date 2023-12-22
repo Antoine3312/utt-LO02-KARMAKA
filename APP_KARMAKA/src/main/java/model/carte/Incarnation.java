@@ -23,6 +23,7 @@ public class Incarnation extends Carte {
         this.nom = "Incarnation";
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.MOSAIQUE; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Choisissez une de vos oeuvres et utiliser son pouvoir";
     }
 
     /**

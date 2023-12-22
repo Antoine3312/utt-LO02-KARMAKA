@@ -13,6 +13,7 @@ public abstract class Carte implements Serializable {
     protected int point;
     protected NomCouleur couleur;
     protected Renderable renderer;
+    protected String intitulePouvoir;
 
     public Carte(Renderable renderer) {
         this.renderer = renderer;
@@ -51,7 +52,7 @@ public abstract class Carte implements Serializable {
 
     @Override
     public String toString() {
-        return "("+point+")"+"  "+nom+"  ["+couleur+"]";
+        return "("+point+")"+"  "+nom+"  ["+couleur+"] : "+intitulePouvoir;
     }
 
 }

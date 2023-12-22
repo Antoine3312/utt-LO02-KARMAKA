@@ -24,6 +24,7 @@ public class Roulette extends Carte {
         this.nom = "Roulette";
         this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.ROUGE; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Défaussez 2 cartes de votre Main, puis puisez de la source 3 cartes";
     }
 
     /**

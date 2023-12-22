@@ -27,6 +27,7 @@ public class Destinee extends Carte {
         this.nom = "Destinee";
         this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Regardez les 3 premières cartes de la Source, ajoutez-en 2 dans votre Vie Future";
     }
 
     /**

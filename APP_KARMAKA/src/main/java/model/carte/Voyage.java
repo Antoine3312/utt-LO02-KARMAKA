@@ -23,6 +23,7 @@ public class Voyage extends Carte {
         this.nom = "Voyage";
         this.point = 3;
         this.couleur = NomCouleur.VERTE; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Puisez 3 cartes à la Source";
     }
 
     /**

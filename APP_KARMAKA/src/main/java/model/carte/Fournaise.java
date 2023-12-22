@@ -24,6 +24,7 @@ public class Fournaise extends Carte {
         this.nom = "Fournaise";
         this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.ROUGE; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Défaussez les 2 premières cartes de la Vie Future de votre Rival";
     }
 
     /**

@@ -25,6 +25,7 @@ public class Semis extends Carte {
         this.nom = "Semis";
         this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.VERTE; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Placez 2 cartes à la Source, puis placez sur votre Vie Future 2 cartes de votre Main";
     }
 
     /**

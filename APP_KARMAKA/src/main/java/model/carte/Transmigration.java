@@ -23,6 +23,7 @@ public class Transmigration extends Carte {
         this.nom = "Transmigration";
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Placez dans votre Main n'importequelle carte de votre Vie Future";
     }
 
     /**

@@ -24,6 +24,7 @@ public class Sauvetage extends Carte {
         this.nom = "Sauvetage";
         this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.VERTE; // Définition de la couleur de la carte
+        this.intitulePouvoir = "Ajoutez à votre Main une des 3 dernières cartes de la Fosse";
     }
 
     /**

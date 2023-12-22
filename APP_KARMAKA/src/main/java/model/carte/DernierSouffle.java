@@ -15,6 +15,7 @@ public class DernierSouffle extends Carte{
         this.nom = "Dernier Souffle";
         this.point = 1;
         this.couleur = NomCouleur.ROUGE;
+        this.intitulePouvoir = "Votre rival défausse une carte de sa Main";
     }
 
     @Override
