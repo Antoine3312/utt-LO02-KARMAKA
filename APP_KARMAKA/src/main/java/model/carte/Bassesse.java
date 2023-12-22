@@ -49,7 +49,7 @@ public class Bassesse extends Carte {
             List<Carte> cartesADefausser = cartesMain.subList(0, nombreCartes);
 
             // Ajout des cartes à la défausse et suppression de la main
-            EtatPartie.getInstance().getFosse().addCartes(cartesADefausser);
+            EtatPartie.getInstance().getFosse().getCartes().addAll(cartesADefausser);
             cartesMain.removeAll(cartesADefausser);
 
         }else{

@@ -38,8 +38,8 @@ public class ActionJouer {
         if(jouerUneCarte){
             switch (utilisation){
 //                case ActionJouer.UTILISATIONPOUVOIR -> carteJouer.jouerPouvoir();
-                case ActionJouer.UTILISATIONFUTUR -> carteJouer.jouerFutur();
-                case ActionJouer.UTILISATIONPOINT -> carteJouer.jouerPoint();
+//                case ActionJouer.UTILISATIONFUTUR -> carteJouer.jouerFutur();
+//                case ActionJouer.UTILISATIONPOINT -> carteJouer.jouerPoint();
             }
             joueur.getMain().remove(carteJouer);
         }
@@ -55,7 +55,7 @@ public class ActionJouer {
             }
         }
         // Défosser toutes les oeuvres
-        partie.getFosse().addCartes(joueur.getOeuvre().getCartes());
+        partie.getFosse().getCartes().addAll(joueur.getOeuvre().getCartes());
 
         // Composition de la nouvelle main
         joueur.setMain( new ArrayList<Carte>(joueur.getVieFutur().getCartes()));

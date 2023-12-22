@@ -39,7 +39,7 @@ public class DeroulementPartie {
         EchelleKarmique echelle = new EchelleKarmique();
         echelle.getBousier().addPlayers(joueurs);
         PileCartes source = new PileCartes();
-        source.addCartes(loadSource());
+        source.getCartes().addAll(loadSource());
         PileCartes fosse = new PileCartes();
         int numTour = 0;
         this.partie.init(echelle,joueurs.get(0),joueurs.get(1),source,fosse,numTour);
