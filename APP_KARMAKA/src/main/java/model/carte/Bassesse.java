@@ -7,6 +7,7 @@ import model.joueur.Ordinateur;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Classe abstraite représentant une carte de type "Bassesse". Cette classe hérite de la classe abstraite "Carte".
@@ -33,64 +34,9 @@ public abstract class Bassesse extends Carte {
     @Override
     public void jouerPouvoir(Joueur joueurAppelant, Joueur joueurReceveur) {
         // Défaussez au hasard 2 cartes de la Main d'un rival
-        Joueur rivalChoisi = choisirRival(joueurAppelant);
-
-        if (rivalChoisi != null) {
-            defausserAuHasard(rivalChoisi, 2);
-        }
+        this.defausserAuHasard(joueurReceveur, 2);
     }
 
-    /**
-     * Méthode pour choisir un rival.
-     *
-     * @param joueurAppelant Le joueur qui choisit le rival.
-     * @return Le joueur rival choisi.
-     */
-    private Joueur choisirRival(Joueur joueurAppelant) {
-        List<Joueur> joueursPossibles = joueurAppelant.getPartie().getJoueurs();
-        joueursPossibles.remove(joueurAppelant); // Exclure le joueur appelant
-
-        // Si le joueur est un ordinateur, il choisit automatiquement un rival
-        if (joueurAppelant instanceof Ordinateur) {
-            return choisirRivalOrdinateur(joueursPossibles);
-        }
-
-        // Si le joueur est humain, il choisit le rival
-        return choisirRivalHumain(joueursPossibles);
-    }
-
-    /**
-     * Méthode pour choisir un rival (cas de l'ordinateur).
-     *
-     * @param joueursPossibles La liste des joueurs parmi lesquels choisir un rival.
-     * @return Le joueur rival choisi.
-     */
-    private Joueur choisirRivalOrdinateur(List<Joueur> joueursPossibles) {
-        // Choix aléatoire d'un rival (ordinateur)
-        Collections.shuffle(joueursPossibles);
-        return joueursPossibles.get(0);
-    }
-
-    /**
-     * Méthode pour choisir un rival (cas de l'humain).
-     *
-     * @param joueursPossibles La liste des joueurs parmi lesquels choisir un rival.
-     * @return Le joueur rival choisi.
-     */
-    private Joueur choisirRivalHumain(List<Joueur> joueursPossibles) {
-        // Affichage des choix de rivaux possibles
-        this.renderer.afficherChoixRivaux(joueursPossibles);
-
-        // Sélection du rival par l'humain
-        return this.renderer.choisirUnRival(joueursPossibles);
-    }
-
-    /**
-     * Méthode pour défausser au hasard un certain nombre de cartes de la Main d'un joueur.
-     *
-     * @param joueur        Le joueur dont les cartes doivent être défaussées.
-     * @param nombreCartes  Le nombre de cartes à défausser.
-     */
     private void defausserAuHasard(Joueur joueur, int nombreCartes) {
         List<Carte> cartesMain = joueur.getMain();
 
@@ -103,6 +49,10 @@ public abstract class Bassesse extends Carte {
             // Ajout des cartes à la défausse et suppression de la main
             EtatPartie.getInstance().getFosse().addCartes(cartesADefausser);
             cartesMain.removeAll(cartesADefausser);
+
+        }else{
+            this.renderer.displayErrorMessage("Le rival n'a pas assez de cartes en main");
         }
+
     }
 }

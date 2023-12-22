@@ -125,7 +125,5 @@ public class Joueur {
     }*/
 
 
-    public List<Carte> getOeuvresExposee() {
-        return oeuvresExposee;
-    }
-}
+
+
