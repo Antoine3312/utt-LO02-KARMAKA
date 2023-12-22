@@ -11,7 +11,7 @@ import java.util.List;
  * Classe abstraite représentant la carte "Voyage" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Voyage extends Carte {
+public class Voyage extends Carte {
 
     /**
      * Constructeur de la carte "Voyage".

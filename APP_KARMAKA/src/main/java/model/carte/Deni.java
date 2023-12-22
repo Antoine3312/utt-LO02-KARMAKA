@@ -15,7 +15,7 @@ import java.util.Scanner;
  * Carte "Deni" qui hérite de la classe abstraite "Carte".
  * Représente une carte permettant au joueur de défausser une carte de sa main et de copier le pouvoir de la carte défaussée.
  */
-public abstract class Deni extends Carte {
+public class Deni extends Carte {
 
     /**
      * Constructeur de la carte "Deni".

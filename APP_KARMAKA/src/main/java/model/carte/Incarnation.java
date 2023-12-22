@@ -11,7 +11,7 @@ import java.util.Random;
  * Classe abstraite représentant la carte "Incarnation" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Incarnation extends Carte {
+public class Incarnation extends Carte {
 
     /**
      * Constructeur de la carte "Incarnation".

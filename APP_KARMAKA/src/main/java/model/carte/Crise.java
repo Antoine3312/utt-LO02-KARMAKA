@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Classe abstraite représentant la carte "Crise" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Crise extends Carte {
+public class Crise extends Carte {
 
     /**
      * Constructeur de la carte "Crise".

@@ -12,7 +12,7 @@ import java.util.Random;
  * Classe abstraite représentant la carte "Sauvetage" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Sauvetage extends Carte {
+public class Sauvetage extends Carte {
 
     /**
      * Constructeur de la carte "Sauvetage".

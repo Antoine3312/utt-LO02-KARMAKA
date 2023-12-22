@@ -10,7 +10,7 @@ import model.joueur.Ordinateur;
  *
  * @param <Oeuvre> Le type d'objet représentant une œuvre (à adapter en fonction de la conception du jeu).
  */
-public abstract class Mimetisme<Oeuvre> extends Carte {
+public class Mimetisme extends Carte {
 
     /**
      * Constructeur de la carte "Mimétisme".

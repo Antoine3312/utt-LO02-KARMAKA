@@ -11,7 +11,7 @@ import java.util.Random;
  * Classe abstraite représentant la carte "Jubilé" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Jubile extends Carte {
+public class Jubile extends Carte {
 
     /**
      * Constructeur de la carte "Jubilé".

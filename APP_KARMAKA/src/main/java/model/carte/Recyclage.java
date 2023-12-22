@@ -12,7 +12,7 @@ import java.util.Random;
  * Classe abstraite représentant la carte "Recyclage" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Recyclage extends Carte {
+public class Recyclage extends Carte {
 
     /**
      * Constructeur de la carte "Recyclage".

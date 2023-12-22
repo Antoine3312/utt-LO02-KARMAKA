@@ -15,7 +15,7 @@ import java.util.Scanner;
  * Représente une carte permettant au joueur appelant de regarder les 3 premières cartes de la Source,
  * de choisir jusqu'à 2 cartes à ajouter à sa Vie Future, et de replacer le reste dans l'ordre souhaité.
  */
-public abstract class Destinee extends Carte {
+public class Destinee extends Carte {
 
     /**
      * Constructeur de la carte "Destinee".

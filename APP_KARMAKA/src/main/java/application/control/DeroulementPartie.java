@@ -147,7 +147,67 @@ public class DeroulementPartie {
 
     private List<Carte> loadSource(){
         List<Carte> jeu = Arrays.asList(
-                //cartes ici
+                // Cartes Bleues
+                new Transmigration(this.renderer),
+                new Transmigration(this.renderer),
+                new Transmigration(this.renderer),
+                new Destinee(this.renderer),
+                new Destinee(this.renderer),
+                new Destinee(this.renderer),
+                new ReveBrises(this.renderer),
+                new ReveBrises(this.renderer),
+                new ReveBrises(this.renderer),
+                new Duperie(this.renderer),
+                new Duperie(this.renderer),
+                new Deni(this.renderer),
+                new Deni(this.renderer),
+                new Deni(this.renderer),
+                new Vol(this.renderer),
+                // Cartes Vertes
+                new Lendemain(this.renderer),
+                new Lendemain(this.renderer),
+                new Lendemain(this.renderer),
+                new Recyclage(this.renderer),
+                new Recyclage(this.renderer),
+                new Recyclage(this.renderer),
+                new Longevite(this.renderer),
+                new Longevite(this.renderer),
+                new Longevite(this.renderer),
+                new Semis(this.renderer),
+                new Semis(this.renderer),
+                new Semis(this.renderer),
+                new Voyage(this.renderer),
+                new Voyage(this.renderer),
+                new Jubile(this.renderer),
+                new Jubile(this.renderer),
+                // Cartes Rouges
+                new Panique(this.renderer),
+                new Panique(this.renderer),
+                new Panique(this.renderer),
+                new DernierSouffle(this.renderer),
+                new DernierSouffle(this.renderer),
+                new DernierSouffle(this.renderer),
+                new Crise(this.renderer),
+                new Crise(this.renderer),
+                new Crise(this.renderer),
+                new Roulette(this.renderer),
+                new Roulette(this.renderer),
+                new Roulette(this.renderer),
+                new Fournaise(this.renderer),
+                new Fournaise(this.renderer),
+                new Fournaise(this.renderer),
+                new Vengeance(this.renderer),
+                new Vengeance(this.renderer),
+                new Bassesse(this.renderer),
+                new Bassesse(this.renderer),
+                // Cartes Mosaiques
+                new Incarnation(this.renderer),
+                new Incarnation(this.renderer),
+                new Incarnation(this.renderer),
+                new Incarnation(this.renderer),
+                new Incarnation(this.renderer),
+                new Mimetisme(this.renderer),
+                new Mimetisme(this.renderer)
         );
         Collections.shuffle(jeu);
         return jeu;

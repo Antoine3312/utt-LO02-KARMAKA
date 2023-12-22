@@ -11,7 +11,7 @@ import java.util.List;
  * Classe abstraite représentant la carte "Panique" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Panique extends Carte {
+public class Panique extends Carte {
 
     /**
      * Constructeur de la carte "Panique".

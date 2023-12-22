@@ -11,7 +11,7 @@ import java.util.Random;
  * Classe abstraite représentant la carte "ReveBrises" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class ReveBrises extends Carte {
+public class ReveBrises extends Carte {
 
     /**
      * Constructeur de la carte "ReveBrises".

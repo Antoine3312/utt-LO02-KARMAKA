@@ -12,7 +12,7 @@ import java.util.Random;
 /**
  * Classe abstraite représentant une carte de type "Bassesse". Cette classe hérite de la classe abstraite "Carte".
  */
-public abstract class Bassesse extends Carte {
+public class Bassesse extends Carte {
 
     /**
      * Constructeur de la carte "Bassesse".

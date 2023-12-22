@@ -13,7 +13,7 @@ import java.util.List;
  * Classe abstraite représentant la carte "Coup d'Œil" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class CoupDOeil extends Carte {
+public class CoupDOeil extends Carte {
 
     /**
      * Constructeur de la carte "Coup d'Œil".

@@ -12,7 +12,7 @@ import java.util.Random;
  * Classe abstraite représentant la carte "Vol" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Vol extends Carte {
+public class Vol extends Carte {
 
     /**
      * Constructeur de la carte "Vol".

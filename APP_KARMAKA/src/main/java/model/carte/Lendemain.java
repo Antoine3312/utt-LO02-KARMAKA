@@ -10,7 +10,7 @@ import java.util.List;
  * Classe abstraite représentant la carte "Lendemain" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Lendemain extends Carte {
+public class Lendemain extends Carte {
 
     /**
      * Constructeur de la carte "Lendemain".

@@ -10,7 +10,7 @@ import java.util.List;
  * Classe abstraite représentant la carte "Longevite" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Longevite extends Carte {
+public class Longevite extends Carte {
 
     /**
      * Constructeur de la carte "Longevite".

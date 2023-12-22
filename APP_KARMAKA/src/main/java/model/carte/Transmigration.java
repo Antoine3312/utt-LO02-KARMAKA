@@ -11,7 +11,7 @@ import java.util.Random;
  * Classe abstraite représentant la carte "Transmigration" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Transmigration extends Carte {
+public class Transmigration extends Carte {
 
     /**
      * Constructeur de la carte "Transmigration".

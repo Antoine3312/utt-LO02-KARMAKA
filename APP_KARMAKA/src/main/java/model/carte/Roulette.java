@@ -12,7 +12,7 @@ import java.util.Random;
  * Classe abstraite représentant la carte "Roulette" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Roulette extends Carte {
+public class Roulette extends Carte {
 
     /**
      * Constructeur de la carte "Roulette".

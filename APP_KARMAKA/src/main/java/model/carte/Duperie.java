@@ -12,7 +12,7 @@ import java.util.Scanner;
  * Classe abstraite représentant une carte de type "Duperie" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Duperie extends Carte {
+public class Duperie extends Carte {
 
     /**
      * Constructeur de la carte "Duperie".

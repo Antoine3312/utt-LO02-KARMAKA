@@ -12,7 +12,7 @@ import java.util.Random;
  * Classe abstraite représentant une carte de type "Fournaise" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Fournaise extends Carte {
+public class Fournaise extends Carte {
 
     /**
      * Constructeur de la carte "Fournaise".

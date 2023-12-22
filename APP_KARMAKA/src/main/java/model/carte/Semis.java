@@ -12,7 +12,7 @@ import java.util.Random;
  * Classe abstraite représentant la carte "Semis" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Semis extends Carte {
+public class Semis extends Carte {
 
     /**
      * Constructeur de la carte "Semis".

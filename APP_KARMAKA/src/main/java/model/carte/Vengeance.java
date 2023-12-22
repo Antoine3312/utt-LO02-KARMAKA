@@ -9,7 +9,7 @@ import model.joueur.Ordinateur;
  * Classe abstraite représentant la carte "Vengeance" dans le jeu.
  * Hérite de la classe abstraite "Carte".
  */
-public abstract class Vengeance extends Carte {
+public class Vengeance extends Carte {
 
     /**
      * Constructeur de la carte "Vengeance".
