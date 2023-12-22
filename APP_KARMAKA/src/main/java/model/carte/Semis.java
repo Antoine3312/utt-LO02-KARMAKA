@@ -19,6 +19,7 @@ public abstract class Semis extends Carte {
      */
     public Semis(Renderable renderable) {
         super(renderable);
+        this.nom = "Semis";
         this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.VERTE; // Définition de la couleur de la carte
     }

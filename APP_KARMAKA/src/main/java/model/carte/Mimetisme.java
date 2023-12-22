@@ -19,6 +19,7 @@ public abstract class Mimetisme<Oeuvre> extends Carte {
      */
     public Mimetisme(Renderable renderable) {
         super(renderable);
+        this.nom = "Mimetisme";
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.MOSAIQUE; // Définition de la couleur de la carte
     }

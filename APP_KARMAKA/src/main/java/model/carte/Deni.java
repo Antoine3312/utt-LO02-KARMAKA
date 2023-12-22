@@ -23,6 +23,7 @@ public abstract class Deni extends Carte {
      */
     public Deni(Renderable renderable) {
         super(renderable);
+        this.nom = "Deni";
         this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
     }

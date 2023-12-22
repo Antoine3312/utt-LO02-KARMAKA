@@ -20,6 +20,7 @@ public abstract class Vol extends Carte {
      */
     public Vol(Renderable renderable) {
         super(renderable);
+        this.nom = "Vol";
         this.point = 3; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
     }

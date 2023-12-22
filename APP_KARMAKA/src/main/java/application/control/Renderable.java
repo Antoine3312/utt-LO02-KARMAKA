@@ -9,6 +9,7 @@ import model.joueur.StyleJeuStrategy;
 
 import java.util.List;
 import java.util.ServiceLoader;
+import java.util.Stack;
 
 public interface Renderable {
 
@@ -42,32 +43,12 @@ public interface Renderable {
 
     void afficherCartes(List<Carte> cartes);
 
-    Carte choisirUneCarteVieFutur(List<Carte> carteVieFutur);
-
-    Carte choisirUneCarteOeuvreExposee(List<Carte> carteOeuvreExposee);
-
-    Carte choisirUneCarteSource(List<Carte> carteSourceJoueurAppelant);
-
-    Carte choisirUneCarte(List<Carte> Cartes);
-
-    Carte getsCartes(List<Carte> Cartes);
-
-    Carte getCartes(List<Carte> Cartes);
-
-    Carte getCartesJouables(List<Carte> CartesJouables);
-
-    <E> List<E> getCartes();
-
-    PileCartes getExposition();
-
-    ServiceLoader<Object> stream();
-
-    int demanderEntier();
-
-    void afficherChoixRivaux(List<Joueur> joueursPossibles);
-
-    Joueur choisirUnRival(List<Joueur> joueursPossibles);
-
     void displayErrorMessage(String s);
+
+    List<Carte> choisirDeuxCarte(List<Carte> cartes);
+
+    Carte choisirUneCarte(List<Carte> cartes);
+
+    void displayMessage(String format);
 }
 

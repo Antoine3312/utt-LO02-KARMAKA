@@ -21,6 +21,7 @@ public abstract class Bassesse extends Carte {
      */
     public Bassesse(Renderable renderable) {
         super(renderable);
+        this.nom = "Bassesse";
         this.point = 3; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.ROUGE; // Définition de la couleur de la carte
     }

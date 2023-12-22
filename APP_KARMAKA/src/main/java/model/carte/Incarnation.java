@@ -20,6 +20,7 @@ public abstract class Incarnation extends Carte {
      */
     public Incarnation(Renderable renderable) {
         super(renderable);
+        this.nom = "Incarnation";
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.MOSAIQUE; // Définition de la couleur de la carte
     }

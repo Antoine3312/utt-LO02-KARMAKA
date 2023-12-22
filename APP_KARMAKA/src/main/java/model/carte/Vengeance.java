@@ -17,6 +17,7 @@ public abstract class Vengeance extends Carte {
      */
     public Vengeance(Renderable renderable) {
         super(renderable);
+        this.nom = "Vengeance";
         this.point = 3; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.ROUGE; // Définition de la couleur de la carte
     }

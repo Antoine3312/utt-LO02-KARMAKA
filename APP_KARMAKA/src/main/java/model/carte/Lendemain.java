@@ -18,6 +18,7 @@ public abstract class Lendemain extends Carte {
      */
     public Lendemain(Renderable renderable) {
         super(renderable);
+        this.nom = "Lendemain";
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.VERTE; // Définition de la couleur de la carte
     }

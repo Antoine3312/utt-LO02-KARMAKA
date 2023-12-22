@@ -20,6 +20,7 @@ public abstract class ReveBrises extends Carte {
      */
     public ReveBrises(Renderable renderable) {
         super(renderable);
+        this.nom = "ReveBrises";
         this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
     }

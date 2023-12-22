@@ -18,6 +18,7 @@ public abstract class Roulette extends Carte {
      */
     public Roulette(Renderable renderable) {
         super(renderable);
+        this.nom = "Roulette";
         this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.ROUGE; // Définition de la couleur de la carte
     }

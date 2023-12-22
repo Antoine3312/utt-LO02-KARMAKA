@@ -20,6 +20,7 @@ public abstract class Transmigration extends Carte {
      */
     public Transmigration(Renderable renderable) {
         super(renderable);
+        this.nom = "Transmigration";
         this.point = 1; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.BLEU; // Définition de la couleur de la carte
     }

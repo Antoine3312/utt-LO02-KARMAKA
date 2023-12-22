@@ -20,6 +20,7 @@ public abstract class Fournaise extends Carte {
      */
     public Fournaise(Renderable renderable) {
         super(renderable);
+        this.nom = "Fournaise";
         this.point = 2; // Définition du nombre de points attribués par cette carte
         this.couleur = NomCouleur.ROUGE; // Définition de la couleur de la carte
     }
